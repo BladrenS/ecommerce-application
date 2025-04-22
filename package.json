@@ -1,0 +1,58 @@
+{
+   "devDependencies": {
+      "@commitlint/cli": "^19.8.0",
+      "@commitlint/config-conventional": "^19.8.0",
+      "@eslint/js": "^9.22.0",
+      "@typescript-eslint/eslint-plugin": "^8.26.1",
+      "@typescript-eslint/parser": "^8.26.1",
+      "clean-webpack-plugin": "^4.0.0",
+      "css-loader": "^6.8.1",
+      "eslint": "^9.23.0",
+      "eslint-plugin-prettier": "^5.2.3",
+      "eslint-plugin-simple-import-sort": "^12.1.1",
+      "eslint-plugin-unicorn": "^57.0.0",
+      "eslint-plugin-unused-imports": "^4.1.4",
+      "html-webpack-plugin": "^5.6.3",
+      "husky": "^9.1.7",
+      "lint-staged": "^15.4.3",
+      "prettier": "^3.5.3",
+      "sass": "^1.85.1",
+      "sass-loader": "^16.0.5",
+      "style-loader": "^3.3.4",
+      "stylelint": "^16.15.0",
+      "stylelint-config-clean-order": "^7.0.0",
+      "stylelint-config-css-modules": "^4.4.0",
+      "stylelint-config-recommended": "^15.0.0",
+      "stylelint-config-standard": "^37.0.0",
+      "stylelint-webpack-plugin": "^5.0.1",
+      "svg-url-loader": "^8.0.0",
+      "ts-loader": "^9.5.0",
+      "typescript": "^5.8.2",
+      "webpack": "^5.88.2",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^4.15.1"
+   },
+   "lint-staged": {
+      "*.{js,ts,tsx}": [
+         "eslint --fix",
+         "prettier --write"
+      ],
+      "*.{css,scss}": [
+         "stylelint --fix",
+         "prettier --write"
+      ]
+   },
+   "type": "module",
+   "scripts": {
+      "dev": "webpack serve --mode development",
+      "build": "webpack --mode production",
+      "preview": "webpack serve --mode production",
+      "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+      "format": "prettier --write src/**/*.ts",
+      "stylelint": "stylelint 'src/**/*.{css,scss,sass}'",
+      "stylelint-fix": "stylelint 'src/**/*.{css,scss,sass}' --fix"
+   },
+   "dependencies": {
+      "normalize.css": "^8.0.1"
+   }
+}
