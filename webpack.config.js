@@ -34,10 +34,10 @@ export default {
             loader: "css-loader",
             options: {
               modules: {
-               mode: "local",
-               auto: true,
-               exportGlobals: true,
-               localIdentName: "[path][name]__[local]--[hash:base64:5]"
+                mode: "local",
+                auto: true,
+                exportGlobals: true,
+                localIdentName: "[path][name]__[local]--[hash:base64:5]"
               },
             },
           },
@@ -53,8 +53,8 @@ export default {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-         test: /\.svg$/i,
-         type: 'asset',
+          test: /\.svg$/i,
+          type: 'asset',
       },
     ],
   },
