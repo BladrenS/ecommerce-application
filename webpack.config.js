@@ -68,7 +68,7 @@ export default {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './src/assets/img/race.svg',
+      favicon: '',
     }),
   ],
 };
