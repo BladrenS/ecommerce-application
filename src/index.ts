@@ -3,6 +3,6 @@ import './styles/main.module.scss';
 import { App } from './App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new App('app');
+  const app = new App('root');
   app.init();
 });
