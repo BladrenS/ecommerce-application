@@ -1,4 +1,6 @@
 import './styles/main.module.scss';
+import './styles/tailwind.css';
+
 
 import { App } from './App';
 

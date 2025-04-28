@@ -12,5 +12,5 @@ export class App {
 
   public init(): void {
    
-}
+  }
 }

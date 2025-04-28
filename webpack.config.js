@@ -47,7 +47,7 @@ export default {
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.scss$/,
