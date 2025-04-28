@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
@@ -23,53 +23,31 @@ export default {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.module\.css$/,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                mode: "local",
-                auto: true,
-                exportGlobals: true,
-                localIdentName: "[path][name]__[local]--[hash:base64:5]"
-              },
-            },
-          },
-        ],
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader',],
       },
       {
-        test: /\.css$/,
-        exclude: /\.module\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-      {
-        test: /\.scss$/,
+        test: /\.scss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-          test: /\.svg$/i,
-          type: 'asset',
+        test: /\.svg$/i,
+        type: 'asset',
       },
     ],
   },
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-    extensions: ['.ts', '.js', '.scss'],
+    extensions: ['.ts', '.tsx', '.js', '.json'],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: '',
     }),
   ],
 };
