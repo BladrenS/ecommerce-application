@@ -3,6 +3,7 @@ import './styles/main.module.scss';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import App from './App';
 import store from './store/Store';
 
@@ -12,7 +13,7 @@ if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <Provider store={store}>
       <App />
-    </Provider>
+    </Provider>,
   );
 } else {
   console.error('Root element not found');

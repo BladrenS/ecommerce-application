@@ -5,6 +5,7 @@ import unicorn from 'eslint-plugin-unicorn';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
+import jest from 'eslint-plugin-jest';
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
@@ -18,7 +19,10 @@ export default [
   },
   js.configs.recommended,
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.test.ts', '**/*.test.tsx'],
+    plugins: {
+      jest,
+    },
     languageOptions: {
       parser: parserTs,
       parserOptions: {
@@ -43,6 +47,7 @@ export default [
         module: 'readonly',
         __dirname: 'readonly',
         fetch: 'readonly',
+        ...jest.environments.test.globals,
       },
     },
     plugins: {

@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "target": "ES5",
+    "target": "ES6",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "outDir": "./dist",
@@ -24,6 +25,6 @@
     "noImplicitOverride": true,
     "baseUrl": ".",
   },
-  "include": ["src/**/*", "global.d.ts", "webpack.config.js"],
+  "include": ["src/**/*", "global.d.ts", "webpack.config.js", "test", "test/setupTests.ts"],
   "exclude": ["node_modules"]
 }
