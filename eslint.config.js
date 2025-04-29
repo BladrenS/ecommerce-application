@@ -20,9 +20,6 @@ export default [
   js.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.test.ts', '**/*.test.tsx'],
-    plugins: {
-      jest,
-    },
     languageOptions: {
       parser: parserTs,
       parserOptions: {
@@ -47,7 +44,7 @@ export default [
         module: 'readonly',
         __dirname: 'readonly',
         fetch: 'readonly',
-        ...jest.environments.test.globals,
+        ...jest.environments.globals.globals,
       },
     },
     plugins: {
@@ -56,6 +53,7 @@ export default [
       prettier,
       'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
+      jest,
     },
     rules: {
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],

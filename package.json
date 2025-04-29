@@ -11,7 +11,8 @@
     "stylelint": "stylelint 'src/**/*.{css,scss,sass}'",
     "stylelint-fix": "stylelint 'src/**/*.{css,scss,sass}' --fix",
     "test": "jest",
-    "test:watch": "jest --watch --coverage"
+    "test:watch": "jest --watch --coverage",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
