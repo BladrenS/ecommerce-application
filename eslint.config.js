@@ -58,7 +58,8 @@ export default [
     rules: {
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-imports': 'error',
-      '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/no-unused-vars': 'error',
+      'no-unused-vars': 'off',
       '@typescript-eslint/explicit-member-accessibility': [
         'error',
         {
@@ -67,7 +68,6 @@ export default [
         },
       ],
       '@typescript-eslint/member-ordering': 'error',
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
 
       'class-methods-use-this': 'error',
 
@@ -95,6 +95,7 @@ export default [
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'unused-imports/no-unused-imports': 'warn',
+      'import/no-default-export': 'error',
     },
   },
 ];
