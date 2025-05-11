@@ -1,7 +1,9 @@
-import React from 'react';
+import { RegistrationForm } from './pages/registrationForm/RegistrationForm';
 
-const App: React.FC = () => {
-  return <div></div>;
+export const App = () => {
+  return (
+    <div>
+      <RegistrationForm></RegistrationForm>
+    </div>
+  );
 };
-
-export default App;
