@@ -33,7 +33,6 @@
     ],
     "declaration-property-value-no-unknown": null,
 
-    "order/order": ["custom-properties", "dollar-variables", "declarations", "at-rules", "rules"],
-    "order/properties-alphabetical-order": true
+    "order/order": ["custom-properties", "dollar-variables", "declarations", "at-rules", "rules"]
   }
 }
