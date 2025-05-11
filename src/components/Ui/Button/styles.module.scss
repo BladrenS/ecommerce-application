@@ -1,0 +1,25 @@
+.button {
+  padding: 15px 50px;
+  border-radius: var(--border-radius);
+
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+
+  background-color: var(--primary-color);
+
+  transition: var(--transition);
+
+  &:focus-visible {
+    outline: 1px solid var(--secondary-color);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:not(:disabled):hover {
+    background-color: var(--primary-hover);
+  }
+}

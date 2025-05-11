@@ -1,0 +1,8 @@
+@use '../../styles/abstract/mixins' as *;
+
+.page {
+  min-height: 100vh;
+  padding: 15px;
+
+  @include flex-center;
+}

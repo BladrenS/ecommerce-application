@@ -1,5 +1,16 @@
-@import url('~@csstools/normalize.css');
+@use './base/normalize' as *;
+@use './base/fonts' as *;
+@use './abstract/constants' as *;
+@use './abstract/mixins' as *;
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--main-font);
+  color: var(--main-color);
+  background-color: var(--background-color);
 }

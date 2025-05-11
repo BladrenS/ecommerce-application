@@ -2,6 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,5 +74,6 @@ export default {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new DotenvWebpackPlugin(),
   ],
 };

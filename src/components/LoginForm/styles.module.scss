@@ -1,0 +1,59 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.credentials-error {
+  color: var(--error);
+  text-align: center;
+}
+
+.wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  width: 100%;
+  max-width: 425px;
+  padding: 50px;
+  border-radius: var(--border-radius);
+
+  background-color: #fff;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.redirect {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.link {
+  color: var(--primary-color);
+  transition: var(--transition);
+
+  &:hover {
+    color: rgb(70 163 88 / 70%);
+  }
+}
+
+.green {
+  color: green;
+}
