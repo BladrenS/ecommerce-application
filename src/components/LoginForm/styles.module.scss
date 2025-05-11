@@ -1,13 +1,16 @@
+@use '../../styles/abstract/mixins' as *;
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
+  margin-bottom: 55px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 55px;
 }
 
 .credentials-error {
@@ -17,41 +20,36 @@
 
 .wrapper {
   position: relative;
-
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  top: -82px;
 
   width: 100%;
-  max-width: 425px;
-  padding: 50px;
+  max-width: 395px;
   border-radius: var(--border-radius);
 
-  background-color: #fff;
+  color: var(--secondary-color);
+  letter-spacing: 1.32px;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
+  margin-bottom: 72px;
   text-align: center;
 }
 
 .redirect {
   display: flex;
-  gap: 5px;
+  gap: 7px;
   justify-content: center;
 
-  color: var(--secondary-color);
+  color: var(--primary-color);
   text-align: center;
 }
 
 .link {
-  color: var(--primary-color);
+  position: relative;
+  color: var(--secondary-color);
   transition: var(--transition);
 
-  &:hover {
-    color: rgb(70 163 88 / 70%);
-  }
+  @include hover-decor;
 }
 
 .green {

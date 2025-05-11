@@ -1,0 +1,33 @@
+@use '../../../../styles/abstract/mixins' as *;
+
+.subtitle {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 65px;
+}
+
+.active,
+.auth-page {
+  font-size: 26px;
+}
+
+.auth-page {
+  position: relative;
+  font-size: 26px;
+  transition: var(--transition);
+
+  @include hover-decor;
+}
+
+.active {
+  color: var(--primary-color);
+}
+
+.decor {
+  width: 3px;
+  height: 19px;
+  background-color: var(--secondary-color);
+}

@@ -1,8 +1,19 @@
 @use '../../styles/abstract/mixins' as *;
 
 .page {
-  min-height: 100vh;
-  padding: 15px;
+  position: relative;
+  padding: 288px 15px 180px;
 
   @include flex-center;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.4;
+    background: url('../../assets/auth-images/background-img.jpg') center no-repeat;
+    background-size: cover;
+  }
 }

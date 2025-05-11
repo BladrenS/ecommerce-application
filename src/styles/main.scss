@@ -9,8 +9,19 @@
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: var(--main-font);
   color: var(--main-color);
   background-color: var(--background-color);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }

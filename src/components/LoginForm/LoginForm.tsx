@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Button, Loader } from '../Ui';
 import { useLoginSubmitting } from './logic/useLoginSubmitting';
-import { AuthInput } from './parts';
+import { AuthInput, Subtitle } from './parts';
 import { type LoginField, schema } from './schemas/loginSchemas';
 import styles from './styles.module.scss';
 
@@ -22,7 +22,8 @@ export const LoginForm: FC = () => {
   return (
     <div className={styles.wrapper}>
       {loading && <Loader />}
-      <div className={styles.title}>Login</div>
+      <Subtitle />
+      <div className={styles.title}>Enter your email and password to login.</div>
       <form onSubmit={handleSubmit(submit)} className={styles.form}>
         <div className={styles.container}>
           <AuthInput
@@ -46,9 +47,9 @@ export const LoginForm: FC = () => {
         {errors.root && <p className={styles['credentials-error']}>{errors.root.message}</p>}
       </form>
       <div className={styles.redirect}>
-        Don’t have an account?
+        Don't have an account yet?
         <NavLink to={'/register'} className={styles.link}>
-          Sign Up
+          Register
         </NavLink>
       </div>
     </div>

@@ -3,13 +3,10 @@
 .label {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  font-weight: 500;
+  gap: 11px;
 }
 
 .name {
-  font-size: 12px;
-
   &::first-letter {
     text-transform: capitalize;
   }
@@ -21,7 +18,7 @@
 
 .input {
   width: 100%;
-  padding: 15px 35px 15px 15px;
+  padding: 15px 45px 15px 28px;
   border: 1px solid #dedede;
   border-radius: 5px;
 
@@ -30,15 +27,6 @@
   transition: var(--transition);
 
   @include flex-center;
-
-  &::placeholder {
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  &:focus {
-    border: 1px solid var(--secondary-color);
-  }
 }
 
 .error {
