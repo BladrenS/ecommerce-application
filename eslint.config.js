@@ -6,6 +6,7 @@ import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unusedImports from 'eslint-plugin-unused-imports';
 import jest from 'eslint-plugin-jest';
+import importPlugin from 'eslint-plugin-import';
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
@@ -54,6 +55,7 @@ export default [
       'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
       jest,
+      import: importPlugin,
     },
     rules: {
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
