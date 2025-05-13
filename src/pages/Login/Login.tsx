@@ -15,8 +15,8 @@ export const Login: FC = () => {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <LoginForm />
-    </div>
+    </main>
   );
 };

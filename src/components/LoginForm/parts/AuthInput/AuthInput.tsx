@@ -35,7 +35,7 @@ export const AuthInput: FC<AuthInputProps> = ({ error, name, type, ...props }) =
           />
         )}
       </div>
-      {error && <p className={styles.error}>{error}</p>}
+      <div className={styles.error}>{error ? error : ''}</div>
     </label>
   );
 };
