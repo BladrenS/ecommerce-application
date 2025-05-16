@@ -1,34 +1,24 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import type { FC } from 'react';
-import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
 import { Button, Loader } from '../Ui';
 import { useLoginSubmitting } from './logic/useLoginSubmitting';
 import { AuthInput, Subtitle } from './parts';
-import { type LoginField, schema } from './schemas/loginSchemas';
 import styles from './styles.module.scss';
 
 export const LoginForm: FC = () => {
-  const {
-    register,
-    formState: { errors, isValid },
-    handleSubmit,
-    setError,
-  } = useForm<LoginField>({ mode: 'onChange', resolver: zodResolver(schema) });
-
-  const { submit, loading } = useLoginSubmitting(setError);
+  const { submit, register, isValid, loading, errors } = useLoginSubmitting();
 
   return (
     <div className={styles.wrapper}>
       {loading && <Loader />}
       <Subtitle />
       <div className={styles.title}>Enter your email and password to login.</div>
-      <form onSubmit={handleSubmit(submit)} className={styles.form}>
+      <form onSubmit={submit} className={styles.form}>
         <div className={styles.container}>
           <AuthInput
             error={errors.email?.message}
-            type="email"
+            type="text"
             autoComplete="true"
             placeholder="Enter your email"
             {...register('email')}

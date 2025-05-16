@@ -1,20 +1,32 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { AxiosError } from 'axios';
+import type { FormEvent } from 'react';
 import { useState } from 'react';
-import type { SubmitHandler, UseFormSetError } from 'react-hook-form';
+import type { FieldErrors, SubmitHandler, UseFormRegister } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { ErrorCodeResponse } from '../../../types';
-import type { LoginField } from '../schemas/loginSchemas';
+import { type LoginField, schema } from '../schemas/loginSchemas';
 
 interface SubmitHandling {
-  submit: SubmitHandler<LoginField>;
+  register: UseFormRegister<LoginField>;
+  submit: (event: FormEvent<HTMLFormElement>) => void;
+  errors: FieldErrors<LoginField>;
+  isValid: boolean;
   loading: boolean;
 }
 
-export const useLoginSubmitting = (setError: UseFormSetError<LoginField>): SubmitHandling => {
+export const useLoginSubmitting = (): SubmitHandling => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    setError,
+  } = useForm<LoginField>({ mode: 'onChange', resolver: zodResolver(schema) });
 
   const submit: SubmitHandler<LoginField> = async (values) => {
     try {
@@ -46,5 +58,5 @@ export const useLoginSubmitting = (setError: UseFormSetError<LoginField>): Submi
     }
   };
 
-  return { submit, loading };
+  return { register, submit: handleSubmit(submit), loading, errors, isValid };
 };
