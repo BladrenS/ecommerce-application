@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { CommerceToolsService } from './api/CommerceToolsService';
+import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
 import { Login, Main, Register } from './pages';
 
@@ -30,6 +31,7 @@ export const App: FC = () => {
 
   return (
     <BrowserRouter>
+      <Header></Header>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
