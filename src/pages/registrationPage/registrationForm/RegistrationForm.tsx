@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -32,6 +33,9 @@ export const RegistrationForm = () => {
   const onError = (errors: unknown): void => {
     console.error('Form errors:', errors);
   };
+
+  const [isShippingEqualBilling, setIsShippingEqualBilling] = useState(false);
+
   return (
     <div className={styles['page-wrapper']}>
       <form className={styles['registration-form']} onSubmit={handleSubmit(onSubmit, onError)}>
@@ -90,7 +94,7 @@ export const RegistrationForm = () => {
           </div>
 
           <div className={styles['form-group']}>
-            <h3 className={styles['form-group-name']}>Shipping Adress</h3>
+            <h3 className={styles['form-group-name']}>Shipping Address</h3>
             <LabeledInput
               label="Street"
               name="street"
@@ -127,7 +131,68 @@ export const RegistrationForm = () => {
               error={errors.country}
               required={true}
             />
+            <div className={styles['checkbox-container']}>
+              <input type="checkbox" name="" id="" />
+              <span className={styles.checkbox}>Use as default for shipping</span>
+            </div>
+
+            <div className={styles['checkbox-container']}>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                checked={isShippingEqualBilling}
+                onChange={(event) => setIsShippingEqualBilling(event.target.checked)}
+              />
+              <span className={styles.checkbox}>Use shipping address as billing</span>
+            </div>
           </div>
+
+          {!isShippingEqualBilling && (
+            <div className={styles['form-group']}>
+              <h3 className={styles['form-group-name']}>Billing Address</h3>
+              <LabeledInput
+                label="Street"
+                name="street"
+                type="text"
+                placeholder="Street"
+                register={register}
+                error={errors.street}
+                required={true}
+              />
+              <LabeledInput
+                label="City"
+                name="city"
+                type="text"
+                placeholder="City"
+                register={register}
+                error={errors.city}
+                required={true}
+              />
+              <LabeledInput
+                label="Postal Code"
+                name="postalCode"
+                type="text"
+                placeholder="Postal Code"
+                register={register}
+                error={errors.postalCode}
+                required={true}
+              />
+              <LabeledInput
+                label="Country"
+                name="country"
+                type="text"
+                placeholder="Country"
+                register={register}
+                error={errors.country}
+                required={true}
+              />
+              <div className={styles['checkbox-container']}>
+                <input type="checkbox" name="" id="" />
+                <span className={styles.checkbox}>Use as default for billing</span>
+              </div>
+            </div>
+          )}
         </div>
 
         <button disabled={isSubmitting || !isValid} type="submit" className={styles['submit-button']}>

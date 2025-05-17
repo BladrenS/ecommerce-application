@@ -109,3 +109,13 @@ $base-radius: 7px;
   border-bottom: 4px solid $accent-color;
   color: $primary-white;
 }
+
+.checkbox-container {
+  display: flex;
+  gap: 5px;
+  padding-top: 5px;
+}
+
+.checkbox {
+  color: $primary-white;
+}
