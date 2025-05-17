@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { FieldError, UseFormRegister } from 'react-hook-form';
 
-import styles from './register.module.scss';
+import styles from './registerForm.module.scss';
 
 type InputFieldProps = {
   label: string;

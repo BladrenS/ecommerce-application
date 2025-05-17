@@ -1,0 +1,100 @@
+@use '../../../styles/variables' as *;
+
+$gap: 20px;
+$base-radius: 7px;
+
+.label {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: $accent-color;
+}
+
+.submit-button {
+  align-self: center;
+
+  width: 200px;
+  height: 52px;
+  margin: 10px auto;
+  border: none;
+  border-radius: $base-radius;
+  border-radius: 13.2px;
+
+  font-size: 20px;
+  font-weight: 700;
+  color: $primary-white;
+
+  background-color: $accent-color;
+  outline: none;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  background-color: $accent-color-hovered;
+}
+
+.submit-button:disabled {
+  cursor: not-allowed;
+  color: $dark-gray;
+  background-color: $light-gray;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  margin: 0 auto;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.registration-form-wrapper {
+  display: flex;
+  gap: $gap;
+  justify-content: center;
+}
+
+.input-field {
+  width: 100%;
+  height: 50px;
+  border: 1px solid $light-gray;
+  border-radius: $base-radius;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid $accent-color;
+  box-shadow: 0 0 1px $accent-color;
+}
+
+.required {
+  color: $accent-red;
+}
+
+.error-message {
+  color: $accent-red;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  width: 100%;
+  max-width: 530px;
+}
+
+.form-group-name {
+  width: fit-content;
+  padding-bottom: 10px;
+  border-bottom: 4px solid $accent-color;
+  color: $primary-white;
+}

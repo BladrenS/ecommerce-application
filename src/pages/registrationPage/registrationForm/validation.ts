@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { validCountries } from '../../constants/countries';
+import { validCountries } from '../../../constants/countries';
 
 const MIN_AGE = 14;
 const today = new Date();
