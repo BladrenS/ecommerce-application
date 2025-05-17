@@ -32,7 +32,8 @@
           "while",
           "mixin",
           "include",
-          "content"
+          "content",
+          "use"
         ]
       }
     ],
