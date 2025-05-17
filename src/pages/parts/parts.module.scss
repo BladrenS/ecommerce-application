@@ -1,0 +1,55 @@
+@use '../../styles/variables' as *;
+
+.toggle-button {
+  font-size: 26px;
+  font-weight: 700;
+  color: $primary-white;
+}
+
+.toggle-button.active {
+  color: $accent-color;
+}
+
+.toggle-button,
+.toggle-button:hover {
+  border: none;
+  border-bottom: 4px solid transparent;
+  background: none;
+}
+
+.toggle-button.active:hover {
+  cursor: default;
+}
+
+.toggle-button:not(.active):hover {
+  cursor: pointer;
+  border-bottom: 4px solid $accent-color;
+  border-radius: 0;
+  background: none;
+}
+
+.description {
+  margin-top: 0;
+  font-size: 16px;
+  color: $primary-white;
+  text-align: center;
+}
+
+.login-registration-toggler {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.form-toggle {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.separator {
+  height: 21px;
+  border: 2px solid $primary-white;
+}
