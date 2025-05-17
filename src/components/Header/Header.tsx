@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { type FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -6,7 +7,9 @@ import styles from './styles.module.scss';
 
 export const Header: FC = memo(() => {
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `${styles['header-link']} ${styles.active}` : styles['header-link'];
+    clsx(styles['header-link'], {
+      [styles.active]: isActive,
+    });
 
   return (
     <div className={styles.header}>
