@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 
 export const Footer: FC = memo(() => {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles['footer-container']}>
         <div className={styles['footer-promo']}>
           {promoItems.map((item, i) => (
@@ -28,32 +28,29 @@ export const Footer: FC = memo(() => {
             </span>
           </div>
         </div>
-        <div className={styles['footer-links']}></div>
       </div>
 
       <div className={styles['footer-connections']}>
-        <div className={styles['footer-container']}>
-          <NavLink to="/main" className={styles.shop}>
-            <img src={logo} alt="logo" />
-            хрустикshop
-          </NavLink>
-          <a
-            className={styles['footer-connections-item']}
-            href="https://maps.app.goo.gl/1jSjmqpZzkUWpoZJ8"
-            target="_blank"
-          >
-            <img src={location} alt="mark" />
-            Николаева ул., 2/1, Москва, 103274
-          </a>
-          <a href="mailto:connect@хрустикshop.com" className={styles['footer-connections-item']}>
-            <img src={mail} alt="mail" />
-            connect@хрустикshop.com
-          </a>
-          <a href="tel:+78005552525" className={styles['footer-connections-item']}>
-            <img src={phone} alt="phone" />
-            +7 800 555 25 25
-          </a>
-        </div>
+        <NavLink to="/main" className={styles.shop}>
+          <img src={logo} alt="logo" />
+          хрустикshop
+        </NavLink>
+        <a
+          className={styles['footer-connections-item']}
+          href="https://maps.app.goo.gl/1jSjmqpZzkUWpoZJ8"
+          target="_blank"
+        >
+          <img src={location} alt="mark" />
+          Николаева ул., 2/1, Москва, 103274
+        </a>
+        <a href="mailto:connect@хрустикshop.com" className={styles['footer-connections-item']}>
+          <img src={mail} alt="mail" />
+          connect@хрустикshop.com
+        </a>
+        <a href="tel:+78005552525" className={styles['footer-connections-item']}>
+          <img src={phone} alt="phone" />
+          +7 800 555 25 25
+        </a>
       </div>
 
       <div className={styles['footer-container']}>
@@ -89,6 +86,6 @@ export const Footer: FC = memo(() => {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 });
