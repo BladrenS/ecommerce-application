@@ -1,7 +1,7 @@
 @use '../../styles/abstract/mixins' as *;
 
 .header {
-  position: absolute;
+  position: fixed;
   z-index: 5;
   top: 0;
 
@@ -56,4 +56,10 @@
   cursor: pointer;
   fill: var(--primary-color);
   stroke: var(--primary-color);
+}
+
+.sticky {
+  position: sticky;
+  z-index: 10;
+  top: 0;
 }
