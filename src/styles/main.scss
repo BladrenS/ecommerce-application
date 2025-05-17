@@ -18,6 +18,10 @@ body {
   font-family: var(--main-font);
   color: var(--main-color);
   background-color: var(--background-color);
+
+  &.scroll-hide {
+    overflow: hidden;
+  }
 }
 
 #root {

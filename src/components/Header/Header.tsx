@@ -3,12 +3,14 @@ import { type FC, memo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { logo } from '../../assets/';
-import { HEADER_LINKS } from './constants';
-import { CartIcon, FavoriteIcon, LogoutIcon, ProfileIcon } from './parts';
+import { HEADER_ICONS, HEADER_LINKS } from './constants';
+import { useMenuVisible } from './logic/useMenuVisible';
+import { LogoutIcon, Menu } from './parts';
 import styles from './styles.module.scss';
 
 export const Header: FC = memo(() => {
   const navigate = useNavigate();
+  const { isActiveMenu, setIsActiveMenu } = useMenuVisible();
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     clsx(styles['header-link'], {
       [styles.active]: isActive,
@@ -37,21 +39,18 @@ export const Header: FC = memo(() => {
           ))}
         </div>
         <div className={styles['header-icons']}>
-          <NavLink to={'/cart'}>
-            <CartIcon className={styles['header-icon']} />
-          </NavLink>
-          <NavLink to={'/like'}>
-            <FavoriteIcon className={styles['header-icon']} />
-          </NavLink>
-          <NavLink to={'/profile'}>
-            <ProfileIcon className={styles['header-icon']} />
-          </NavLink>
+          {HEADER_ICONS.map(({ Component, href }) => (
+            <NavLink key={href} to={href}>
+              <Component className={styles['header-icon']} />
+            </NavLink>
+          ))}
           <LogoutIcon onClick={userLogout} className={styles['header-icon']} />
         </div>
-        <div className={styles.burger}>
+        <div className={styles.burger} onClick={() => setIsActiveMenu((previous) => !previous)}>
           <span></span>
         </div>
       </div>
+      <Menu active={isActiveMenu} setActive={setIsActiveMenu} userLogout={userLogout} />
     </header>
   );
 });

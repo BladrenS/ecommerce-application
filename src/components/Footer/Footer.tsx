@@ -19,7 +19,12 @@ export const Footer: FC = memo(() => {
           <div className={styles['footer-promo-item']}>
             <h3>Want to be the first to know about all our deals? Subscribe now!</h3>
             <div className={styles['input-block']}>
-              <input type="text" placeholder="enter your email address..." className={styles.input} />
+              <input
+                name="email-field"
+                type="text"
+                placeholder="enter your email address..."
+                className={styles.input}
+              />
               <div className={styles['yes-button']}>Yes</div>
             </div>
             <span className={styles.span}>

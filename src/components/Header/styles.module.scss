@@ -27,6 +27,10 @@
   align-items: center;
   justify-content: space-between;
   min-width: 30vw;
+
+  @media (width <= 768px) {
+    display: none;
+  }
 }
 
 .header-link {
@@ -40,6 +44,12 @@
   transition: var(--transition);
 
   @include hover-decor;
+}
+
+.header-icons {
+  @media (width <= 768px) {
+    display: none;
+  }
 }
 
 .header-icon {
@@ -91,6 +101,10 @@
 
   width: 25px;
   height: 20px;
+
+  @media (width > 768px) {
+    display: none;
+  }
 
   span {
     width: 100%;
