@@ -73,6 +73,7 @@ export default {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './src/assets/header-icons/bike.svg',
     }),
     new DotenvWebpackPlugin(),
   ],
