@@ -54,9 +54,15 @@ $base-radius: 7px;
 }
 
 .registration-form-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
   gap: $gap;
   justify-content: center;
+
+  @media (width <= 720px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .input-field {
@@ -87,9 +93,14 @@ $base-radius: 7px;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  justify-self: center;
 
   width: 100%;
-  max-width: 530px;
+  max-width: calc(50vw - 40px - $gap);
+
+  @media (width <= 720px) {
+    max-width: 100%;
+  }
 }
 
 .form-group-name {
