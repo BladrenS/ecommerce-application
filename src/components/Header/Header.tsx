@@ -1,10 +1,13 @@
-import { type FC } from 'react';
+import { type FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { logo } from '../../assets/';
 import styles from './styles.module.scss';
 
-export const Header: FC = () => {
+export const Header: FC = memo(() => {
+  const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? `${styles['header-link']} ${styles.active}` : styles['header-link'];
+
   return (
     <div className={styles.header}>
       <div className={styles['header-container']}>
@@ -12,19 +15,19 @@ export const Header: FC = () => {
           <img src={logo} alt="logo" />
         </NavLink>
         <div className={styles['header-links']}>
-          <NavLink to={'/login'} className={styles['header-link']}>
+          <NavLink to="/login" className={getNavLinkClass}>
             Login
           </NavLink>
-          <NavLink to={'/register'} className={styles['header-link']}>
+          <NavLink to="/register" className={getNavLinkClass}>
             Register
           </NavLink>
-          <NavLink to={'/main'} className={styles['header-link']}>
+          <NavLink to="/main" className={getNavLinkClass}>
             Main
           </NavLink>
-          <NavLink to={'/catalog'} className={styles['header-link']}>
+          <NavLink to="/catalog" className={getNavLinkClass}>
             Catalog
           </NavLink>
-          <NavLink to={'/about'} className={styles['header-link']}>
+          <NavLink to="/about" className={getNavLinkClass}>
             About us
           </NavLink>
         </div>
@@ -76,4 +79,4 @@ export const Header: FC = () => {
       </div>
     </div>
   );
-};
+});

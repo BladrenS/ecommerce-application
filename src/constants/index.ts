@@ -22,7 +22,10 @@ export const COMMERCETOOLS_CONFIG = {
   apiUrl: process.env.CTP_API_URL || '',
 };
 
-export const promoItems = [
+export const promoItems: {
+  img: string;
+  text: string;
+}[] = [
   {
     img: helmet,
     text: 'Gear up for the ride! This week only – special discounts on all motorcycle helmets. Stay safe and stylish without breaking the bank!',
@@ -37,7 +40,21 @@ export const promoItems = [
   },
 ];
 
-export const footerLinks = [
+export const footerLinks: {
+  header: string;
+  links: (
+    | {
+        to: string;
+        label: string;
+        disabled?: undefined;
+      }
+    | {
+        to: string;
+        label: string;
+        disabled: boolean;
+      }
+  )[];
+}[] = [
   {
     header: 'General',
     links: [
@@ -70,5 +87,5 @@ export const footerLinks = [
   },
 ];
 
-export const socialIcons = [twitter, linkedin, facebook, instagram, youtube];
-export const paymentIcons = [paypal, visa, mastercard, bit];
+export const socialIcons: string[] = [twitter, linkedin, facebook, instagram, youtube];
+export const paymentIcons: string[] = [paypal, visa, mastercard, bit];
