@@ -1,9 +1,9 @@
-import { RegistrationForm } from './pages/registrationForm/RegistrationForm';
+import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 
 export const App = () => {
   return (
     <div>
-      <RegistrationForm></RegistrationForm>
+      <RegistrationPage></RegistrationPage>
     </div>
   );
 };
