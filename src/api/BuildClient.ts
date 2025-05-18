@@ -1,34 +1,46 @@
-import {
-  // Import middlewares
-  type AuthMiddlewareOptions, // Required for auth
-  ClientBuilder,
-  type HttpMiddlewareOptions, // Required for sending HTTP requests
-} from '@commercetools/ts-client';
+import { type AuthMiddlewareOptions, ClientBuilder } from '@commercetools/ts-client';
 import fetch from 'isomorphic-fetch';
 
 import { COMMERCETOOLS_CONFIG } from '../constants/credentials';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl, scope } = COMMERCETOOLS_CONFIG;
 
-const scopes = scope.split(' ');
-
-const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: authUrl,
-  projectKey: projectKey,
-  credentials: {
-    clientId: clientId,
-    clientSecret: clientSecret,
-  },
-  scopes,
-  httpClient: fetch,
-};
-
-const httpMiddlewareOptions: HttpMiddlewareOptions = {
+const httpMiddlewareOptions = {
   host: apiUrl,
   httpClient: fetch,
 };
 
-export const ctpClient = new ClientBuilder()
-  .withClientCredentialsFlow(authMiddlewareOptions)
-  .withHttpMiddleware(httpMiddlewareOptions)
-  .build();
+// ---------- АНОНИМНЫЙ КЛИЕНТ ----------
+export const createAnonymousClient = (anonymousId?: string) => {
+  const authMiddlewareOptions: AuthMiddlewareOptions = {
+    host: authUrl,
+    projectKey,
+    credentials: { clientId, clientSecret },
+    scopes: scope.split(' '),
+    httpClient: fetch,
+  };
+
+  const builder = new ClientBuilder().withHttpMiddleware(httpMiddlewareOptions).withAnonymousSessionFlow({
+    ...authMiddlewareOptions,
+    ...(anonymousId ? { anonymousId } : {}),
+  });
+
+  return builder.build();
+};
+
+// ---------- СИСТЕМНЫЙ КЛИЕНТ ----------
+export const createSystemClient = () => {
+  const authMiddlewareOptions: AuthMiddlewareOptions = {
+    host: authUrl,
+    projectKey,
+    credentials: { clientId, clientSecret },
+    scopes: scope.split(' '),
+    httpClient: fetch,
+  };
+
+  const builder = new ClientBuilder()
+    .withHttpMiddleware(httpMiddlewareOptions)
+    .withClientCredentialsFlow(authMiddlewareOptions);
+
+  return builder.build();
+};
