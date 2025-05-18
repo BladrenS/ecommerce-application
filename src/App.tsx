@@ -6,7 +6,8 @@ import { CommerceToolsService } from './api/CommerceToolsService';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
-import { Login, Main, Register } from './pages';
+import { Login, Main } from './pages';
+import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 
 export const App: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -36,7 +37,7 @@ export const App: FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="*" element={<div>404 Page not found</div>} />
       </Routes>

@@ -1,0 +1,159 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/abstract/mixins' as *;
+
+$gap: 20px;
+$base-radius: 7px;
+
+.label {
+  display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: $accent-color;
+}
+
+.submit-button {
+  align-self: center;
+
+  width: 200px;
+  height: 52px;
+  margin: 10px auto;
+  border: none;
+  border-radius: $base-radius;
+  border-radius: 13.2px;
+
+  font-size: 20px;
+  font-weight: 700;
+  color: $primary-white;
+
+  background-color: $accent-color;
+  outline: none;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $accent-color-hovered;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: $dark-gray;
+    background-color: $light-gray;
+  }
+}
+
+.page-wrapper {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  margin: 0 auto;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.registration-form-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-wrap: wrap;
+  gap: $gap;
+  justify-content: center;
+
+  @media (width <= 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-field {
+  width: 100%;
+  height: 50px;
+  padding-left: 15px;
+  border: 1px solid $light-gray;
+  border-radius: $base-radius;
+
+  font-size: 16px;
+
+  outline: none;
+
+  &:focus {
+    border: 2px solid $accent-color;
+    box-shadow: 0 0 1px $accent-color;
+  }
+}
+
+.required {
+  color: $accent-red;
+}
+
+.error-message {
+  color: $accent-red;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-self: center;
+
+  width: 100%;
+  max-width: calc(50vw - 40px - $gap);
+
+  @media (width <= 720px) {
+    max-width: 100%;
+  }
+}
+
+.form-group-name {
+  width: fit-content;
+  padding-bottom: 10px;
+  border-bottom: 4px solid $accent-color;
+  color: $primary-white;
+}
+
+.checkbox-container {
+  display: flex;
+  gap: 5px;
+  padding-top: 5px;
+}
+
+.checkbox {
+  color: $primary-white;
+}
+
+.desc-under {
+  width: fit-content;
+  margin: 0 auto;
+  color: $accent-color;
+}
+
+.desc-under-span {
+  cursor: pointer;
+
+  position: relative;
+
+  margin-left: 5px;
+
+  color: $primary-white;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    @include hover-decor;
+  }
+}
+
+.root-error {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 5px;
+
+  font-size: 14px;
+  color: $accent-red;
+}

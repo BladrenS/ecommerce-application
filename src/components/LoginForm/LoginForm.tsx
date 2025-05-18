@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { LoginRegistrationToggler } from '../../pages/parts/LoginRegistrationToggler';
 import { Button, Loader } from '../Ui';
 import { useLoginSubmitting } from './logic/useLoginSubmitting';
-import { AuthInput, Subtitle } from './parts';
+import { AuthInput } from './parts';
 import styles from './styles.module.scss';
 
 export const LoginForm: FC = () => {
@@ -12,8 +13,7 @@ export const LoginForm: FC = () => {
   return (
     <div className={styles.wrapper}>
       {loading && <Loader />}
-      <Subtitle />
-      <div className={styles.title}>Enter your email and password to login.</div>
+      <LoginRegistrationToggler activeButton="login" />
       <form onSubmit={submit} className={styles.form}>
         <div className={styles.container}>
           <AuthInput
