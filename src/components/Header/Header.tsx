@@ -25,6 +25,10 @@ export const Header: FC = memo(() => {
     }
   };
 
+  const clickHandlerBurger = () => {
+    setIsActiveMenu((previous) => !previous);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles['header-container']}>
@@ -46,9 +50,10 @@ export const Header: FC = memo(() => {
           ))}
           <LogoutIcon onClick={userLogout} className={styles['header-icon']} />
         </div>
-        <div className={styles.burger} onClick={() => setIsActiveMenu((previous) => !previous)}>
-          <span></span>
-        </div>
+        <div
+          className={clsx(styles.burger, isActiveMenu && styles['active-burger'])}
+          onClick={clickHandlerBurger}
+        ></div>
       </div>
       <Menu active={isActiveMenu} setActive={setIsActiveMenu} userLogout={userLogout} />
     </header>
