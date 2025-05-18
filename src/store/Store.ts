@@ -2,10 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import Reducer from './Slice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     State: Reducer,
   },
 });
-
-export default store;

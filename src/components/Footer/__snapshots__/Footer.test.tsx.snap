@@ -1,0 +1,340 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer snapshot test renders correctly 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer"
+  >
+    <div
+      class="footer-container"
+    >
+      <div
+        class="footer-promo"
+      >
+        <div
+          class="footer-promo-item"
+        >
+          <img
+            alt="promo-0"
+            src="test-file-stub"
+          />
+          <span
+            class="span"
+          >
+            Gear up for the ride! This week only – special discounts on all motorcycle helmets. Stay safe and stylish without breaking the bank!
+          </span>
+        </div>
+        <div
+          class="footer-promo-item"
+        >
+          <img
+            alt="promo-1"
+            src="test-file-stub"
+          />
+          <span
+            class="span"
+          >
+            Rev up your savings! Get top-quality motorcycle parts at unbeatable prices — for a limited time only. Keep your ride in peak condition without draining your wallet!
+          </span>
+        </div>
+        <div
+          class="footer-promo-item"
+        >
+          <img
+            alt="promo-2"
+            src="test-file-stub"
+          />
+          <span
+            class="span"
+          >
+            Chain up and ride strong! Premium motorcycle chains now on sale — built for durability, priced for riders. Don’t miss the deal that keeps you moving!
+          </span>
+        </div>
+        <div
+          class="footer-promo-item"
+        >
+          <h3>
+            Want to be the first to know about all our deals? Subscribe now!
+          </h3>
+          <div
+            class="input-block"
+          >
+            <input
+              class="input"
+              name="email-field"
+              placeholder="enter your email address..."
+              type="text"
+            />
+            <div
+              class="yes-button"
+            >
+              Yes
+            </div>
+          </div>
+          <span
+            class="span"
+          >
+            Subscribe to our newsletter for updates on new arrivals, exclusive discounts, and notifications about our latest blog articles. Stay informed and enhance your moto experience with our expert tips and offers!
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="footer-connections"
+    >
+      <a
+        class="shop"
+        data-discover="true"
+        href="/main"
+      >
+        <img
+          alt="logo"
+          src="test-file-stub"
+        />
+        хрустикshop
+      </a>
+      <a
+        class="footer-connections-item"
+        href="https://maps.app.goo.gl/1jSjmqpZzkUWpoZJ8"
+        target="_blank"
+      >
+        <img
+          alt="mark"
+          src="test-file-stub"
+        />
+        Николаева ул., 2/1, Москва, 103274
+      </a>
+      <a
+        class="footer-connections-item"
+        href="mailto:connect@хрустикshop.com"
+      >
+        <img
+          alt="mail"
+          src="test-file-stub"
+        />
+        connect@хрустикshop.com
+      </a>
+      <a
+        class="footer-connections-item"
+        href="tel:+78005552525"
+      >
+        <img
+          alt="phone"
+          src="test-file-stub"
+        />
+        +7 800 555 25 25
+      </a>
+    </div>
+    <div
+      class="footer-container"
+    >
+      <div
+        class="footer-links-block"
+      >
+        <h2
+          class="links-header"
+        >
+          General
+        </h2>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/profile"
+        >
+          My account
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/about"
+        >
+          About us
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/blog"
+        >
+          Blog
+        </a>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          Career
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/Cooperation"
+        >
+          Cooperation
+        </a>
+      </div>
+      <div
+        class="footer-links-block"
+      >
+        <h2
+          class="links-header"
+        >
+          Help & Guide
+        </h2>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          Help center
+        </a>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          How to buy
+        </a>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          Delivery
+        </a>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          Product Policy
+        </a>
+        <a
+          aria-current="page"
+          class="disabled active"
+          data-discover="true"
+          href="/"
+        >
+          How to Return
+        </a>
+      </div>
+      <div
+        class="footer-links-block"
+      >
+        <h2
+          class="links-header"
+        >
+          Categories
+        </h2>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/profile"
+        >
+          Cat 1
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/about"
+        >
+          Cat 2
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/blog"
+        >
+          Cat 3
+        </a>
+        <a
+          aria-current="page"
+          class="footer-link active"
+          data-discover="true"
+          href="/"
+        >
+          Cat 4
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/Cooperation"
+        >
+          Cat 5
+        </a>
+      </div>
+      <div
+        class="footer-icons-block"
+      >
+        <h2
+          class="paragraph"
+        >
+          Social Media
+        </h2>
+        <div
+          class="icons-container"
+        >
+          <img
+            alt="social-0"
+            class="icon"
+            src="test-file-stub"
+          />
+          <img
+            alt="social-1"
+            class="icon"
+            src="test-file-stub"
+          />
+          <img
+            alt="social-2"
+            class="icon"
+            src="test-file-stub"
+          />
+          <img
+            alt="social-3"
+            class="icon"
+            src="test-file-stub"
+          />
+          <img
+            alt="social-4"
+            class="icon"
+            src="test-file-stub"
+          />
+        </div>
+        <h2
+          class="paragraph"
+        >
+          We accept
+        </h2>
+        <div
+          class="icons-container"
+        >
+          <img
+            alt="payment-0"
+            src="test-file-stub"
+            width="32"
+          />
+          <img
+            alt="payment-1"
+            src="test-file-stub"
+            width="32"
+          />
+          <img
+            alt="payment-2"
+            src="test-file-stub"
+            width="32"
+          />
+          <img
+            alt="payment-3"
+            src="test-file-stub"
+            width="32"
+          />
+        </div>
+      </div>
+    </div>
+  </footer>
+</DocumentFragment>
+`;

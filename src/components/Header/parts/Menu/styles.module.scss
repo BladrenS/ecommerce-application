@@ -1,0 +1,105 @@
+@use '../../../../styles/abstract/mixins' as *;
+
+.menu {
+  position: fixed;
+  z-index: 3;
+  top: 85px;
+  right: 0;
+  transform: translateX(100%);
+
+  display: flex;
+  justify-content: flex-end;
+
+  width: 100vw;
+  height: 100vh;
+
+  transition: all ease-in-out 0.4s;
+
+  @media (width <= 768px) {
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 300px;
+  height: 100%;
+  padding: 20px;
+
+  color: var(--secondary-color);
+
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.list {
+  position: relative;
+  top: -85px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  cursor: pointer;
+  position: relative;
+  font-size: 24px;
+}
+
+.menu-link {
+  position: relative;
+
+  margin: 0 10px;
+
+  color: var(--secondary-color);
+  text-transform: uppercase;
+
+  transition: var(--transition);
+
+  @include hover-decor;
+}
+
+.active {
+  color: var(--primary-color);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+    height: 2px;
+
+    background-color: var(--primary-color);
+  }
+}
+
+.list-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  fill: var(--secondary-color);
+  stroke: var(--secondary-color);
+  stroke-width: 0;
+  transition: var(--transition);
+
+  &:hover {
+    fill: var(--primary-color);
+    stroke: var(--primary-color);
+  }
+}
