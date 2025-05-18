@@ -1,36 +1,25 @@
 @use '../../styles/variables' as *;
+@use '../../styles/abstract/mixins' as *;
 
 .toggle-button {
+  position: relative;
+
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 400;
   color: $primary-white;
+
+  @include hover-decor;
 }
 
 .toggle-button.active {
   color: $accent-color;
 }
 
-.toggle-button,
-.toggle-button:hover {
-  border: none;
-  border-bottom: 4px solid transparent;
-  background: none;
-}
-
-.toggle-button.active:hover {
-  cursor: default;
-}
-
-.toggle-button:not(.active):hover {
-  cursor: pointer;
-  border-bottom: 4px solid $accent-color;
-  border-radius: 0;
-  background: none;
-}
-
 .description {
-  margin-top: 0;
+  margin-top: 20px;
+
   font-size: 16px;
+  font-weight: 400;
   color: $primary-white;
   text-align: center;
 }
@@ -38,8 +27,10 @@
 .login-registration-toggler {
   display: flex;
   flex-direction: column;
+
   width: fit-content;
   margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .form-toggle {

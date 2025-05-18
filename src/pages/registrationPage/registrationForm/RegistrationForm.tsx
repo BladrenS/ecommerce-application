@@ -1,14 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { createCustomer } from '../../../api/request';
+import { Loader } from '../../../components/Ui/Loader/Loader';
 import { LabeledInput } from './LabeledInput';
 import styles from './registerForm.module.scss';
 import type { RegistrationFormData } from './validation';
 import { registrationSchema } from './validation';
 
 export const RegistrationForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,16 +29,22 @@ export const RegistrationForm = () => {
     },
   });
 
+  const [activeLoader, setActiveLoader] = useState(false);
+
   const shippingAsBilling = watch('shippingAsBilling');
 
   const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
+      setActiveLoader(true);
       await createCustomer(data);
+      navigate('/main');
       console.log('User created successfully');
     } catch (error) {
       setError('root', {
         message: `Something went wrong. Please try again later. Error: ${error}`,
       });
+    } finally {
+      setActiveLoader(false);
     }
   };
 
@@ -44,6 +54,7 @@ export const RegistrationForm = () => {
 
   return (
     <div className={styles['page-wrapper']}>
+      {activeLoader && <Loader />}
       <form className={styles['registration-form']} onSubmit={handleSubmit(onSubmit, onError)}>
         <div className={styles['registration-form-wrapper']}>
           <div className={styles['form-group']}>

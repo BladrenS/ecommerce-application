@@ -1,0 +1,58 @@
+@use '../../styles/abstract/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 55px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.credentials-error {
+  color: var(--error);
+  text-align: center;
+}
+
+.wrapper {
+  position: relative;
+  top: -82px;
+
+  width: 100%;
+  max-width: 395px;
+  border-radius: var(--border-radius);
+
+  color: var(--secondary-color);
+  letter-spacing: 1.32px;
+}
+
+.title {
+  margin-bottom: 72px;
+  text-align: center;
+}
+
+.redirect {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.link {
+  position: relative;
+  color: var(--secondary-color);
+  transition: var(--transition);
+
+  @include hover-decor;
+}
+
+.green {
+  color: green;
+}

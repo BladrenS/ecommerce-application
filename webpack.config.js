@@ -61,7 +61,7 @@ export default {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.svg$/i,
+        test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,
         type: 'asset',
       },
     ],
@@ -73,6 +73,7 @@ export default {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './src/assets/header-icons/bike.svg',
     }),
     new DotenvWebpackPlugin(),
   ],

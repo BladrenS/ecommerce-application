@@ -1,10 +1,10 @@
-import './styles/main.module.scss';
+import './styles/main.scss';
 
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { App } from './App';
-import store from './store/Store';
+import { store } from './store/Store';
 
 const rootElement: HTMLElement | null = document.getElementById('root');
 

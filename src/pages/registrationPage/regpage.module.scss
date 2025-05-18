@@ -1,4 +1,17 @@
 .registration-page {
+  position: relative;
   padding: 40px;
-  background-color: black;
+  padding-top: 206px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+
+    opacity: 0.4;
+    background: url('../../assets/auth-images/high-background.jpg') center no-repeat;
+    background-size: cover;
+  }
 }

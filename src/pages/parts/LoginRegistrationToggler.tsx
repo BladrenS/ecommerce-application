@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
 
 import styles from './parts.module.scss';
 
@@ -8,23 +9,29 @@ export const LoginRegistrationToggler = ({ activeButton }: { activeButton: activ
   return (
     <div className={styles['login-registration-toggler']}>
       <div className={styles['form-toggle']}>
-        <button
+        <NavLink
           className={clsx(styles['toggle-button'], {
             [styles.active]: activeButton === 'login',
           })}
+          to={'/login'}
         >
           Login
-        </button>
+        </NavLink>
         <span className={styles.separator}></span>
-        <button
+        <NavLink
           className={clsx(styles['toggle-button'], {
             [styles.active]: activeButton === 'register',
           })}
+          to={'/register'}
         >
           Register
-        </button>
+        </NavLink>
       </div>
-      <h4 className={styles.description}>Enter your information to register.</h4>
+      <h4 className={styles.description}>
+        {activeButton === 'register'
+          ? 'Enter your information to register.'
+          : 'Enter your email and password to login.'}
+      </h4>
     </div>
   );
 };
