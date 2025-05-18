@@ -78,11 +78,11 @@ export const footerLinks: {
   {
     header: 'Categories',
     links: [
-      { to: '/profile', label: 'Cat' },
-      { to: '/about', label: 'Cat' },
-      { to: '/blog', label: 'Cat' },
-      { to: '', label: 'Cat' },
-      { to: '/Cooperation', label: 'Cat' },
+      { to: '/profile', label: 'Cat 1' },
+      { to: '/about', label: 'Cat 2' },
+      { to: '/blog', label: 'Cat 3' },
+      { to: '', label: 'Cat 4' },
+      { to: '/Cooperation', label: 'Cat 5' },
     ],
   },
 ];

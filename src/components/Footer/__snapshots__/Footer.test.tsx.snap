@@ -235,21 +235,21 @@ exports[`Footer snapshot test renders correctly 1`] = `
           data-discover="true"
           href="/profile"
         >
-          Cat
+          Cat 1
         </a>
         <a
           class="footer-link"
           data-discover="true"
           href="/about"
         >
-          Cat
+          Cat 2
         </a>
         <a
           class="footer-link"
           data-discover="true"
           href="/blog"
         >
-          Cat
+          Cat 3
         </a>
         <a
           aria-current="page"
@@ -257,14 +257,14 @@ exports[`Footer snapshot test renders correctly 1`] = `
           data-discover="true"
           href="/"
         >
-          Cat
+          Cat 4
         </a>
         <a
           class="footer-link"
           data-discover="true"
           href="/Cooperation"
         >
-          Cat
+          Cat 5
         </a>
       </div>
       <div
