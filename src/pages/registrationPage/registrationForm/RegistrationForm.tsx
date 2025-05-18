@@ -47,6 +47,7 @@ export const RegistrationForm = () => {
         <div className={styles['registration-form-wrapper']}>
           <div className={styles['form-group']}>
             <h3 className={styles['form-group-name']}>Credentials</h3>
+
             <LabeledInput
               label="Email"
               name="email"
@@ -56,6 +57,7 @@ export const RegistrationForm = () => {
               error={errors.email}
               required
             />
+
             <LabeledInput
               label="Password"
               name="password"
@@ -69,6 +71,7 @@ export const RegistrationForm = () => {
 
           <div className={styles['form-group']}>
             <h3 className={styles['form-group-name']}>Personal</h3>
+
             <LabeledInput
               label="First Name"
               name="firstName"
@@ -78,6 +81,7 @@ export const RegistrationForm = () => {
               error={errors.firstName}
               required
             />
+
             <LabeledInput
               label="Last Name"
               name="lastName"
@@ -87,6 +91,7 @@ export const RegistrationForm = () => {
               error={errors.lastName}
               required
             />
+
             <LabeledInput
               label="Date of Birth"
               name="dateOfBirth"
@@ -100,6 +105,7 @@ export const RegistrationForm = () => {
 
           <div className={styles['form-group']}>
             <h3 className={styles['form-group-name']}>Shipping Address</h3>
+
             <LabeledInput
               label="Street"
               name="street_shipping"
@@ -141,7 +147,7 @@ export const RegistrationForm = () => {
             />
 
             <div className={styles['checkbox-container']}>
-              <input type="checkbox" name="default-shipping" id="cbx-default-shipping" />
+              <input type="checkbox" id="cbx-default-shipping" {...register('defaultShipping')} />
               <span className={styles.checkbox}>Use as default for shipping</span>
             </div>
 
@@ -196,7 +202,7 @@ export const RegistrationForm = () => {
               />
 
               <div className={styles['checkbox-container']}>
-                <input type="checkbox" name="default-billing" id="cbx-default-billing" />
+                <input type="checkbox" id="cbx-default-billing" {...register('defaultBilling')} />
                 <span className={styles.checkbox}>Use as default for billing</span>
               </div>
             </div>

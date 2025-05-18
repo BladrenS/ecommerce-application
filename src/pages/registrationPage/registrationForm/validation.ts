@@ -51,6 +51,8 @@ export const registrationSchema = z
       }),
 
     shippingAsBilling: z.boolean(),
+    defaultShipping: z.boolean(),
+    defaultBilling: z.boolean(),
 
     street_billing: z.string().trim().min(1, { message: 'Street is required' }).optional(),
     city_billing: z
