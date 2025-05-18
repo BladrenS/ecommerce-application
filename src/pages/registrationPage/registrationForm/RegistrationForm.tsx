@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
+import { createCustomer } from '../../../api/request';
 import { LabeledInput } from './LabeledInput';
 import styles from './registerForm.module.scss';
 import type { RegistrationFormData } from './validation';
@@ -28,8 +29,8 @@ export const RegistrationForm = () => {
 
   const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      await createCustomer(data);
+      console.log('User created successfully');
     } catch (error) {
       setError('root', {
         message: `Something went wrong. Please try again later. Error: ${error}`,
@@ -217,7 +218,7 @@ export const RegistrationForm = () => {
           Already have an account?
           <span className={styles['desc-under-span']}>Login</span>
         </div>
-        {errors.root && <div className="error-message">{errors.root.message}</div>}
+        {errors.root && <div className={styles['root-error']}>{errors.root.message}</div>}
       </form>
     </div>
   );

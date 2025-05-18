@@ -135,3 +135,12 @@ $base-radius: 7px;
     border-bottom: 2px solid $accent-color;
   }
 }
+
+.root-error {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 5px;
+
+  font-size: 14px;
+  color: $accent-red;
+}
