@@ -27,17 +27,17 @@ $base-radius: 7px;
   background-color: $accent-color;
   outline: none;
   box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
-}
 
-.submit-button:hover {
-  cursor: pointer;
-  background-color: $accent-color-hovered;
-}
+  &:hover {
+    cursor: pointer;
+    background-color: $accent-color-hovered;
+  }
 
-.submit-button:disabled {
-  cursor: not-allowed;
-  color: $dark-gray;
-  background-color: $light-gray;
+  &:disabled {
+    cursor: not-allowed;
+    color: $dark-gray;
+    background-color: $light-gray;
+  }
 }
 
 .page-wrapper {
@@ -74,11 +74,11 @@ $base-radius: 7px;
   font-size: 16px;
 
   outline: none;
-}
 
-.input-field:focus {
-  border: 2px solid $accent-color;
-  box-shadow: 0 0 1px $accent-color;
+  &:focus {
+    border: 2px solid $accent-color;
+    box-shadow: 0 0 1px $accent-color;
+  }
 }
 
 .required {
@@ -118,4 +118,20 @@ $base-radius: 7px;
 
 .checkbox {
   color: $primary-white;
+}
+
+.desc-under {
+  width: fit-content;
+  margin: 0 auto;
+  color: $accent-color;
+}
+
+.desc-under-span {
+  cursor: pointer;
+  margin-left: 5px;
+  color: $primary-white;
+
+  &:hover {
+    border-bottom: 2px solid $accent-color;
+  }
 }

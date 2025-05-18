@@ -9,63 +9,103 @@ const minBirthDate = new Date(today.getFullYear() - MIN_AGE, today.getMonth(), t
 const nameRegex = /^[\p{L}' -]+$/u;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-const baseSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().regex(passwordRegex, {
-    message: 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number',
-  }),
-  firstName: z
-    .string()
-    .trim()
-    .min(1, { message: 'First name is required' })
-    .regex(nameRegex, { message: 'First name must not contain numbers or special characters' }),
-  lastName: z
-    .string()
-    .trim()
-    .min(1, { message: 'Last name is required' })
-    .regex(nameRegex, { message: 'Last name must not contain numbers or special characters' }),
-  dateOfBirth: z.coerce
-    .date()
-    .refine((date) => date <= minBirthDate, { message: `You must be at least ${MIN_AGE} years old` }),
-  street: z.string().trim().min(1, { message: 'Street is required' }),
-  city: z
-    .string({ required_error: 'City is required' })
-    .trim()
-    .min(1, { message: 'City is required' })
-    .regex(nameRegex, { message: 'City must not contain numbers or special characters' }),
-});
-
-const postalSchema = z.object({
-  postalCode: z
-    .string({ required_error: 'Postal code is required' })
-    .trim()
-    .min(3, { message: 'Postal code is required' })
-    .regex(/^\d+$/, { message: 'Postal code must contain only digits' }),
-  country: z
-    .string()
-    .trim()
-    .refine((value) => validCountries.includes(value), {
-      message: 'Please select a valid country (USA, UK, EU countries, Russia, Belarus)',
+export const registrationSchema = z
+  .object({
+    email: z.string().email('Invalid email address'),
+    password: z.string().regex(passwordRegex, {
+      message:
+        'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number',
     }),
-});
+    firstName: z
+      .string()
+      .trim()
+      .min(1, { message: 'First name is required' })
+      .regex(nameRegex, { message: 'First name must not contain numbers or special characters' }),
+    lastName: z
+      .string()
+      .trim()
+      .min(1, { message: 'Last name is required' })
+      .regex(nameRegex, { message: 'Last name must not contain numbers or special characters' }),
+    dateOfBirth: z.coerce
+      .date()
+      .refine((date) => date <= minBirthDate, { message: `You must be at least ${MIN_AGE} years old` }),
 
-export const registrationSchema = baseSchema.merge(postalSchema);
+    street_shipping: z.string().trim().min(1, { message: 'Street is required' }),
+    city_shipping: z
+      .string({ required_error: 'City is required' })
+      .trim()
+      .min(1, { message: 'City is required' })
+      .regex(nameRegex, { message: 'City must not contain numbers or special characters' }),
+    postalCode_shipping: z
+      .string({ required_error: 'Postal code is required' })
+      .trim()
+      .regex(/^\d+$/, { message: 'Postal code must contain only digits' })
+      .min(5, { message: 'The postal code does not match the codes of the allowed countries' })
+      .max(5, { message: 'The postal code does not match the codes of the allowed countries' }),
+    country_shipping: z
+      .string()
+      .trim()
+      .refine((value) => validCountries.includes(value), {
+        message:
+          'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
+      }),
 
-// export const registrationSchema = baseSchema.merge(postalSchema).superRefine((data, context) => {
-//   console.log('Country:', data.country);
-//   console.log('Postal Code:', data.postalCode);
-//   const pattern = postalCodePatterns[data.country];
-//   console.log('Pattern:', pattern);
+    shippingAsBilling: z.boolean(),
 
-//   if (pattern && !pattern.test(data.postalCode)) {
-//     context.addIssue({
-//       path: ['postalCode'],
-//       code: z.ZodIssueCode.custom,
-//       message: `Invalid postal code format for ${data.country}`,
-//     });
-//     console.log('Invalid postal code format for', data.country);
-//   }
-// });
-// Не смог заставить выводиться сообщение в DOM пока
+    street_billing: z.string().trim().min(1, { message: 'Street is required' }).optional(),
+    city_billing: z
+      .string({ required_error: 'City is required' })
+      .trim()
+      .min(1, { message: 'City is required' })
+      .regex(nameRegex, { message: 'City must not contain numbers or special characters' })
+      .optional(),
+    postalCode_billing: z
+      .string({ required_error: 'Postal code is required' })
+      .trim()
+      .regex(/^\d+$/, { message: 'Postal code must contain only digits' })
+      .min(5, { message: 'The postal code does not match the codes of the allowed countries' })
+      .max(5, { message: 'The postal code does not match the codes of the allowed countries' })
+      .optional(),
+    country_billing: z
+      .string()
+      .trim()
+      .refine((value) => validCountries.includes(value), {
+        message:
+          'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
+      })
+      .optional(),
+  })
+  .superRefine((data, context) => {
+    if (!data.shippingAsBilling) {
+      if (!data.street_billing?.trim()) {
+        context.addIssue({
+          path: ['street_billing'],
+          code: z.ZodIssueCode.custom,
+          message: 'Billing street is required',
+        });
+      }
+      if (!data.city_billing?.trim()) {
+        context.addIssue({
+          path: ['city_billing'],
+          code: z.ZodIssueCode.custom,
+          message: 'Billing city is required',
+        });
+      }
+      if (!data.postalCode_billing?.trim()) {
+        context.addIssue({
+          path: ['postalCode_billing'],
+          code: z.ZodIssueCode.custom,
+          message: 'Billing postal code is required',
+        });
+      }
+      if (!data.country_billing?.trim()) {
+        context.addIssue({
+          path: ['country_billing'],
+          code: z.ZodIssueCode.custom,
+          message: 'Billing country is required',
+        });
+      }
+    }
+  });
 
 export type RegistrationFormData = z.infer<typeof registrationSchema>;

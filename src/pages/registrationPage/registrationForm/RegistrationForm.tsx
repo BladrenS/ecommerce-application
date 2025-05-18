@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -13,12 +13,18 @@ export const RegistrationForm = () => {
     register,
     handleSubmit,
     setError,
+    setValue,
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
     mode: 'onChange',
     reValidateMode: 'onChange',
+    defaultValues: {
+      shippingAsBilling: true,
+    },
   });
+
+  const [isShippingEqualBilling, setIsShippingEqualBilling] = useState(false);
 
   const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
@@ -30,11 +36,16 @@ export const RegistrationForm = () => {
       });
     }
   };
+
   const onError = (errors: unknown): void => {
     console.error('Form errors:', errors);
   };
 
-  const [isShippingEqualBilling, setIsShippingEqualBilling] = useState(false);
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    setIsShippingEqualBilling(checked);
+    setValue('shippingAsBilling', checked); // обновляем значение формы вручную
+  };
 
   return (
     <div className={styles['page-wrapper']}>
@@ -49,7 +60,7 @@ export const RegistrationForm = () => {
               placeholder="user@example.com"
               register={register}
               error={errors.email}
-              required={true}
+              required
             />
             <LabeledInput
               label="Password"
@@ -58,7 +69,7 @@ export const RegistrationForm = () => {
               placeholder="********"
               register={register}
               error={errors.password}
-              required={true}
+              required
             />
           </div>
 
@@ -71,7 +82,7 @@ export const RegistrationForm = () => {
               placeholder="Donald"
               register={register}
               error={errors.firstName}
-              required={true}
+              required
             />
             <LabeledInput
               label="Last Name"
@@ -80,7 +91,7 @@ export const RegistrationForm = () => {
               placeholder="Trump"
               register={register}
               error={errors.lastName}
-              required={true}
+              required
             />
             <LabeledInput
               label="Date of Birth"
@@ -89,7 +100,7 @@ export const RegistrationForm = () => {
               placeholder="Date of Birth"
               register={register}
               error={errors.dateOfBirth}
-              required={true}
+              required
             />
           </div>
 
@@ -97,52 +108,55 @@ export const RegistrationForm = () => {
             <h3 className={styles['form-group-name']}>Shipping Address</h3>
             <LabeledInput
               label="Street"
-              name="street"
+              name="street_shipping"
               type="text"
               placeholder="Street"
               register={register}
-              error={errors.street}
-              required={true}
+              error={errors.street_shipping}
+              required
             />
+
             <LabeledInput
               label="City"
-              name="city"
+              name="city_shipping"
               type="text"
               placeholder="City"
               register={register}
-              error={errors.city}
-              required={true}
+              error={errors.city_shipping}
+              required
             />
-            <LabeledInput
-              label="Postal Code"
-              name="postalCode"
-              type="text"
-              placeholder="Postal Code"
-              register={register}
-              error={errors.postalCode}
-              required={true}
-            />
+
             <LabeledInput
               label="Country"
-              name="country"
+              name="country_shipping"
               type="text"
               placeholder="Country"
               register={register}
-              error={errors.country}
-              required={true}
+              error={errors.country_shipping}
+              required
             />
+
+            <LabeledInput
+              label="Postal Code"
+              name="postalCode_shipping"
+              type="text"
+              placeholder="Postal Code"
+              register={register}
+              error={errors.postalCode_shipping}
+              required
+            />
+
             <div className={styles['checkbox-container']}>
-              <input type="checkbox" name="" id="" />
+              <input type="checkbox" name="default-shipping" id="cbx-default-shipping" />
               <span className={styles.checkbox}>Use as default for shipping</span>
             </div>
 
             <div className={styles['checkbox-container']}>
               <input
                 type="checkbox"
-                name=""
-                id=""
+                id="cbx-shipping-as-billing"
                 checked={isShippingEqualBilling}
-                onChange={(event) => setIsShippingEqualBilling(event.target.checked)}
+                onChange={handleCheckboxChange}
               />
               <span className={styles.checkbox}>Use shipping address as billing</span>
             </div>
@@ -151,44 +165,49 @@ export const RegistrationForm = () => {
           {!isShippingEqualBilling && (
             <div className={styles['form-group']}>
               <h3 className={styles['form-group-name']}>Billing Address</h3>
+
               <LabeledInput
                 label="Street"
-                name="street"
+                name="street_billing"
                 type="text"
                 placeholder="Street"
                 register={register}
-                error={errors.street}
-                required={true}
+                error={errors.street_billing}
+                required
               />
+
               <LabeledInput
                 label="City"
-                name="city"
+                name="city_billing"
                 type="text"
                 placeholder="City"
                 register={register}
-                error={errors.city}
-                required={true}
+                error={errors.city_billing}
+                required
               />
-              <LabeledInput
-                label="Postal Code"
-                name="postalCode"
-                type="text"
-                placeholder="Postal Code"
-                register={register}
-                error={errors.postalCode}
-                required={true}
-              />
+
               <LabeledInput
                 label="Country"
-                name="country"
+                name="country_billing"
                 type="text"
                 placeholder="Country"
                 register={register}
-                error={errors.country}
-                required={true}
+                error={errors.country_billing}
+                required
               />
+
+              <LabeledInput
+                label="Postal Code"
+                name="postalCode_billing"
+                type="text"
+                placeholder="Postal Code"
+                register={register}
+                error={errors.postalCode_billing}
+                required
+              />
+
               <div className={styles['checkbox-container']}>
-                <input type="checkbox" name="" id="" />
+                <input type="checkbox" name="default-shipping" id="cbx-default-billing" />
                 <span className={styles.checkbox}>Use as default for billing</span>
               </div>
             </div>
@@ -198,6 +217,11 @@ export const RegistrationForm = () => {
         <button disabled={isSubmitting || !isValid} type="submit" className={styles['submit-button']}>
           {isSubmitting ? 'Loading...' : 'Register'}
         </button>
+
+        <div className={styles['desc-under']}>
+          Already have an account?
+          <span className={styles['desc-under-span']}>Login</span>
+        </div>
         {errors.root && <div className="error-message">{errors.root.message}</div>}
       </form>
     </div>
