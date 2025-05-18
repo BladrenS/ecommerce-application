@@ -3,7 +3,6 @@
 
 .toggle-button {
   position: relative;
-
   font-size: 26px;
   font-weight: 400;
   color: $primary-white;
@@ -13,6 +12,14 @@
 
 .toggle-button.active {
   color: $accent-color;
+}
+
+.toggle-button.active:hover {
+  &::after {
+    cursor: none;
+    content: '';
+    width: 0;
+  }
 }
 
 .description {

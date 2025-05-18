@@ -76,7 +76,7 @@ export default [
       'unicorn/no-array-callback-reference': 'warn',
       'unicorn/no-array-for-each': 'warn',
       'unicorn/no-array-reduce': 'warn',
-      'unicorn/no-null': 'warn',
+      'unicorn/no-null': 'off',
       'unicorn/number-literal-case': 'warn',
       'unicorn/numeric-separators-style': 'warn',
       'unicorn/prevent-abbreviations': [

@@ -8,6 +8,7 @@ import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
 import { Login, Main } from './pages';
 import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
+import { ScrollToTop } from './utils/ScrollToTop';
 
 export const App: FC = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ export const App: FC = () => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header></Header>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />

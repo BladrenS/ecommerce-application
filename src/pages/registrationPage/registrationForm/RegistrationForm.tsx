@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { createCustomer } from '../../../api/request';
 import { Loader } from '../../../components/Ui/Loader/Loader';
@@ -227,7 +227,9 @@ export const RegistrationForm = () => {
 
         <div className={styles['desc-under']}>
           Already have an account?
-          <span className={styles['desc-under-span']}>Login</span>
+          <NavLink className={styles['desc-under-span']} to={'/login'}>
+            Login
+          </NavLink>
         </div>
         {errors.root && <div className={styles['root-error']}>{errors.root.message}</div>}
       </form>
