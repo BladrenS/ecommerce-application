@@ -11,7 +11,7 @@ import importPlugin from 'eslint-plugin-import';
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'node_modules', 'test/__mocks__/fileMock.js'],
   },
   {
     linterOptions: {
