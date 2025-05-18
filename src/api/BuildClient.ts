@@ -6,23 +6,25 @@ import {
 } from '@commercetools/ts-client';
 import fetch from 'isomorphic-fetch';
 
-import { credentials } from './credentials';
+import { COMMERCETOOLS_CONFIG } from '../constants';
 
-const scopes = credentials.CTP_SCOPES.split(' ');
+const { authUrl, projectKey, clientId, clientSecret, apiUrl, scope } = COMMERCETOOLS_CONFIG;
+
+const scopes = scope.split(' ');
 
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: credentials.CTP_AUTH_URL,
-  projectKey: credentials.CTP_PROJECT_KEY,
+  host: authUrl,
+  projectKey: projectKey,
   credentials: {
-    clientId: credentials.CTP_CLIENT_ID,
-    clientSecret: credentials.CTP_CLIENT_SECRET,
+    clientId: clientId,
+    clientSecret: clientSecret,
   },
   scopes,
   httpClient: fetch,
 };
 
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
-  host: credentials.CTP_API_URL,
+  host: apiUrl,
   httpClient: fetch,
 };
 
