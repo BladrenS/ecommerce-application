@@ -6,7 +6,7 @@ import {
 } from '@commercetools/ts-client';
 import fetch from 'isomorphic-fetch';
 
-import { COMMERCETOOLS_CONFIG } from '../constants';
+import { COMMERCETOOLS_CONFIG } from '../constants/credentials';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl, scope } = COMMERCETOOLS_CONFIG;
 
