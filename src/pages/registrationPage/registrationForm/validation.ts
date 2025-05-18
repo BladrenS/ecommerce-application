@@ -81,28 +81,29 @@ export const registrationSchema = z
         context.addIssue({
           path: ['street_billing'],
           code: z.ZodIssueCode.custom,
-          message: 'Billing street is required',
+          message: 'Street is required',
         });
       }
       if (!data.city_billing?.trim()) {
         context.addIssue({
           path: ['city_billing'],
           code: z.ZodIssueCode.custom,
-          message: 'Billing city is required',
+          message: 'City is required',
         });
       }
       if (!data.postalCode_billing?.trim()) {
         context.addIssue({
           path: ['postalCode_billing'],
           code: z.ZodIssueCode.custom,
-          message: 'Billing postal code is required',
+          message: 'Postal code is required',
         });
       }
       if (!data.country_billing?.trim()) {
         context.addIssue({
           path: ['country_billing'],
           code: z.ZodIssueCode.custom,
-          message: 'Billing country is required',
+          message:
+            'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
         });
       }
     }

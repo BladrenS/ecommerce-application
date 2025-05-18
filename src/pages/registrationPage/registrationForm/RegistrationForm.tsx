@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type ChangeEvent, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -13,18 +12,19 @@ export const RegistrationForm = () => {
     register,
     handleSubmit,
     setError,
-    setValue,
+    watch,
     formState: { errors, isSubmitting, isValid },
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
     mode: 'onChange',
     reValidateMode: 'onChange',
+    shouldUnregister: true,
     defaultValues: {
-      shippingAsBilling: true,
+      shippingAsBilling: false,
     },
   });
 
-  const [isShippingEqualBilling, setIsShippingEqualBilling] = useState(false);
+  const shippingAsBilling = watch('shippingAsBilling');
 
   const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
@@ -39,12 +39,6 @@ export const RegistrationForm = () => {
 
   const onError = (errors: unknown): void => {
     console.error('Form errors:', errors);
-  };
-
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-    setIsShippingEqualBilling(checked);
-    setValue('shippingAsBilling', checked); // обновляем значение формы вручную
   };
 
   return (
@@ -152,17 +146,12 @@ export const RegistrationForm = () => {
             </div>
 
             <div className={styles['checkbox-container']}>
-              <input
-                type="checkbox"
-                id="cbx-shipping-as-billing"
-                checked={isShippingEqualBilling}
-                onChange={handleCheckboxChange}
-              />
+              <input type="checkbox" id="cbx-shipping-as-billing" {...register('shippingAsBilling')} />
               <span className={styles.checkbox}>Use shipping address as billing</span>
             </div>
           </div>
 
-          {!isShippingEqualBilling && (
+          {!shippingAsBilling && (
             <div className={styles['form-group']}>
               <h3 className={styles['form-group-name']}>Billing Address</h3>
 
@@ -207,7 +196,7 @@ export const RegistrationForm = () => {
               />
 
               <div className={styles['checkbox-container']}>
-                <input type="checkbox" name="default-shipping" id="cbx-default-billing" />
+                <input type="checkbox" name="default-billing" id="cbx-default-billing" />
                 <span className={styles.checkbox}>Use as default for billing</span>
               </div>
             </div>
