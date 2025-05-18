@@ -22,6 +22,6 @@
     "noImplicitOverride": true,
     "baseUrl": ".",
   },
-  "include": ["src/**/*", "global.d.ts", "webpack.config.js", "test", "test/setupTests.ts"],
+  "include": ["src/**/*", "global.d.ts", "webpack.config.js", "test/setupTests.ts"],
   "exclude": ["node_modules"]
 }

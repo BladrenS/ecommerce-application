@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="wrapper"
+  >
+    <div
+      class="subtitle"
+    >
+      <div
+        class="active"
+      >
+        Login
+      </div>
+      <span
+        class="decor"
+      />
+      <a
+        class="auth-page"
+        data-discover="true"
+        href="/register"
+      >
+        Register
+      </a>
+    </div>
+    <div
+      class="title"
+    >
+      Enter your email and password to login.
+    </div>
+    <form
+      class="form"
+    >
+      <div
+        class="container"
+      >
+        <label
+          class="label"
+        >
+          <div
+            class="name"
+          >
+            email
+          </div>
+          <div
+            class="wrapper"
+          >
+            <input
+              autocomplete="true"
+              class="input"
+              name="email"
+              placeholder="Enter your email"
+              type="text"
+            />
+          </div>
+          <div
+            class="error"
+          />
+        </label>
+        <label
+          class="label"
+        >
+          <div
+            class="name"
+          >
+            email
+          </div>
+          <div
+            class="wrapper"
+          >
+            <input
+              autocomplete="true"
+              class="input"
+              name="email"
+              placeholder="Enter your password"
+              type="password"
+            />
+          </div>
+          <div
+            class="error"
+          />
+        </label>
+      </div>
+      <div
+        style="text-align: center;"
+      >
+        <button
+          class="button"
+        >
+          Login
+        </button>
+      </div>
+    </form>
+    <div
+      class="redirect"
+    >
+      Don't have an account yet?
+      <a
+        class="link"
+        data-discover="true"
+        href="/register"
+      >
+        Register
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;
