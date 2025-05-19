@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { createCustomer } from '../../../api/request';
 import { Button } from '../../../components/Ui';
 import { Loader } from '../../../components/Ui/Loader/Loader';
@@ -38,11 +39,18 @@ export const RegistrationForm = () => {
     try {
       setActiveLoader(true);
       await createCustomer(data);
+      const values = {
+        email: data.email,
+        password: data.password,
+      };
+
+      const response = await CommerceToolsService.authCustomer(values);
+      localStorage.setItem('refresh_token', response.refresh_token);
       navigate('/main');
       console.log('User created successfully');
     } catch (error) {
       setError('root', {
-        message: `Something went wrong. Please try again later. Error: ${error}`,
+        message: `${error}`,
       });
     } finally {
       setActiveLoader(false);

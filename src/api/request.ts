@@ -56,5 +56,6 @@ export const createCustomer = async (formData: RegistrationFormData) => {
     return response.body;
   } catch (error) {
     console.error('Error creating customer:', error);
+    throw error;
   }
 };
