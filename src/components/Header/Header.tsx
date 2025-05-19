@@ -61,7 +61,7 @@ export const Header: FC = memo(() => {
               <Component className={styles['header-icon']} />
             </NavLink>
           ))}
-          <LogoutIcon onClick={userLogout} className={styles['header-icon']} />
+          {token && <LogoutIcon onClick={userLogout} className={styles['header-icon']} />}
         </div>
         <div
           className={clsx(styles.burger, isActiveMenu && styles['active-burger'])}

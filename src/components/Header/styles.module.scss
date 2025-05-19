@@ -47,6 +47,11 @@
 }
 
 .header-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 214px;
+
   @media (width <= 768px) {
     display: none;
   }
