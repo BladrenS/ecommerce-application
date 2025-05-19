@@ -6,28 +6,32 @@ exports[`LoginForm matches the snapshot 1`] = `
     class="wrapper"
   >
     <div
-      class="subtitle"
+      class="login-registration-toggler"
     >
       <div
-        class="active"
+        class="form-toggle"
       >
-        Login
+        <span
+          class="toggle-button active"
+        >
+          Login
+        </span>
+        <span
+          class="separator"
+        />
+        <a
+          class="toggle-button"
+          data-discover="true"
+          href="/register"
+        >
+          Register
+        </a>
       </div>
-      <span
-        class="decor"
-      />
-      <a
-        class="auth-page"
-        data-discover="true"
-        href="/register"
+      <h4
+        class="description"
       >
-        Register
-      </a>
-    </div>
-    <div
-      class="title"
-    >
-      Enter your email and password to login.
+        Enter your email and password to login.
+      </h4>
     </div>
     <form
       class="form"
