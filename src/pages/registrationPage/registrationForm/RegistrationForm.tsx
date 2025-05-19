@@ -280,7 +280,6 @@ export const RegistrationForm = () => {
             Login
           </NavLink>
         </div>
-        {errors.root && <div className={styles['root-error']}>{errors.root.message}</div>}
       </form>
     </div>
   );

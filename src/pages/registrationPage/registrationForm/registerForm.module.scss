@@ -146,19 +146,6 @@ $base-radius: 7px;
   }
 }
 
-.root-error {
-  position: absolute;
-  bottom: -30px;
-  left: 23vw;
-
-  width: fit-content;
-  margin: 0 auto;
-  margin-top: 5px;
-
-  font-size: 14px;
-  color: $accent-red;
-}
-
 .labeled-input {
   position: relative;
   margin-bottom: 20px;
