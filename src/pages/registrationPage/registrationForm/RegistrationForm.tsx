@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { createCustomer } from '../../../api/request';
+import { Button } from '../../../components/Ui';
 import { Loader } from '../../../components/Ui/Loader/Loader';
 import { LabeledInput } from './LabeledInput';
 import styles from './registerForm.module.scss';
@@ -221,9 +222,9 @@ export const RegistrationForm = () => {
           )}
         </div>
 
-        <button disabled={isSubmitting || !isValid} type="submit" className={styles['submit-button']}>
+        <Button disabled={isSubmitting || !isValid} className={styles['submit-button']}>
           {isSubmitting ? 'Loading...' : 'Register'}
-        </button>
+        </Button>
 
         <div className={styles['desc-under']}>
           Already have an account?

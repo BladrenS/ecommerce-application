@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Button } from '../Button/Button';
 import styles from './styles.module.scss';
 
 export const ScrollToTopButton = () => {
@@ -21,8 +22,11 @@ export const ScrollToTopButton = () => {
   if (!visible) return null;
 
   return (
-    <button onClick={scrollToTop} className={styles['scroll-to-top-button']}>
+    // <button onClick={scrollToTop} className={styles['scroll-to-top-button']}>
+    //   ↑ Top
+    // </button>
+    <Button onClick={scrollToTop} className={styles['scroll-to-top-button']}>
       ↑ Top
-    </button>
+    </Button>
   );
 };

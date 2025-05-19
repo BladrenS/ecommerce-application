@@ -12,35 +12,7 @@ $base-radius: 7px;
 }
 
 .submit-button {
-  align-self: center;
-
-  width: 200px;
-  height: 52px;
   margin: 10px auto;
-  border: none;
-  border-radius: $base-radius;
-  border-radius: 13.2px;
-
-  font-size: 20px;
-  font-weight: 700;
-  color: $primary-white;
-
-  background-color: $accent-color;
-  outline: none;
-  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
-
-  transition: all 0.2s linear;
-
-  &:hover {
-    cursor: pointer;
-    background-color: $accent-color-hovered;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    color: $dark-gray;
-    background-color: $light-gray;
-  }
 }
 
 .page-wrapper {
