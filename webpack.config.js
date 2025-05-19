@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import DotenvWebpackPlugin from 'dotenv-webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,5 +77,8 @@ export default {
       favicon: './src/assets/header-icons/bike.svg',
     }),
     new DotenvWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public/_redirects', to: '' }],
+    }),
   ],
 };

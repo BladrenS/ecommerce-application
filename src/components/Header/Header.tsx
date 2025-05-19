@@ -9,6 +9,8 @@ import { LogoutIcon, Menu } from './parts';
 import styles from './styles.module.scss';
 
 export const Header: FC = memo(() => {
+  const token = localStorage.getItem('refresh_token');
+
   const navigate = useNavigate();
   const { isActiveMenu, setIsActiveMenu } = useMenuVisible();
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -17,8 +19,6 @@ export const Header: FC = memo(() => {
     });
 
   const userLogout = () => {
-    const token = localStorage.getItem('refresh_token');
-
     if (token) {
       localStorage.removeItem('refresh_token');
       navigate('/login');
@@ -36,12 +36,25 @@ export const Header: FC = memo(() => {
           <img src={logo} alt="logo" />
         </NavLink>
         <div className={styles['header-links']}>
-          {HEADER_LINKS.map(({ href, text }) => (
-            <NavLink key={href} to={href} className={getNavLinkClass}>
-              {text}
-            </NavLink>
-          ))}
+          {HEADER_LINKS.map(({ href, text }, index) => {
+            const shouldDisable = token && (index === 0 || index === 1);
+
+            return shouldDisable ? (
+              <span
+                key={href}
+                className={`${styles['disabled-link']} ${styles['nav-link']}`}
+                style={{ pointerEvents: 'none', opacity: 0.5 }}
+              >
+                {text}
+              </span>
+            ) : (
+              <NavLink key={href} to={href} className={getNavLinkClass}>
+                {text}
+              </NavLink>
+            );
+          })}
         </div>
+
         <div className={styles['header-icons']}>
           {HEADER_ICONS.map(({ Component, href }) => (
             <NavLink key={href} to={href}>

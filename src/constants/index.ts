@@ -14,12 +14,12 @@ import {
 } from '../assets/';
 
 export const COMMERCETOOLS_CONFIG = {
-  authUrl: process.env.REACT_APP_CTP_AUTH_URL || '',
-  clientId: process.env.REACT_APP_CTP_CLIENT_ID || '',
-  clientSecret: process.env.REACT_APP_CTP_CLIENT_SECRET || '',
-  projectKey: process.env.REACT_APP_CTP_PROJECT_KEY || '',
-  scope: process.env.REACT_APP_CTP_SCOPES || '',
-  apiUrl: process.env.REACT_APP_CTP_API_URL || '',
+  authUrl: process.env.CTP_AUTH_URL || '',
+  clientId: process.env.CTP_CLIENT_ID || '',
+  clientSecret: process.env.CTP_CLIENT_SECRET || '',
+  projectKey: process.env.CTP_PROJECT_KEY || '',
+  scope: process.env.CTP_SCOPES || '',
+  apiUrl: process.env.CTP_API_URL || '',
 };
 
 export const promoItems: {

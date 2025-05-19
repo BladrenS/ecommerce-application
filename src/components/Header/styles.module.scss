@@ -130,3 +130,13 @@
     transition: var(--transition);
   }
 }
+
+.disabled-link {
+  cursor: not-allowed;
+
+  margin: 0 10px;
+
+  color: gray;
+  text-decoration: none;
+  text-transform: uppercase;
+}
