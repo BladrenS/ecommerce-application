@@ -7,15 +7,26 @@ const today = new Date();
 const minBirthDate = new Date(today.getFullYear() - MIN_AGE, today.getMonth(), today.getDate());
 
 const nameRegex = /^[\p{L}' -]+$/u;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 export const registrationSchema = z
   .object({
     email: z.string().email('Invalid email address'),
-    password: z.string().regex(passwordRegex, {
-      message:
-        'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number',
-    }),
+    password: z
+      .string()
+      .nonempty('Field is required')
+      .min(8, 'Password must be at least 8 characters long')
+      .refine((value) => !/\s/.test(value), 'Password must not contain whitespace')
+      .refine(
+        (value) => /^[a-zA-Z0-9!@#$%^&*]+$/.test(value),
+        'Password must contain only Latin characters, numbers and special characters (e.g., !@#$%^&*)',
+      )
+      .refine((value) => /[A-Z]/.test(value), 'Password must contain at least one uppercase letter (A-Z)')
+      .refine((value) => /[a-z]/.test(value), 'Password must contain at least one lowercase letter (a-z)')
+      .refine((value) => /[0-9]/.test(value), 'Password must contain at least one digit (0-9)')
+      .refine(
+        (value) => /[!@#$%^&*]/.test(value),
+        'Password must contain at least one special character (e.g., !@#$%^&*)',
+      ),
     firstName: z
       .string()
       .trim()

@@ -6,6 +6,7 @@ import { CommerceToolsService } from './api/CommerceToolsService';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
+import { ScrollToTopButton } from './components/Ui';
 import { Login, Main } from './pages';
 import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 import { ScrollToTop } from './utils/ScrollToTop';
@@ -36,6 +37,7 @@ export const App: FC = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Header></Header>
+      <ScrollToTopButton />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />

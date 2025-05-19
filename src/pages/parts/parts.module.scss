@@ -2,7 +2,10 @@
 @use '../../styles/abstract/mixins' as *;
 
 .toggle-button {
+  user-select: none;
+
   position: relative;
+
   font-size: 26px;
   font-weight: 400;
   color: $primary-white;
