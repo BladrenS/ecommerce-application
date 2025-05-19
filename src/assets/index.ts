@@ -1,4 +1,5 @@
 export { default as backgroundImg } from './auth-images/background-img.jpg';
+export { default as cross } from './auth-images/cross.png';
 export { default as eyeImg } from './auth-images/eye.svg';
 export { default as eyeOffImg } from './auth-images/eye-off.svg';
 export { default as chain } from './footer-images/chain.svg';

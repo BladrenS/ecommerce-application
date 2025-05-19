@@ -2,9 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
+import Modal from 'react-modal';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { createCustomer } from '../../../api/request';
+import { cross } from '../../../assets';
 import { Button } from '../../../components/Ui';
 import { Loader } from '../../../components/Ui/Loader/Loader';
 import { LabeledInput } from './LabeledInput';
@@ -29,20 +32,59 @@ export const RegistrationForm = () => {
       shippingAsBilling: false,
     },
   });
-
+  Modal.setAppElement('#root');
   const [activeLoader, setActiveLoader] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const shippingAsBilling = watch('shippingAsBilling');
+  console.log(shippingAsBilling);
+
+  const customStyles = {
+    overlay: {
+      backgroundColor: '#000000ad',
+    },
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: '25em',
+      height: 'auto',
+      borderRadius: '15px',
+      backgroundColor: 'black',
+      color: 'white',
+      border: '1px solid #ff6200',
+    },
+  };
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
     try {
       setActiveLoader(true);
       await createCustomer(data);
+      const values = {
+        email: data.email,
+        password: data.password,
+      };
+
+      const response = await CommerceToolsService.authCustomer(values);
+      localStorage.setItem('refresh_token', response.refresh_token);
       navigate('/main');
-      console.log('User created successfully');
     } catch (error) {
+      if (error instanceof Error) setErrorMessage(error.message);
+      openModal();
       setError('root', {
-        message: `Something went wrong. Please try again later. Error: ${error}`,
+        message: `${error}`,
       });
     } finally {
       setActiveLoader(false);
@@ -55,6 +97,12 @@ export const RegistrationForm = () => {
 
   return (
     <div className={styles['page-wrapper']}>
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
+        <div>
+          <img src={cross} onClick={closeModal} className={styles.cross} alt="cross" />
+          {errorMessage}
+        </div>
+      </Modal>
       {activeLoader && <Loader />}
       <form className={styles['registration-form']} onSubmit={handleSubmit(onSubmit, onError)}>
         <div className={styles['registration-form-wrapper']}>
