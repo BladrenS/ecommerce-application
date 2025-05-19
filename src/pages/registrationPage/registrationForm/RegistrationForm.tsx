@@ -38,7 +38,6 @@ export const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const shippingAsBilling = watch('shippingAsBilling');
-  console.log(shippingAsBilling);
 
   const customStyles = {
     overlay: {
