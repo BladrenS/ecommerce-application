@@ -22,9 +22,6 @@ export const ScrollToTopButton = () => {
   if (!visible) return null;
 
   return (
-    // <button onClick={scrollToTop} className={styles['scroll-to-top-button']}>
-    //   ↑ Top
-    // </button>
     <Button onClick={scrollToTop} className={styles['scroll-to-top-button']}>
       ↑ Top
     </Button>

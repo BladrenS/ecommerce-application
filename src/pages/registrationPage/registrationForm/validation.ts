@@ -63,17 +63,17 @@ export const registrationSchema = z
 
     shippingAsBilling: z.boolean(),
     defaultShipping: z.boolean(),
-    defaultBilling: z.boolean(),
+    defaultBilling: z.boolean().optional(),
 
     street_billing: z.string().trim().min(1, { message: 'Street is required' }).optional(),
     city_billing: z
-      .string({ required_error: 'City is required' })
+      .string()
       .trim()
       .min(1, { message: 'City is required' })
       .regex(nameRegex, { message: 'City must not contain numbers or special characters' })
       .optional(),
     postalCode_billing: z
-      .string({ required_error: 'Postal code is required' })
+      .string()
       .trim()
       .regex(/^\d+$/, { message: 'Postal code must contain only digits' })
       .min(5, { message: 'The postal code does not match the codes of the allowed countries' })
@@ -90,28 +90,28 @@ export const registrationSchema = z
   })
   .superRefine((data, context) => {
     if (!data.shippingAsBilling) {
-      if (!data.street_billing?.trim()) {
+      if (!data.street_billing) {
         context.addIssue({
           path: ['street_billing'],
           code: z.ZodIssueCode.custom,
           message: 'Street is required',
         });
       }
-      if (!data.city_billing?.trim()) {
+      if (!data.city_billing) {
         context.addIssue({
           path: ['city_billing'],
           code: z.ZodIssueCode.custom,
           message: 'City is required',
         });
       }
-      if (!data.postalCode_billing?.trim()) {
+      if (!data.postalCode_billing) {
         context.addIssue({
           path: ['postalCode_billing'],
           code: z.ZodIssueCode.custom,
           message: 'Postal code is required',
         });
       }
-      if (!data.country_billing?.trim()) {
+      if (!data.country_billing) {
         context.addIssue({
           path: ['country_billing'],
           code: z.ZodIssueCode.custom,

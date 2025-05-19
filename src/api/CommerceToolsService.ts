@@ -63,13 +63,11 @@ export class CommerceToolsService {
   }
 
   public static async getMe(): Promise<void> {
-    const response = await axios.get(`${apiUrl}/${projectKey}/me`, {
+    await axios.get(`${apiUrl}/${projectKey}/me`, {
       headers: {
         Authorization: `Bearer ${CommerceToolsService.accessToken}`,
       },
     });
-
-    console.log(response.data);
   }
 
   public static async checkEmail(email: string): Promise<boolean> {

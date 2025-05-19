@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *;
 @use '../../../styles/abstract/mixins' as *;
 
-$gap: 20px;
+$gap: 30px;
 $base-radius: 7px;
 
 .label {
@@ -65,13 +65,18 @@ $base-radius: 7px;
 }
 
 .error-message {
+  position: absolute;
+  z-index: 5;
+  top: 92px;
+  left: 0;
+
   color: $accent-red;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   justify-self: center;
 
   width: 100%;
@@ -142,10 +147,36 @@ $base-radius: 7px;
 }
 
 .root-error {
+  position: absolute;
+  bottom: -30px;
+  left: 23vw;
+
   width: fit-content;
   margin: 0 auto;
   margin-top: 5px;
 
   font-size: 14px;
   color: $accent-red;
+}
+
+.labeled-input {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.cross {
+  position: absolute;
+  z-index: 6;
+  top: 10px;
+  right: 10px;
+
+  width: 18px;
+  height: 18px;
+
+  transition: all 0.5s linear;
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(90deg);
+  }
 }
