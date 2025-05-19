@@ -2,6 +2,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -29,15 +31,38 @@ export default {
         exclude: /node_modules/,
       },
       {
+        test: /\.module\.s[ac]ss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
+              importLoaders: 2,
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.scss$/i,
+        test: /\.s[ac]ss$/i,
+        exclude: /\.module\.s[ac]ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.svg$/i,
+        test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,
         type: 'asset',
       },
     ],
@@ -49,6 +74,11 @@ export default {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './src/assets/header-icons/bike.svg',
+    }),
+    new DotenvWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public/_redirects', to: '' }],
     }),
   ],
 };

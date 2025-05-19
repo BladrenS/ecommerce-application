@@ -1,0 +1,34 @@
+@use './base/normalize' as *;
+@use './base/fonts' as *;
+@use './abstract/constants' as *;
+@use './abstract/mixins' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--main-font), sans-serif;
+  font-weight: 300;
+  color: var(--main-color);
+  letter-spacing: 1.32px;
+
+  background-color: var(--background-color);
+
+  &.scroll-hide {
+    overflow: hidden;
+  }
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}

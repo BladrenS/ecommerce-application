@@ -1,0 +1,56 @@
+@use '../../styles/variables' as *;
+@use '../../styles/abstract/mixins' as *;
+
+.toggle-button {
+  user-select: none;
+
+  position: relative;
+
+  font-size: 26px;
+  font-weight: 400;
+  color: $primary-white;
+
+  @include hover-decor;
+}
+
+.toggle-button.active {
+  color: $accent-color;
+}
+
+.toggle-button.active:hover {
+  &::after {
+    cursor: none;
+    content: '';
+    width: 0;
+  }
+}
+
+.description {
+  margin-top: 20px;
+
+  font-size: 16px;
+  font-weight: 400;
+  color: $primary-white;
+  text-align: center;
+}
+
+.login-registration-toggler {
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.form-toggle {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.separator {
+  height: 21px;
+  border: 2px solid $primary-white;
+}
