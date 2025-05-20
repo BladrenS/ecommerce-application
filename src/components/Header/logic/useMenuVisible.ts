@@ -5,13 +5,13 @@ export const useMenuVisible = () => {
 
   useEffect(() => {
     if (isActiveMenu) {
-      document.body.classList.add('scroll-hide');
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.classList.remove('scroll-hide');
+      document.body.style.overflow = '';
     }
 
     return () => {
-      document.body.classList.remove('scroll-hide');
+      document.body.style.overflow = '';
     };
   }, [isActiveMenu]);
 
