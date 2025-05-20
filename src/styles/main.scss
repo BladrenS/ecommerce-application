@@ -35,10 +35,16 @@ body {
 
 .not-found {
   display: flex;
-  align-items: center;
   justify-content: center;
 
   height: 100vh;
+  padding-top: 90px;
 
+  font-size: 26px;
   color: var(--primary-color);
+
+  background-image: url('../assets/auth-images/404.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50% 70%;
 }
