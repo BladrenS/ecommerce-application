@@ -38,7 +38,7 @@ $base-radius: 7px;
   gap: $gap;
   justify-content: center;
 
-  @media (width <= 720px) {
+  @media (width <= 840px) {
     grid-template-columns: 1fr;
   }
 }
@@ -82,7 +82,7 @@ $base-radius: 7px;
   width: 100%;
   max-width: calc(50vw - 40px - $gap);
 
-  @media (width <= 720px) {
+  @media (width <= 840px) {
     max-width: 100%;
   }
 }
@@ -148,7 +148,11 @@ $base-radius: 7px;
 
 .labeled-input {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+
+  @media (width <= 840px) {
+    margin-bottom: 50px;
+  }
 }
 
 .cross {
