@@ -9,6 +9,7 @@ import { Loader } from './components/Ui';
 import { ScrollToTopButton } from './components/Ui';
 import { Login, Main } from './pages';
 import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
+import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
 
 export const App: FC = () => {
@@ -43,7 +44,7 @@ export const App: FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
-        <Route path="*" element={<div>404 Page not found</div>} />
+        <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
