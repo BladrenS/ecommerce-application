@@ -13,6 +13,7 @@ interface MenuProps extends ComponentProps<'div'> {
 }
 
 export const Menu: FC<MenuProps> = ({ active, setActive, userLogout }) => {
+  const token = localStorage.getItem('refresh_token');
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     clsx(styles['menu-link'], {
       [styles.active]: isActive,
@@ -26,13 +27,23 @@ export const Menu: FC<MenuProps> = ({ active, setActive, userLogout }) => {
     <div onClick={closeMenu} className={clsx(styles.menu, { [styles.active]: active })}>
       <div onClick={(event) => event.stopPropagation()} className={styles.content}>
         <ul className={styles.list}>
-          {HEADER_LINKS.map(({ href, text }) => (
-            <li onClick={closeMenu} key={href} className={styles.item}>
+          {HEADER_LINKS.map(({ href, text }, index) => {
+            const shouldDisable = token && (index === 0 || index === 1);
+
+            return shouldDisable ? (
+              <span
+                key={href}
+                className={`${styles['disabled-link']} ${styles['nav-link']}`}
+                style={{ pointerEvents: 'none', opacity: 0.5 }}
+              >
+                {text}
+              </span>
+            ) : (
               <NavLink key={href} to={href} className={getNavLinkClass}>
                 {text}
               </NavLink>
-            </li>
-          ))}
+            );
+          })}
         </ul>
         <ul className={styles['list-icons']}>
           {HEADER_ICONS.map(({ Component, href }) => (
