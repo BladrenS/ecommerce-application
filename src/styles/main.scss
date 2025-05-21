@@ -21,14 +21,26 @@ body {
   letter-spacing: 1.32px;
 
   background-color: var(--background-color);
-
-  &.scroll-hide {
-    overflow: hidden;
-  }
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+
+  height: 100vh;
+  padding-top: 90px;
+
+  font-size: 26px;
+  color: var(--primary-color);
+
+  background-image: url('../assets/auth-images/404.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50% 70%;
 }

@@ -59,7 +59,17 @@ export default {
       {
         test: /\.s[ac]ss$/i,
         exclude: /\.module\.s[ac]ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,

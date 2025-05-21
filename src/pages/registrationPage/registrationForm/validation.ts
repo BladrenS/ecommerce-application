@@ -57,8 +57,7 @@ export const registrationSchema = z
       .string()
       .trim()
       .refine((value) => validCountries.includes(value), {
-        message:
-          'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
+        message: 'Only: Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain',
       }),
 
     shippingAsBilling: z.boolean(),
@@ -83,8 +82,7 @@ export const registrationSchema = z
       .string()
       .trim()
       .refine((value) => validCountries.includes(value), {
-        message:
-          'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
+        message: 'Only: Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain',
       })
       .optional(),
   })
@@ -115,8 +113,7 @@ export const registrationSchema = z
         context.addIssue({
           path: ['country_billing'],
           code: z.ZodIssueCode.custom,
-          message:
-            'Please select a valid country (Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain)',
+          message: 'Only: Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain',
         });
       }
     }
