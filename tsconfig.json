@@ -20,7 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "baseUrl": ".",
+    "baseUrl": ".src/*"
   },
   "include": ["src/**/*", "global.d.ts", "webpack.config.js", "test/setupTests.ts"],
   "exclude": ["node_modules"]
