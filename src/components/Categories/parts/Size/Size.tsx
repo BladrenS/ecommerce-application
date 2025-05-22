@@ -11,7 +11,7 @@ export const Size: FC = () => {
       <ul className={styles.list}>
         {SIZES.map((text) => (
           <label key={text} className={styles.label}>
-            <input className={styles.input} type="checkbox" />
+            <input name="size" className={styles.input} type="checkbox" />
             <div className={styles.text}>{text}</div>
           </label>
         ))}

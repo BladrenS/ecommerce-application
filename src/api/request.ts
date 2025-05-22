@@ -1,9 +1,9 @@
 import type { MyCustomerDraft } from '@commercetools/platform-sdk';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import type { RegistrationFormData } from 'src/pages/registrationPage/registrationForm/validation';
 
 import { COMMERCETOOLS_CONFIG } from '../constants';
 import { countryNameToCode } from '../constants/countries';
+import type { RegistrationFormData } from '../pages/registrationPage/registrationForm/validation';
 import { createSystemClient } from './BuildClient';
 
 const ctpClient = createSystemClient(); // <-- системный клиент
