@@ -75,12 +75,22 @@ export class CommerceToolsService {
       await CommerceToolsService.getMainToken();
     }
 
-    const response = await axios.get(`${apiUrl}/${projectKey}/customers?where=email="${encodeURIComponent(email)}"`, {
+    const response = await axios.get(`${apiUrl}/${projectKey}/customers?where=email="${email}"`, {
       headers: {
         Authorization: `Bearer ${CommerceToolsService.mainToken}`,
       },
     });
 
     return response.data.count;
+  }
+
+  public static async getProducts(): Promise<void> {
+    const response = await axios.get(`${apiUrl}/${projectKey}/products`, {
+      headers: {
+        Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+      },
+    });
+
+    console.log(response);
   }
 }

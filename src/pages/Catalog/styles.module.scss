@@ -1,0 +1,9 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 125px;
+
+  padding: 180px 120px 160px 50px;
+
+  color: var(--secondary-color);
+}
