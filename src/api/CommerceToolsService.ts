@@ -1,3 +1,4 @@
+import type { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
 import axios from 'axios';
 
 import { type LoginField } from '../components/LoginForm/schemas/loginSchemas';
@@ -84,13 +85,20 @@ export class CommerceToolsService {
     return response.data.count;
   }
 
-  public static async getProducts(): Promise<void> {
-    const response = await axios.get(`${apiUrl}/${projectKey}/products`, {
-      headers: {
-        Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+  public static async getProducts(): Promise<ProductProjectionPagedQueryResponse> {
+    const response = await axios.get<ProductProjectionPagedQueryResponse>(
+      `${apiUrl}/${projectKey}/product-projections`,
+      {
+        params: {
+          where: `categories(id="2ade6a19-0a51-4cde-8a70-b24326f0fcfd")`,
+          expand: 'categories',
+        },
+        headers: {
+          Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+        },
       },
-    });
+    );
 
-    console.log(response);
+    return response.data;
   }
 }
