@@ -1,18 +1,22 @@
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import { useEffect, useState } from 'react';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const getProducts = async () => {
     try {
-      const data = await CommerceToolsService.getProducts();
+      setLoading(true);
+      const data = await CommerceToolsProducts.getProducts();
 
       setProducts(data.results);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -20,5 +24,5 @@ export const useProducts = () => {
     getProducts();
   }, []);
 
-  return { products };
+  return { products, loading };
 };

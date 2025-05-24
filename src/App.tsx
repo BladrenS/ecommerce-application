@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { CommerceToolsService } from './api/CommerceToolsService';
+import { CommerceToolsAuth } from './api/CommerceToolsService';
 import { Footer, Header } from './components';
 import { Loader, ScrollToTopButton } from './components/Ui';
 import { Catalog, Login, Main, RegistrationPage } from './pages';
@@ -15,7 +15,7 @@ export const App: FC = () => {
     const refreshToken = localStorage.getItem('refresh_token');
     try {
       if (refreshToken) {
-        await CommerceToolsService.refreshToken(refreshToken);
+        await CommerceToolsAuth.refreshToken(refreshToken);
       }
     } finally {
       setLoading(false);
