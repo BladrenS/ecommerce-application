@@ -1,28 +1,28 @@
 import type { ProductProjection } from '@commercetools/platform-sdk';
-import { useEffect, useState } from 'react';
+import { AxiosError } from 'axios';
+import { useCallback, useState } from 'react';
 
 import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const getProducts = async () => {
+  const fetchProducts = useCallback(async (filterQuery?: string) => {
     try {
       setLoading(true);
-      const data = await CommerceToolsProducts.getProducts();
+      const data = await CommerceToolsProducts.getProducts(filterQuery);
 
       setProducts(data.results);
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        setError(error.message);
+      }
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    getProducts();
   }, []);
 
-  return { products, setProducts, loading };
+  return { products, loading, error, setProducts, fetchProducts };
 };

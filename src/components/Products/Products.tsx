@@ -1,12 +1,12 @@
 import { type FC } from 'react';
 
+import { useCatalogContext } from '../../pages/Catalog/context/CatalogContext';
 import { Product } from '../index';
 import { Loader } from '../Ui';
-import { useProducts } from './logic/useProducts';
 import styles from './styles.module.scss';
 
 export const Products: FC = () => {
-  const { products, loading } = useProducts();
+  const { products, loading } = useCatalogContext();
 
   return (
     <section className={styles.container}>

@@ -1,18 +1,20 @@
 import { type FC, useEffect } from 'react';
 
-import { CommerceToolsProducts } from '../../../../api/CommerceToolsService';
+import { useCatalogContext } from '../../../../pages/Catalog/context/CatalogContext';
 import { useSize } from './logic/useSize';
 import styles from './styles.module.scss';
 
 const SIZES = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
 export const Size: FC = () => {
+  const { fetchProducts } = useCatalogContext();
+
   const { selectedSize, handleChangeCheckbox, filterQuery } = useSize();
 
   useEffect(() => {
     if (!selectedSize.length) return;
 
-    CommerceToolsProducts.getFilteredProducts(filterQuery(selectedSize));
+    fetchProducts(filterQuery());
   }, [selectedSize]);
 
   return (

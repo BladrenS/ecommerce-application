@@ -13,8 +13,8 @@ export const useSize = () => {
     });
   };
 
-  const filterQuery = (sizes: string[]) => {
-    return `variants.attributes.sizes:${sizes.map((size) => `"${size}"`).join(',')}`;
+  const filterQuery = () => {
+    return `variants.attributes.sizes:${selectedSize.map((size) => `"${size}"`).join(',')}`;
   };
 
   return { selectedSize, handleChangeCheckbox, filterQuery };

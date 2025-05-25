@@ -1,19 +1,19 @@
-import { type ChangeEvent, type FC, useState } from 'react';
+import { type FC, useEffect } from 'react';
 
+import { useCatalogContext } from '../../../../pages/Catalog/context/CatalogContext';
+import { usePrice } from './logic/usePrice';
 import styles from './styles.module.scss';
 
 export const Price: FC = () => {
-  const [value, setValue] = useState({
-    from: '3.50',
-    to: '160.00',
-  });
+  const { fetchProducts } = useCatalogContext();
 
-  const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
-    setValue((previous) => {
-      return { ...previous, [name]: value };
-    });
-  };
+  const { value, changeValue, filterQuery } = usePrice();
+
+  useEffect(() => {
+    if (!value.from || !value.to) return;
+
+    fetchProducts(filterQuery());
+  }, [value]);
 
   return (
     <div className={styles.wrapper}>
