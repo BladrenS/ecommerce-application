@@ -2,12 +2,14 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { CommerceToolsService } from './api/CommerceToolsService';
+import { CommerceToolsAuth } from './api/CommerceToolsService';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
+import { ProductPage } from './components/ProductPage/ProductPage';
 import { Loader } from './components/Ui';
 import { ScrollToTopButton } from './components/Ui';
 import { Login, Main } from './pages';
+import { Catalog } from './pages/Catalog/Catalog';
 import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
@@ -19,7 +21,7 @@ export const App: FC = () => {
     const refreshToken = localStorage.getItem('refresh_token');
     try {
       if (refreshToken) {
-        await CommerceToolsService.refreshToken(refreshToken);
+        await CommerceToolsAuth.refreshToken(refreshToken);
       }
     } finally {
       setLoading(false);
@@ -44,6 +46,8 @@ export const App: FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer></Footer>

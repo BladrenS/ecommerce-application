@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import Modal from 'react-modal';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsAuth } from '../../../api/CommerceToolsService';
 import { createCustomer } from '../../../api/request';
 import { cross } from '../../../assets';
 import { Button } from '../../../components/Ui';
@@ -76,7 +76,7 @@ export const RegistrationForm = () => {
         password: data.password,
       };
 
-      const response = await CommerceToolsService.authCustomer(values);
+      const response = await CommerceToolsAuth.authCustomer(values);
       localStorage.setItem('refresh_token', response.refresh_token);
       navigate('/main');
     } catch (error) {

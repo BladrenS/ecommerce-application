@@ -59,3 +59,8 @@ export const createCustomer = async (formData: RegistrationFormData) => {
     throw error;
   }
 };
+
+export const queryProduct = async (productID: string) => {
+  const response = await apiRoot.products().withId({ ID: productID }).get().execute();
+  return response.body;
+};
