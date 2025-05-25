@@ -24,5 +24,5 @@ export const useProducts = () => {
     getProducts();
   }, []);
 
-  return { products, loading };
+  return { products, setProducts, loading };
 };

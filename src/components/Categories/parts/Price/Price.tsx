@@ -4,8 +4,8 @@ import styles from './styles.module.scss';
 
 export const Price: FC = () => {
   const [value, setValue] = useState({
-    from: '3,50',
-    to: '160,00',
+    from: '3.50',
+    to: '160.00',
   });
 
   const changeValue = (event: ChangeEvent<HTMLInputElement>) => {

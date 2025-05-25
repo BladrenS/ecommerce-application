@@ -10,7 +10,9 @@ export const Categories: FC = () => {
       <Category />
       <Price />
       <Size />
-      <Button>Reset</Button>
+      <div className={styles.center}>
+        <Button>Reset</Button>
+      </div>
     </aside>
   );
 };

@@ -8,8 +8,6 @@ import styles from './styles.module.scss';
 export const Products: FC = () => {
   const { products, loading } = useProducts();
 
-  console.log(products);
-
   return (
     <section className={styles.container}>
       {loading && <Loader />}
