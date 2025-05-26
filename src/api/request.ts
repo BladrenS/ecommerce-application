@@ -64,3 +64,8 @@ export const queryProduct = async (productID: string) => {
   const response = await apiRoot.products().withId({ ID: productID }).get().execute();
   return response.body;
 };
+
+export const queryCategory = async (categoryID: string) => {
+  const response = await apiRoot.categories().withId({ ID: categoryID }).get().execute();
+  return response.body;
+};

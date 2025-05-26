@@ -87,7 +87,9 @@ export default {
       template: './public/index.html',
       favicon: './src/assets/header-icons/bike.svg',
     }),
-    new DotenvWebpackPlugin(),
+    new DotenvWebpackPlugin({
+      systemvars: true,
+    }),
     new CopyWebpackPlugin({
       patterns: [{ from: 'public/_redirects', to: '' }],
     }),

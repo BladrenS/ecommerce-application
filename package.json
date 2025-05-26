@@ -39,6 +39,7 @@
     "react-modal": "^3.16.3",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.2",
+    "swiper": "^11.2.8",
     "zod": "^3.24.4"
   },
   "devDependencies": {
@@ -88,6 +89,7 @@
     "stylelint-config-recommended": "^15.0.0",
     "stylelint-config-recommended-scss": "^15.0.0",
     "stylelint-config-standard": "^37.0.0",
+    "stylelint-css-modules": "^1.2.2",
     "stylelint-scss": "^6.12.0",
     "stylelint-webpack-plugin": "^5.0.1",
     "svg-url-loader": "^8.0.0",

@@ -1,0 +1,87 @@
+@use '../../styles/abstract/mixins' as *;
+
+.product-wrapper {
+  margin-top: 140px;
+  margin-bottom: 50px;
+  color: var(--secondary-color);
+}
+
+.my-swiper {
+  max-width: 500px;
+  /* stylelint-disable selector-pseudo-class-no-unknown */
+  :global {
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: var(--primary-color);
+      transition: 0.3s;
+
+      &:hover {
+        color: var(--primary-hover);
+      }
+    }
+
+    .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      margin: 0 6px;
+      border-radius: 50%;
+
+      opacity: 0.5;
+      background-color: gray;
+
+      transition: all 0.3s;
+    }
+
+    .swiper-pagination-bullet-active {
+      transform: scale(1.2);
+      opacity: 1;
+      background-color: var(--primary-color);
+    }
+  }
+}
+
+.delimiter {
+  margin: 0 10px;
+}
+
+.links {
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+
+.breadcrumbs {
+  position: relative;
+
+  font-size: 12px;
+  color: rgb(182 182 182);
+  text-transform: uppercase;
+
+  transition: var(--transition);
+
+  @include hover-decor;
+}
+
+.product-container {
+  display: flex;
+  gap: 20px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.product-info {
+  flex: 1 1 0;
+}
+
+.sale {
+  margin-right: 15px;
+  text-decoration: line-through;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.prices {
+  display: flex;
+  margin: 15px 0;
+}
