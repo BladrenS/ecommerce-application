@@ -1,21 +1,17 @@
-import { useState } from 'react';
+import { useCatalogContext } from '../../../../../pages/Catalog';
 
 export const useSize = () => {
-  const [selectedSize, setSelectedSize] = useState<string[]>([]);
+  const { filters, setFilters } = useCatalogContext();
 
   const handleChangeCheckbox = (size: string) => {
-    setSelectedSize((previous) => {
-      if (previous.includes(size)) {
-        return previous.filter((s) => s !== size);
+    setFilters((previous) => {
+      if (previous.size.includes(size)) {
+        return { ...previous, size: previous.size.filter((s) => s !== size) };
       }
 
-      return [...previous, size];
+      return { ...previous, size: [...previous.size, size] };
     });
   };
 
-  const filterQuery = () => {
-    return `variants.attributes.sizes:${selectedSize.map((size) => `"${size}"`).join(',')}`;
-  };
-
-  return { selectedSize, handleChangeCheckbox, filterQuery };
+  return { selectedSize: filters.size, handleChangeCheckbox };
 };

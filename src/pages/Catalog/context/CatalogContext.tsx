@@ -1,27 +1,33 @@
 import { type ProductProjection } from '@commercetools/platform-sdk';
-import type { FC, PropsWithChildren } from 'react';
+import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import { createContext, useContext, useEffect } from 'react';
 
+import { useDebounce } from '../../../hooks';
 import { useProducts } from '../logic/useProducts';
+import type { IFilters } from '../types';
 
 interface CatalogContextType {
   products: ProductProjection[];
+  filters: IFilters;
   loading: boolean;
   error: string;
-  fetchProducts: (filterQuery: string) => Promise<void>;
+  setFilters: Dispatch<SetStateAction<IFilters>>;
 }
 
 export const CatalogContext = createContext<null | CatalogContextType>(null);
 
 export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { products, loading, error, fetchProducts } = useProducts();
+  const { products, filters, loading, error, fetchProducts, setFilters } = useProducts();
+  const debounceFilters = useDebounce(filters, 1000);
 
   useEffect(() => {
     fetchProducts();
-  }, [fetchProducts]);
+  }, [debounceFilters]);
 
   return (
-    <CatalogContext.Provider value={{ products, loading, error, fetchProducts }}>{children}</CatalogContext.Provider>
+    <CatalogContext.Provider value={{ products, filters, loading, error, setFilters }}>
+      {children}
+    </CatalogContext.Provider>
   );
 };
 

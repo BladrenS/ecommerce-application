@@ -1,19 +1,10 @@
-import { type FC, useEffect } from 'react';
+import { type FC } from 'react';
 
-import { useCatalogContext } from '../../../../pages/Catalog/context/CatalogContext';
 import { usePrice } from './logic/usePrice';
 import styles from './styles.module.scss';
 
 export const Price: FC = () => {
-  const { fetchProducts } = useCatalogContext();
-
-  const { value, changeValue, filterQuery } = usePrice();
-
-  useEffect(() => {
-    if (!value.from || !value.to) return;
-
-    fetchProducts(filterQuery());
-  }, [value]);
+  const { from, to, changeValue } = usePrice();
 
   return (
     <div className={styles.wrapper}>
@@ -21,11 +12,11 @@ export const Price: FC = () => {
       <div className={styles.container}>
         <label className={styles.label}>
           <div className={styles.text}>From</div>
-          <input name="from" className={styles.input} type="number" value={value.from} onChange={changeValue} />
+          <input name="from" className={styles.input} type="number" value={from} onChange={changeValue} />
         </label>
         <label className={styles.label}>
           <div className={styles.text}>To</div>
-          <input name="to" className={styles.input} type="number" value={value.to} onChange={changeValue} />
+          <input name="to" className={styles.input} type="number" value={to} onChange={changeValue} />
         </label>
       </div>
     </div>

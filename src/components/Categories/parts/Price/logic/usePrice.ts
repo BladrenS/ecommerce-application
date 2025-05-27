@@ -1,21 +1,25 @@
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent } from 'react';
+
+import { useCatalogContext } from '../../../../../pages/Catalog';
 
 export const usePrice = () => {
-  const [value, setValue] = useState({
-    from: '',
-    to: '',
-  });
+  const { filters, setFilters } = useCatalogContext();
 
   const changeValue = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
-    setValue((previous) => {
-      return { ...previous, [name]: value };
-    });
+    const { name, value } = event.target;
+
+    setFilters((previous) => ({
+      ...previous,
+      priceRange: {
+        ...previous.priceRange,
+        [name]: value,
+      },
+    }));
   };
 
-  const filterQuery = () => {
-    return `variants.price.centAmount:range (${value.from} to ${value.to})`;
+  return {
+    from: filters.priceRange.from,
+    to: filters.priceRange.to,
+    changeValue,
   };
-
-  return { value, changeValue, filterQuery };
 };

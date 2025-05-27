@@ -1,21 +1,12 @@
-import { type FC, useEffect } from 'react';
+import { type FC } from 'react';
 
-import { useCatalogContext } from '../../../../pages/Catalog/context/CatalogContext';
 import { useSize } from './logic/useSize';
 import styles from './styles.module.scss';
 
 const SIZES = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
 export const Size: FC = () => {
-  const { fetchProducts } = useCatalogContext();
-
-  const { selectedSize, handleChangeCheckbox, filterQuery } = useSize();
-
-  useEffect(() => {
-    if (!selectedSize.length) return;
-
-    fetchProducts(filterQuery());
-  }, [selectedSize]);
+  const { selectedSize, handleChangeCheckbox } = useSize();
 
   return (
     <div className={styles.wrapper}>

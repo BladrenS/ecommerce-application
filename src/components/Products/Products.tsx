@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 
-import { useCatalogContext } from '../../pages/Catalog/context/CatalogContext';
+import { useCatalogContext } from '../../pages/Catalog';
 import { Product } from '../index';
 import { Loader } from '../Ui';
 import styles from './styles.module.scss';
