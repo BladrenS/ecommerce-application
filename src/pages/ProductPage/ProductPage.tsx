@@ -13,6 +13,8 @@ import { EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { queryCategory, queryProduct } from '../../api/request';
+import { FavoriteIcon } from '../../components/Header/parts';
+import { Button, Loader } from '../../components/Ui';
 import { centToDollar } from '../../utils/centToDollar';
 import styles from './styles.module.scss';
 
@@ -23,6 +25,7 @@ export const ProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [category1, setCategory1] = useState<Category | undefined>();
   const [category2, setCategory2] = useState<Category | undefined>();
+  const [loading, setIsLoading] = useState(true);
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     clsx(styles['breadcrumbs'], {
@@ -33,22 +36,36 @@ export const ProductPage = () => {
     if (!productId) return;
 
     const fetchProduct = async () => {
+      setIsLoading(true);
       try {
         const productData = await queryProduct(productId);
         setProduct(productData);
-        console.log(productData);
-
         const getCategory = await queryCategory(productData.masterData.current.categories[0].id);
         setCategory1(getCategory);
         const getCategory2 = await queryCategory(productData.masterData.current.categories[1].id);
         setCategory2(getCategory2);
+        console.log(productData);
       } catch (error) {
         console.error('Ошибка при получении товара:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchProduct();
   }, [productId]);
+
+  const price: number | undefined = product?.masterData?.current?.masterVariant?.prices?.[0]?.value?.centAmount;
+  const discountedPrice: number | undefined =
+    product?.masterData?.current?.masterVariant?.prices?.[0]?.discounted?.value?.centAmount;
+
+  if (loading) {
+    return (
+      <div className={styles['product-wrapper']}>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className={styles['product-wrapper']}>
@@ -62,11 +79,11 @@ export const ProductPage = () => {
         </NavLink>
         <span className={styles.delimiter}>•</span>
         <NavLink to={'/catalog'} className={getNavLinkClass}>
-          {category1 ? category1.name['en-US'] || 'No name' : 'Loading...'}
+          {category1 && category1.name['en-US']}
         </NavLink>
         <span className={styles.delimiter}>•</span>
-        <NavLink to={'/catalog'} className={getNavLinkClass}>
-          {category2 ? category2.name['en-US'] || 'No name' : 'Loading...'}
+        <NavLink to={'/catalog'} className={styles.active}>
+          {category2 && category2.name['en-US']}
         </NavLink>
       </div>
       <div className={styles['product-container']}>
@@ -97,23 +114,28 @@ export const ProductPage = () => {
         ) : (
           <p>Изображения отсутствуют</p>
         )}
-        <div className={styles['product_info']}>
+        <div className={styles['product-info']}>
           {product && (
             <>
-              <h2 className={styles['product_name']}>{product.masterData.current.name['en-US']}</h2>
+              <h2 className={styles['product-name']}>{product.masterData.current.name['en-US']}</h2>
               <div className={styles.prices}>
-                <div className={styles.sale}>
-                  {product?.masterData?.current?.masterVariant?.prices?.[0]?.value?.centAmount &&
-                    centToDollar(product?.masterData?.current?.masterVariant?.prices?.[0]?.value?.centAmount)}
-                </div>
-                <div className={styles.price}>
-                  {product?.masterData?.current?.masterVariant?.prices?.[0]?.discounted?.value.centAmount &&
-                    centToDollar(
-                      product?.masterData?.current?.masterVariant?.prices?.[0]?.discounted?.value.centAmount,
-                    )}
-                </div>
+                <div className={styles.sale}>{price && centToDollar(price)}</div>
+                <div className={styles.price}>{discountedPrice && centToDollar(discountedPrice)}</div>
               </div>
+              <h3 className={styles.description_header}>Description:</h3>
               <p className={styles.description}>{product.masterData.current.description?.['en-US']}</p>
+              <div className={styles['buttons-wrapper']}>
+                <Button className={styles.add}>Add to cart</Button>
+                <FavoriteIcon className={styles.like}></FavoriteIcon>
+              </div>
+              <div className={styles.description}>
+                Categories:
+                <span className={styles['current-category']}>
+                  {category1 && category1.name['en-US']}
+                  <span className={styles.delimiter}>•</span>
+                  {category2 && category2.name['en-US']}
+                </span>
+              </div>
             </>
           )}
         </div>
