@@ -69,3 +69,8 @@ export const queryCategory = async (categoryID: string) => {
   const response = await apiRoot.categories().withId({ ID: categoryID }).get().execute();
   return response.body;
 };
+
+export const queryCategories = async () => {
+  const response = await apiRoot.categories().get().execute();
+  return response.body;
+};

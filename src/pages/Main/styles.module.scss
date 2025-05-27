@@ -1,10 +1,21 @@
+@use '../../styles/abstract/mixins' as *;
+
 .main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  height: 100vh;
-
+  flex-direction: column;
+  min-height: 100vh;
   font-size: 24px;
   color: var(--primary-color);
+
+  @include flex-center;
+}
+
+.header-big,
+.header-small {
+  margin-top: 40px;
+  color: var(--secondary-color);
+}
+
+.header-small {
+  font-weight: 300;
+  opacity: 0.5;
 }

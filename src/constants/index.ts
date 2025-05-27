@@ -60,7 +60,7 @@ export const footerLinks: {
     links: [
       { to: '/profile', label: 'My account' },
       { to: '/about', label: 'About us' },
-      { to: '/blog', label: 'Blog' },
+      { to: '/news', label: 'News' },
       { to: '', label: 'Career', disabled: true },
       { to: '/Cooperation', label: 'Cooperation' },
     ],
@@ -78,11 +78,11 @@ export const footerLinks: {
   {
     header: 'Categories',
     links: [
-      { to: '/profile', label: 'Cat 1' },
-      { to: '/about', label: 'Cat 2' },
-      { to: '/blog', label: 'Cat 3' },
-      { to: '', label: 'Cat 4' },
-      { to: '/Cooperation', label: 'Cat 5' },
+      { to: '/catalog', label: 'Sport' },
+      { to: '/catalog', label: 'Street' },
+      { to: '/catalog', label: 'Parts' },
+      { to: '/catalog', label: 'Gear' },
+      { to: '/catalog', label: 'Helmets' },
     ],
   },
 ];

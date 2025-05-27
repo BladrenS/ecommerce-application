@@ -1,0 +1,241 @@
+@use '../../styles/abstract/mixins' as *;
+
+.my-swiper {
+  max-width: 94vw;
+  height: 50vh;
+  border-radius: 15px;
+}
+
+.slider {
+  position: relative;
+}
+
+.slide-one {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url('../../assets/images/medium.jpg');
+  background-size: 100% 100%;
+}
+
+.gloves {
+  position: absolute;
+  right: 0;
+
+  width: 30%;
+  height: 60%;
+  margin-top: 6%;
+  margin-right: 2%;
+  border-radius: 15px;
+
+  animation: pulse-zoom 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-zoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.action {
+  width: 400px;
+  padding-top: 20px;
+}
+
+.action-header {
+  overflow: hidden;
+
+  width: 100%;
+
+  font-size: 80px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.action-text {
+  width: 100%;
+  margin-top: 30px;
+
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.slide-two-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url('../../assets/images/motoslide.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.slide-two {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 450px;
+  height: 450px;
+
+  i {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #fff;
+    transition: 0.5s;
+  }
+
+  i:nth-child(1) {
+    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    animation: animate 6s linear infinite;
+  }
+
+  i:nth-child(2) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate 4s linear infinite;
+  }
+
+  i:nth-child(3) {
+    border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+    animation: animate2 10s linear infinite;
+  }
+
+  &:hover {
+    .green {
+      border: 6px solid #00ff0a;
+      filter: drop-shadow(0 0 20px #00ff0a);
+    }
+
+    .pink {
+      border: 6px solid #ff0057;
+      filter: drop-shadow(0 0 20px #ff0057);
+    }
+
+    .yellow {
+      border: 6px solid #fffd44;
+      filter: drop-shadow(0 0 20px #fffd44);
+    }
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate2 {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 75%;
+  height: 80%;
+
+  text-align: center;
+}
+
+.spring,
+.white {
+  font-size: 60px;
+  font-weight: 900;
+}
+
+.white,
+.text,
+.dates {
+  color: var(--secondary-color);
+}
+
+.text {
+  width: 300px;
+  margin: 0 auto;
+  font-size: 18px;
+  text-align: center;
+}
+
+.dates {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.promo {
+  position: relative;
+  width: 30%;
+
+  @include flex-center;
+}
+
+.icon {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.slide-three-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url('../../assets/images/partsslide.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.round:hover {
+  animation: circle 0.3s linear;
+}
+
+@keyframes circle {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

@@ -18,6 +18,10 @@ export const HEADER_LINKS = [
     text: 'Catalog',
   },
   {
+    href: '/news',
+    text: 'News',
+  },
+  {
     href: '/about',
     text: 'About us',
   },

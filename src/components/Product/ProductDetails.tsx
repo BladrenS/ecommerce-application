@@ -26,7 +26,7 @@ export const ProductDetails = ({
       <div className={styles.sale}>{price && centToDollar(price)}</div>
       <div className={styles.price}>{discountedPrice && centToDollar(discountedPrice)}</div>
     </div>
-    <h3 className={styles.description_header}>Description:</h3>
+    <h3 className={styles['description-header']}>Description:</h3>
     <p className={styles.description}>{description}</p>
     <div className={styles['buttons-wrapper']}>
       <Button className={styles.add}>Add to cart</Button>

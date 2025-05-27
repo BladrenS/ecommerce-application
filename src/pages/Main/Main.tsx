@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useEffect } from 'react';
 
 import { CommerceToolsUser } from '../../api/CommerceToolsService';
+import { MainSlider } from '../../components/Main/MainSlider';
 import styles from './styles.module.scss';
 
 export const Main: FC = () => {
@@ -13,7 +14,11 @@ export const Main: FC = () => {
 
   return (
     <div className={styles.main}>
-      <h1>Main</h1>
+      <MainSlider />
+      <h2 className={styles['header-big']}>New models arrived!</h2>
+      <h6 className={styles['header-small']}>
+        This is where we share our experiences with fellow motorcycle enthusiasts.
+      </h6>
     </div>
   );
 };
