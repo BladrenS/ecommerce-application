@@ -16,7 +16,7 @@ export const Product: FC<ProductProps> = ({ name, description, price, imageUrl, 
   const priceFormatted = centToDollar(price?.value.centAmount);
 
   return (
-    <div className={styles.product}>
+    <li className={styles.product}>
       <img src={imageUrl} alt={imageAlt} className={styles.image} />
       <div className={styles.content}>
         <h3 className={styles.title}>{name}</h3>
@@ -33,6 +33,6 @@ export const Product: FC<ProductProps> = ({ name, description, price, imageUrl, 
         <div className={styles.text}>{description}</div>
         <div className={styles.link}>More</div>
       </div>
-    </div>
+    </li>
   );
 };

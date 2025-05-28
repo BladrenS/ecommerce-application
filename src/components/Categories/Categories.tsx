@@ -6,7 +6,12 @@ import { Category, Price, Size } from './parts';
 import styles from './styles.module.scss';
 
 export const Categories: FC = () => {
-  const { setFilters } = useCatalogContext();
+  const { setFilters, setSort } = useCatalogContext();
+
+  const initialValue = () => {
+    setFilters({ categoryId: '', priceRange: { from: '', to: '' }, size: [] });
+    setSort(0);
+  };
 
   return (
     <aside className={styles.categories}>
@@ -14,9 +19,7 @@ export const Categories: FC = () => {
       <Price />
       <Size />
       <div className={styles.center}>
-        <Button onClick={() => setFilters({ categoryId: '', priceRange: { from: '', to: '' }, size: [] })}>
-          Reset
-        </Button>
+        <Button onClick={initialValue}>Reset</Button>
       </div>
     </aside>
   );

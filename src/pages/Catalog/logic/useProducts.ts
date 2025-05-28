@@ -3,12 +3,14 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 
 import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
-import type { IFilters } from '../types';
+import type { FacetsResponse, IFilters, PriceRangeFacets } from '../types';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [sort, setSort] = useState(0);
+  const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
   const [filters, setFilters] = useState<IFilters>({
     categoryId: '',
     priceRange: { from: '', to: '' },
@@ -40,13 +42,52 @@ export const useProducts = () => {
     return conditions.join(' and ');
   };
 
+  const createSortQuery = () => {
+    switch (sort) {
+      case 1: {
+        return 'variants.price.centAmount desc';
+      }
+      case 2: {
+        return 'createdAt desc';
+      }
+      default:
+        return '';
+    }
+  };
+
+  function getPriceRange(facets?: FacetsResponse): PriceRangeFacets {
+    const priceFacet = facets ? facets['variants.price.centAmount'] : '';
+
+    if (!priceFacet || !priceFacet.ranges || priceFacet.ranges.length === 0) {
+      return { min: '', max: '' };
+    }
+
+    const range = priceFacet.ranges[0];
+
+    return {
+      min: (+range.min / 100).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }),
+      max: (+range.max / 100).toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }),
+    };
+  }
+
   const fetchProducts = async () => {
     try {
       setLoading(true);
 
       const filterQuery = createFilterQuery();
+      const sortQuery = createSortQuery();
 
-      const data = await CommerceToolsProducts.getProducts(filterQuery);
+      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery);
+
+      const { min, max } = getPriceRange(data.facets);
+
+      setInitialPriceValue({ from: min, to: max });
 
       setProducts(data.results);
     } catch (error) {
@@ -58,5 +99,15 @@ export const useProducts = () => {
     }
   };
 
-  return { products, filters, loading, error, setFilters, fetchProducts };
+  return {
+    products,
+    filters,
+    initialPriceValue,
+    sort,
+    loading,
+    error,
+    setFilters,
+    setSort,
+    fetchProducts,
+  };
 };

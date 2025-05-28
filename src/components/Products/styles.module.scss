@@ -1,5 +1,12 @@
 .container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.products {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, auto));
   gap: 30px;

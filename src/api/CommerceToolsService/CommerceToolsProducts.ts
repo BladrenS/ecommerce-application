@@ -4,11 +4,29 @@ import axios from 'axios';
 import { CommerceToolsService } from './CommerceToolsService';
 
 export class CommerceToolsProducts extends CommerceToolsService {
-  public static async getProducts(filters?: string): Promise<ProductProjectionPagedSearchResponse> {
-    const parameters: { limit: number; filter?: string } = { limit: 100 };
+  public static async getProducts(filters?: string, sortQuery?: string): Promise<ProductProjectionPagedSearchResponse> {
+    const parameters: {
+      limit: number;
+      filter?: string;
+      sort?: string;
+      withTotal: boolean;
+      facet: string;
+      offset: number;
+      markMatchingVariants: boolean;
+    } = {
+      limit: 100,
+      withTotal: true,
+      markMatchingVariants: true,
+      offset: 0,
+      facet: 'variants.price.centAmount: range(0 to *)',
+    };
 
     if (filters) {
       parameters.filter = filters;
+    }
+
+    if (sortQuery) {
+      parameters.sort = sortQuery;
     }
 
     const response = await axios.get<ProductProjectionPagedSearchResponse>(

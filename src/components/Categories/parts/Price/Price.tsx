@@ -4,7 +4,7 @@ import { usePrice } from './logic/usePrice';
 import styles from './styles.module.scss';
 
 export const Price: FC = () => {
-  const { from, to, changeValue } = usePrice();
+  const { from, to, min, max, changeValue } = usePrice();
 
   return (
     <div className={styles.wrapper}>
@@ -12,11 +12,18 @@ export const Price: FC = () => {
       <div className={styles.container}>
         <label className={styles.label}>
           <div className={styles.text}>From</div>
-          <input name="from" className={styles.input} type="number" value={from} onChange={changeValue} />
+          <input
+            placeholder={min}
+            name="from"
+            className={styles.input}
+            type="number"
+            value={from}
+            onChange={changeValue}
+          />
         </label>
         <label className={styles.label}>
           <div className={styles.text}>To</div>
-          <input name="to" className={styles.input} type="number" value={to} onChange={changeValue} />
+          <input placeholder={max} name="to" className={styles.input} type="number" value={to} onChange={changeValue} />
         </label>
       </div>
     </div>

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.item {
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--primary-color);
+
+  &.active {
+    cursor: default;
+    text-decoration: underline;
+  }
+}
