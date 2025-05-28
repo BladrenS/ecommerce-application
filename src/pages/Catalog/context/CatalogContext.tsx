@@ -4,17 +4,17 @@ import { createContext, useContext, useEffect } from 'react';
 
 import { useDebounce } from '../../../hooks';
 import { useProducts } from '../logic/useProducts';
-import type { IFilters, PriceRange } from '../types';
+import type { IFilters, PriceRange, SortValue } from '../types';
 
 interface CatalogContextType {
   products: ProductProjection[];
   filters: IFilters;
   initialPriceValue: PriceRange;
-  sort: number;
+  sort: SortValue;
   loading: boolean;
   error: string;
   setFilters: Dispatch<SetStateAction<IFilters>>;
-  setSort: Dispatch<SetStateAction<number>>;
+  setSort: Dispatch<SetStateAction<SortValue>>;
 }
 
 export const CatalogContext = createContext<null | CatalogContextType>(null);

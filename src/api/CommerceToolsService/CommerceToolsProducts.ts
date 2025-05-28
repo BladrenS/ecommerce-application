@@ -4,16 +4,11 @@ import axios from 'axios';
 import { CommerceToolsService } from './CommerceToolsService';
 
 export class CommerceToolsProducts extends CommerceToolsService {
-  public static async getProducts(filters?: string, sortQuery?: string): Promise<ProductProjectionPagedSearchResponse> {
-    const parameters: {
-      limit: number;
-      filter?: string;
-      sort?: string;
-      withTotal: boolean;
-      facet: string;
-      offset: number;
-      markMatchingVariants: boolean;
-    } = {
+  public static async getProducts(
+    filters?: string[],
+    sortQuery?: string,
+  ): Promise<ProductProjectionPagedSearchResponse> {
+    const parameters: Record<string, unknown> = {
       limit: 100,
       withTotal: true,
       markMatchingVariants: true,

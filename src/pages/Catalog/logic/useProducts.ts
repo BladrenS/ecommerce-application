@@ -3,13 +3,13 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 
 import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
-import type { FacetsResponse, IFilters, PriceRangeFacets } from '../types';
+import type { FacetsResponse, IFilters, PriceRangeFacets, SortValue } from '../types';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [sort, setSort] = useState(0);
+  const [sort, setSort] = useState<SortValue>({ value: 'default', direction: 'asc' });
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
   const [filters, setFilters] = useState<IFilters>({
     categoryId: '',
@@ -39,19 +39,21 @@ export const useProducts = () => {
       conditions.push(`variants.attributes.sizes:${size.map((size) => `"${size.toLowerCase()}"`).join(',')}`);
     }
 
-    return conditions.join(' and ');
+    return conditions;
   };
 
   const createSortQuery = () => {
-    switch (sort) {
-      case 1: {
-        return 'variants.price.centAmount desc';
+    if (sort.value === 'default') return;
+
+    switch (sort.value) {
+      case 'price': {
+        return `price ${sort.direction}`;
       }
-      case 2: {
-        return 'createdAt desc';
+      case 'name': {
+        return `name.en-US ${sort.direction}`;
       }
       default:
-        return '';
+        return;
     }
   };
 

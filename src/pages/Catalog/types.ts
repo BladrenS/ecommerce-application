@@ -21,3 +21,8 @@ export interface PriceFacet {
 export interface FacetsResponse {
   'variants.price.centAmount'?: PriceFacet;
 }
+
+export interface SortValue {
+  value: 'name' | 'price' | 'default';
+  direction: 'asc' | 'desc';
+}

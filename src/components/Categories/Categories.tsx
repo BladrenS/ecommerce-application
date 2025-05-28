@@ -10,7 +10,7 @@ export const Categories: FC = () => {
 
   const initialValue = () => {
     setFilters({ categoryId: '', priceRange: { from: '', to: '' }, size: [] });
-    setSort(0);
+    setSort({ value: 'default', direction: 'asc' });
   };
 
   return (

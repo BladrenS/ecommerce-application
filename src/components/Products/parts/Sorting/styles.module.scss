@@ -6,17 +6,28 @@
 
 .wrapper {
   display: flex;
-  gap: 15px;
+  gap: 12px;
+  align-items: center;
+}
+
+.value {
+  display: flex;
+  gap: 2px;
   align-items: center;
 }
 
 .item {
   cursor: pointer;
+  border-bottom: 2px solid transparent;
   font-size: 24px;
   color: var(--primary-color);
 
   &.active {
-    cursor: default;
-    text-decoration: underline;
+    border-bottom: 2px solid var(--primary-color);
   }
+}
+
+.decor {
+  flex: 0 0 10px;
+  color: var(--primary-color);
 }
