@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import { useCatalogContext } from '../../pages/Catalog';
 import { Product } from '../index';
 import { Loader } from '../Ui';
-import { Sorting } from './parts';
+import { Search, Sort } from './parts';
 import styles from './styles.module.scss';
 
 export const Products: FC = () => {
@@ -11,7 +11,8 @@ export const Products: FC = () => {
 
   return (
     <section className={styles.container}>
-      <Sorting />
+      <Search />
+      <Sort />
       {loading && <Loader />}
       <ul className={styles.products}>
         {products.map(({ description, id, name, key, masterVariant: { images, prices } }) => {

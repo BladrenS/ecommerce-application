@@ -11,26 +11,40 @@ interface CatalogContextType {
   filters: IFilters;
   initialPriceValue: PriceRange;
   sort: SortValue;
+  search: string;
   loading: boolean;
   error: string;
   setFilters: Dispatch<SetStateAction<IFilters>>;
   setSort: Dispatch<SetStateAction<SortValue>>;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
 export const CatalogContext = createContext<null | CatalogContextType>(null);
 
 export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { products, filters, initialPriceValue, sort, loading, error, fetchProducts, setFilters, setSort } =
-    useProducts();
+  const {
+    products,
+    filters,
+    initialPriceValue,
+    sort,
+    search,
+    loading,
+    error,
+    fetchProducts,
+    setFilters,
+    setSort,
+    setSearch,
+  } = useProducts();
   const debounceFilters = useDebounce(filters, 1000);
+  const debounceSearch = useDebounce(search, 1000);
 
   useEffect(() => {
     fetchProducts();
-  }, [debounceFilters, sort]);
+  }, [debounceFilters, sort, debounceSearch]);
 
   return (
     <CatalogContext.Provider
-      value={{ products, filters, initialPriceValue, sort, loading, error, setFilters, setSort }}
+      value={{ products, filters, initialPriceValue, sort, search, loading, error, setFilters, setSort, setSearch }}
     >
       {children}
     </CatalogContext.Provider>

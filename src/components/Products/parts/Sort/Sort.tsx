@@ -9,7 +9,7 @@ type SortValueType = SortValue['value'];
 
 const SORTING_VALUE: SortValueType[] = ['default', 'price', 'name'];
 
-export const Sorting: FC = () => {
+export const Sort: FC = () => {
   const {
     sort: { value, direction },
     setSort,

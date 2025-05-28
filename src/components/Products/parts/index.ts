@@ -1,1 +1,2 @@
-export { Sorting } from './Sorting/Sorting';
+export { Search } from './Search/Search';
+export { Sort } from './Sort/Sort';

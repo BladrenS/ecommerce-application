@@ -10,6 +10,7 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [sort, setSort] = useState<SortValue>({ value: 'default', direction: 'asc' });
+  const [search, setSearch] = useState('');
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
   const [filters, setFilters] = useState<IFilters>({
     categoryId: '',
@@ -67,14 +68,8 @@ export const useProducts = () => {
     const range = priceFacet.ranges[0];
 
     return {
-      min: (+range.min / 100).toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }),
-      max: (+range.max / 100).toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }),
+      min: (+range.min / 100).toLocaleString('en-US', { minimumFractionDigits: 2 }),
+      max: (+range.max / 100).toLocaleString('en-US', { minimumFractionDigits: 2 }),
     };
   }
 
@@ -85,7 +80,7 @@ export const useProducts = () => {
       const filterQuery = createFilterQuery();
       const sortQuery = createSortQuery();
 
-      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery);
+      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, search);
 
       const { min, max } = getPriceRange(data.facets);
 
@@ -106,10 +101,12 @@ export const useProducts = () => {
     filters,
     initialPriceValue,
     sort,
+    search,
     loading,
     error,
     setFilters,
     setSort,
+    setSearch,
     fetchProducts,
   };
 };

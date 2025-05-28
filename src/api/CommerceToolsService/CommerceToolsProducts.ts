@@ -7,6 +7,7 @@ export class CommerceToolsProducts extends CommerceToolsService {
   public static async getProducts(
     filters?: string[],
     sortQuery?: string,
+    search?: string,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const parameters: Record<string, unknown> = {
       limit: 100,
@@ -22,6 +23,11 @@ export class CommerceToolsProducts extends CommerceToolsService {
 
     if (sortQuery) {
       parameters.sort = sortQuery;
+    }
+
+    if (search) {
+      parameters['text.en-US'] = search;
+      parameters.fuzzy = 'true';
     }
 
     const response = await axios.get<ProductProjectionPagedSearchResponse>(
