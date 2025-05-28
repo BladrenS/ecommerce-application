@@ -7,7 +7,8 @@
   color: var(--secondary-color);
 }
 
-.my-swiper {
+.my-swiper,
+.modal-swiper {
   max-width: 500px;
   max-height: 335px;
   margin-top: 10px;
@@ -40,6 +41,20 @@
       opacity: 1;
       background-color: var(--primary-color);
     }
+  }
+}
+
+.my-swiper:hover {
+  cursor: zoom-in;
+}
+
+.modal-swiper {
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 0;
+
+  &:hover {
+    cursor: auto;
   }
 }
 
@@ -162,4 +177,72 @@
 .current-category {
   margin-left: 10px;
   color: var(--primary-color);
+}
+
+.overlay {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.modal {
+  position: relative;
+  z-index: 1001;
+
+  overflow: hidden;
+
+  width: 80%;
+  max-width: 1000px;
+  max-height: 90vh;
+  border-radius: 12px;
+
+  background-color: #000;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.close-button {
+  cursor: pointer;
+
+  position: absolute;
+  z-index: 1002;
+  top: 20px;
+  right: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  font-size: 3rem;
+  color: var(--primary-hover);
+
+  background: none;
+
+  transition: all 0.2s linear;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+body.no-scroll {
+  overflow-y: hidden;
+}
+
+body.no-scroll::-webkit-scrollbar {
+  display: none;
 }

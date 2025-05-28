@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+import { Loader } from '../Ui';
 import styles from './styles.module.scss';
 
 type Article = {
@@ -12,6 +13,7 @@ type Article = {
 
 export const NewsFeed = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -28,11 +30,21 @@ export const NewsFeed = () => {
         setArticles(response.data.articles);
       } catch (error) {
         console.error('Ошибка при загрузке новостей:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchNews();
   }, []);
+
+  if (loading) {
+    return (
+      <div className={styles['news-container']}>
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className={styles['news-container']}>
