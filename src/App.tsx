@@ -47,6 +47,8 @@ export const App: FC = () => {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/yamahaR1" element={<Catalog />} />
+        <Route path="/kawasaki" element={<Catalog />} />
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
