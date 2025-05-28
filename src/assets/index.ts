@@ -22,6 +22,7 @@ export { default as logo } from './header-icons/bike.svg';
 export { default as cart } from './header-icons/cart.svg';
 export { default as like } from './header-icons/like.svg';
 export { default as blog1 } from './images/blog1.jpg';
+export { default as blog1alt } from './images/blog1alt.jpg';
 export { default as blog2 } from './images/blog2.jpg';
 export { default as gloves } from './images/gloves.jpg';
 export { default as honda } from './images/honda.svg';

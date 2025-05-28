@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { CommerceToolsAuth } from './api/CommerceToolsService';
+import { Article } from './components/Article/Article';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
@@ -47,8 +48,7 @@ export const App: FC = () => {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="/catalog" element={<Catalog />} />
-        <Route path="/yamahaR1" element={<Catalog />} />
-        <Route path="/kawasaki" element={<Catalog />} />
+        <Route path="/article/:id" element={<Article />} />
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>

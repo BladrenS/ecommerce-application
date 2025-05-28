@@ -1,11 +1,14 @@
 import {
   bit,
+  blog1,
+  blog2,
   chain,
   facebook,
   helmet,
   instagram,
   linkedin,
   mastercard,
+  newHelm,
   parts,
   paypal,
   twitter,
@@ -21,6 +24,39 @@ export const COMMERCETOOLS_CONFIG = {
   scope: process.env.REACT_APP_CTP_SCOPES || '',
   apiUrl: process.env.REACT_APP_CTP_API_URL || '',
 };
+
+export type BlogItem = {
+  date: string;
+  title: string;
+  text: string;
+  image: string;
+  link?: string;
+  index?: number;
+};
+
+export const blogItems: BlogItem[] = [
+  {
+    date: 'March 30',
+    title: 'Yamaha R1 2025',
+    text: 'Don’t miss the updated model of the iconic R1 series!',
+    image: blog1,
+    index: 0,
+  },
+  {
+    date: 'February 25',
+    title: 'Kawasaki Ninja H2R',
+    text: 'The Untamed Hyperbike Redefining Speed',
+    image: blog2,
+    index: 1,
+  },
+  {
+    date: 'May 5',
+    title: 'New helmet arrivals',
+    text: 'Explore the latest gear for your next ride.',
+    image: newHelm,
+    link: '/catalog',
+  },
+];
 
 export const promoItems: {
   img: string;
