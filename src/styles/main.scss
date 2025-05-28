@@ -43,6 +43,14 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 50% 70%;
+
+  @media (width <= 600px) {
+    background-size: 70% 50%;
+  }
+
+  @media (width <= 340px) {
+    background-size: 70% 30%;
+  }
 }
 
 ::-webkit-scrollbar {

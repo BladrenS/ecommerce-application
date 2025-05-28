@@ -11,6 +11,10 @@
 .header {
   margin-bottom: 30px;
   color: var(--primary-color);
+
+  @media (width <= 460px) {
+    font-size: 20px;
+  }
 }
 
 .image {
@@ -24,4 +28,12 @@
   line-height: 1.6;
   color: var(--secondary-color);
   white-space: pre-wrap;
+
+  @media (width <= 768px) {
+    width: 90%;
+  }
+
+  @media (width <= 460px) {
+    font-size: 14px;
+  }
 }

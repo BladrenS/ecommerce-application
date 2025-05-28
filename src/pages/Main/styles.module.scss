@@ -16,6 +16,7 @@
 .header-small {
   margin-top: 70px;
   color: var(--secondary-color);
+  text-align: center;
 }
 
 .header-small {
@@ -31,4 +32,9 @@
 
   width: 95%;
   margin: 40px 0;
+
+  @media (width <= 768px) {
+    gap: 30px;
+    justify-content: center;
+  }
 }

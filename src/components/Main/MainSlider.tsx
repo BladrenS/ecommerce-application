@@ -18,7 +18,7 @@ export const MainSlider: FC = () => {
       slidesPerView={1}
       className={styles['my-swiper']}
       loop
-      autoplay={{ delay: 5000, disableOnInteraction: false }}
+      autoplay={{ delay: 115_000, disableOnInteraction: false }}
     >
       <SwiperSlide className={styles.slide}>
         <div className={styles['slide-one']}>
@@ -43,7 +43,7 @@ export const MainSlider: FC = () => {
           <span className={styles.white}>SALE</span>
           <span className={styles.text}>Motorbike season kick-off with 15% discount</span>
           <div className={styles.promo}>
-            <img src={sale} alt="sale" className={styles.icon} />
+            <img src={sale} alt="sale" />
             <span style={{ marginLeft: '10px' }}>SPRING-SALE-15%</span>
           </div>
           <span className={styles.dates}>10.04.2025 - 15.05.2025</span>
