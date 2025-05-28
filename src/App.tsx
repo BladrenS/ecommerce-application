@@ -6,6 +6,7 @@ import { CommerceToolsAuth } from './api/CommerceToolsService';
 import { Article } from './components/Article/Article';
 import { Footer } from './components/Footer/Footer';
 import { Header } from './components/Header/Header';
+import { NewsFeed } from './components/News/NewsFeed';
 import { Loader } from './components/Ui';
 import { ScrollToTopButton } from './components/Ui';
 import { Login, Main } from './pages';
@@ -50,6 +51,7 @@ export const App: FC = () => {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/article/:id" element={<Article />} />
         <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/news" element={<NewsFeed />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer></Footer>
