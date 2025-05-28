@@ -24,7 +24,7 @@ export const Menu: FC<MenuProps> = ({ active, setActive, userLogout }) => {
   };
 
   return (
-    <div onClick={closeMenu} className={clsx(styles.menu, { [styles.active]: active })}>
+    <div className={clsx(styles.menu, { [styles.active]: active })}>
       <div onClick={(event) => event.stopPropagation()} className={styles.content}>
         <ul className={styles.list}>
           {HEADER_LINKS.map(({ href, text }, index) => {
@@ -39,7 +39,7 @@ export const Menu: FC<MenuProps> = ({ active, setActive, userLogout }) => {
                 {text}
               </span>
             ) : (
-              <NavLink key={href} to={href} className={getNavLinkClass}>
+              <NavLink onClick={closeMenu} key={href} to={href} className={getNavLinkClass}>
                 {text}
               </NavLink>
             );
