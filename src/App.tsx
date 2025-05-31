@@ -8,6 +8,7 @@ import { Header } from './components/Header/Header';
 import { Loader } from './components/Ui';
 import { ScrollToTopButton } from './components/Ui';
 import { Login, Main } from './pages';
+import { Profile } from './pages/Profile/Profile';
 import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
@@ -44,6 +45,7 @@ export const App: FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer></Footer>
