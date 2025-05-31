@@ -4,19 +4,19 @@ import type { ComponentProps, FC } from 'react';
 import styles from './styles.module.scss';
 
 interface CategoryProps extends ComponentProps<'li'> {
-  order: string;
   name: string;
+  checked: boolean;
 }
 
-const MAIN_ORDER_HINT_CATEGORIES = 0.05;
-
-export const Category: FC<CategoryProps> = ({ name, order, onClick }) => {
+export const Category: FC<CategoryProps> = ({ name, checked, onClick }) => {
   return (
     <li
       onClick={onClick}
-      className={clsx(styles.category, { [styles['sub-category']]: +order > MAIN_ORDER_HINT_CATEGORIES })}
+      className={clsx(styles.category, {
+        [styles.active]: checked,
+      })}
     >
-      {name}: {order}
+      {name}
     </li>
   );
 };

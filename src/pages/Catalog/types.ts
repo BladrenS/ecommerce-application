@@ -1,5 +1,5 @@
 export interface IFilters {
-  categoryId: string;
+  category: string[];
   priceRange: PriceRange;
   size: string[];
   search: string;

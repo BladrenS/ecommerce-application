@@ -5,7 +5,13 @@
   transition: var(--transition);
 
   &:hover {
-    color: var(--primary-hover);
+    @media (any-hover: hover) {
+      color: var(--primary-hover);
+    }
+  }
+
+  &.active {
+    color: var(--primary-color);
   }
 }
 

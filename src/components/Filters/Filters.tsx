@@ -10,7 +10,7 @@ export const Filters: FC = () => {
 
   const initialValue = () => {
     setFilters({
-      categoryId: '',
+      category: [],
       priceRange: { from: '', to: '' },
       size: [],
       search: '',

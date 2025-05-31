@@ -11,7 +11,7 @@ export const useProducts = () => {
   const [error, setError] = useState('');
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
   const [filters, setFilters] = useState<IFilters>({
-    categoryId: '',
+    category: [],
     priceRange: { from: '', to: '' },
     size: [],
     search: '',
@@ -21,13 +21,13 @@ export const useProducts = () => {
   const createFilterQuery = () => {
     const conditions = [];
     const {
-      categoryId,
+      category,
       priceRange: { from, to },
       size,
     } = filters;
 
-    if (categoryId) {
-      conditions.push(`categories.id:"${categoryId}"`);
+    if (category.length) {
+      conditions.push(`categories.id:${category.map((c) => `"${c}"`).join(',')}`);
     }
 
     if (from || to) {
@@ -80,7 +80,7 @@ export const useProducts = () => {
       const filterQuery = createFilterQuery();
       const sortQuery = createSortQuery();
 
-      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, filters.search, filters.categoryId);
+      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, filters.search);
 
       const { min, max } = getPriceRange(data.facets);
 

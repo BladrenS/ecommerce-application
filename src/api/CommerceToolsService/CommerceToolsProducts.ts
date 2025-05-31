@@ -8,7 +8,6 @@ export class CommerceToolsProducts extends CommerceToolsService {
     filters?: string[],
     sortQuery?: string,
     search?: string,
-    categoryId?: string,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const parameters: Record<string, any> = {
       limit: 9,
@@ -31,10 +30,6 @@ export class CommerceToolsProducts extends CommerceToolsService {
       parameters.fuzzy = 'true';
     }
 
-    if (categoryId) {
-      parameters.facet.push(`categories.id:"${categoryId}"`);
-    }
-
     const response = await axios.get<ProductProjectionPagedSearchResponse>(
       `${CommerceToolsService.apiUrl}/${CommerceToolsService.projectKey}/product-projections/search`,
       {
@@ -44,8 +39,6 @@ export class CommerceToolsProducts extends CommerceToolsService {
         },
       },
     );
-
-    console.log(response.data);
 
     return response.data;
   }
@@ -57,7 +50,6 @@ export class CommerceToolsProducts extends CommerceToolsService {
       },
     });
 
-    console.log(response.data);
     return response.data;
   }
 }
