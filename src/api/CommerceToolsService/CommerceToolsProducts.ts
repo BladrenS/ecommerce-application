@@ -10,7 +10,7 @@ export class CommerceToolsProducts extends CommerceToolsService {
     search?: string,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const parameters: Record<string, unknown> = {
-      limit: 100,
+      limit: 9,
       withTotal: true,
       markMatchingVariants: true,
       offset: 0,

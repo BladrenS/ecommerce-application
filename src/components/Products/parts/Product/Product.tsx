@@ -1,22 +1,25 @@
 import { type Price } from '@commercetools/platform-sdk';
 import { type FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { centToDollar } from '../../utils/centToDollar';
+import { centToDollar } from '../../../../utils/centToDollar';
 import styles from './styles.module.scss';
 
 interface ProductProps {
-  name?: string;
-  description?: string;
-  imageUrl?: string;
-  price?: Price;
-  imageAlt?: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  price: Price;
+  imageAlt: string;
+  id: string;
 }
 
-export const Product: FC<ProductProps> = ({ name, description, price, imageUrl, imageAlt }) => {
+export const Product: FC<Partial<ProductProps>> = ({ name, description, price, imageUrl, imageAlt, id }) => {
+  const navigate = useNavigate();
   const priceFormatted = centToDollar(price?.value.centAmount);
 
   return (
-    <li className={styles.product}>
+    <li className={styles.product} onClick={() => navigate(`/product/${id}`)}>
       <img src={imageUrl} alt={imageAlt} className={styles.image} />
       <div className={styles.content}>
         <h3 className={styles.title}>{name}</h3>

@@ -1,9 +1,8 @@
 import { type FC } from 'react';
 
 import { useCatalogContext } from '../../pages/Catalog';
-import { Product } from '../index';
 import { Loader } from '../Ui';
-import { Search, Sort } from './parts';
+import { Product, Search, Sort } from './parts';
 import styles from './styles.module.scss';
 
 export const Products: FC = () => {
@@ -19,6 +18,7 @@ export const Products: FC = () => {
           return (
             <Product
               key={id}
+              id={id}
               name={name && name['en-US']}
               description={description && description['en-US']}
               imageUrl={images && images[0].url}
