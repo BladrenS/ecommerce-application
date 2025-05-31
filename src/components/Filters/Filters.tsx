@@ -2,20 +2,25 @@ import { type FC } from 'react';
 
 import { useCatalogContext } from '../../pages/Catalog';
 import { Button } from '../Ui';
-import { Category, Price, Size } from './parts';
+import { Categories, Price, Size } from './parts';
 import styles from './styles.module.scss';
 
-export const Categories: FC = () => {
-  const { setFilters, setSort } = useCatalogContext();
+export const Filters: FC = () => {
+  const { setFilters } = useCatalogContext();
 
   const initialValue = () => {
-    setFilters({ categoryId: '', priceRange: { from: '', to: '' }, size: [] });
-    setSort({ value: 'default', direction: 'asc' });
+    setFilters({
+      categoryId: '',
+      priceRange: { from: '', to: '' },
+      size: [],
+      search: '',
+      sort: { value: 'default', direction: 'asc' },
+    });
   };
 
   return (
     <aside className={styles.categories}>
-      <Category />
+      <Categories />
       <Price />
       <Size />
       <div className={styles.center}>

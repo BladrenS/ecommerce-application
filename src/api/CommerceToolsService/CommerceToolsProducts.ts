@@ -1,4 +1,4 @@
-import type { ProductProjectionPagedSearchResponse } from '@commercetools/platform-sdk';
+import type { CategoryPagedQueryResponse, ProductProjectionPagedSearchResponse } from '@commercetools/platform-sdk';
 import axios from 'axios';
 
 import { CommerceToolsService } from './CommerceToolsService';
@@ -8,17 +8,18 @@ export class CommerceToolsProducts extends CommerceToolsService {
     filters?: string[],
     sortQuery?: string,
     search?: string,
+    categoryId?: string,
   ): Promise<ProductProjectionPagedSearchResponse> {
-    const parameters: Record<string, unknown> = {
+    const parameters: Record<string, any> = {
       limit: 9,
       withTotal: true,
       markMatchingVariants: true,
       offset: 0,
-      facet: 'variants.price.centAmount: range(0 to *)',
+      facet: ['variants.price.centAmount: range(0 to *)'],
     };
 
     if (filters) {
-      parameters.filter = filters;
+      parameters['filter.query'] = filters;
     }
 
     if (sortQuery) {
@@ -28,6 +29,10 @@ export class CommerceToolsProducts extends CommerceToolsService {
     if (search) {
       parameters['text.en-US'] = search;
       parameters.fuzzy = 'true';
+    }
+
+    if (categoryId) {
+      parameters.facet.push(`categories.id:"${categoryId}"`);
     }
 
     const response = await axios.get<ProductProjectionPagedSearchResponse>(
@@ -42,6 +47,17 @@ export class CommerceToolsProducts extends CommerceToolsService {
 
     console.log(response.data);
 
+    return response.data;
+  }
+
+  public static async getCategories(): Promise<CategoryPagedQueryResponse> {
+    const response = await axios.get<CategoryPagedQueryResponse>(`${this.apiUrl}/${this.projectKey}/categories`, {
+      headers: {
+        Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+      },
+    });
+
+    console.log(response.data);
     return response.data;
   }
 }

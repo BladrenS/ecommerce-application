@@ -2,6 +2,8 @@ export interface IFilters {
   categoryId: string;
   priceRange: PriceRange;
   size: string[];
+  search: string;
+  sort: SortValue;
 }
 export interface PriceRangeFacets {
   min: string;

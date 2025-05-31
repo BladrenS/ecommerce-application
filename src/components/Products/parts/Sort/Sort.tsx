@@ -11,22 +11,24 @@ const SORTING_VALUE: SortValueType[] = ['default', 'price', 'name'];
 
 export const Sort: FC = () => {
   const {
-    sort: { value, direction },
-    setSort,
+    filters: {
+      sort: { direction, value },
+    },
+    setFilters,
   } = useCatalogContext();
 
   const clickSortHandler = (clickedValue: SortValueType) => {
     if (clickedValue === value && clickedValue === 'default') return;
 
-    setSort((previous) => {
-      const isSameField = previous.value === clickedValue;
+    setFilters((previous) => {
+      const isSameField = previous.sort.value === clickedValue;
 
       const updated: SortValue = {
         value: clickedValue,
-        direction: isSameField ? (previous.direction === 'asc' ? 'desc' : 'asc') : 'asc',
+        direction: isSameField ? (previous.sort.direction === 'asc' ? 'desc' : 'asc') : 'asc',
       };
 
-      return updated;
+      return { ...previous, sort: updated };
     });
   };
 

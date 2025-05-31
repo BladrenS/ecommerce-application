@@ -1,0 +1,14 @@
+.category {
+  cursor: pointer;
+  padding: 13px 0;
+  color: var(--secondary-color);
+  transition: var(--transition);
+
+  &:hover {
+    color: var(--primary-hover);
+  }
+}
+
+.sub-category {
+  padding: 13px;
+}

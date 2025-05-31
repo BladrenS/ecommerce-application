@@ -4,17 +4,23 @@ import { useCatalogContext } from '../../../../pages/Catalog';
 import styles from './styles.module.scss';
 
 export const Search: FC = () => {
-  const { search, setSearch } = useCatalogContext();
+  const { filters, setFilters } = useCatalogContext();
 
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setSearch(value);
+    setFilters((previous) => ({ ...previous, search: value }));
   };
 
   return (
     <div className={styles.container}>
-      <input placeholder="Search..." type="text" className={styles.input} value={search} onChange={searchHandler} />
+      <input
+        placeholder="Search..."
+        type="text"
+        className={styles.input}
+        value={filters.search}
+        onChange={searchHandler}
+      />
     </div>
   );
 };

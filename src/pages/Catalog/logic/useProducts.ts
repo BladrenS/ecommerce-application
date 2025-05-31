@@ -3,19 +3,19 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 
 import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
-import type { FacetsResponse, IFilters, PriceRangeFacets, SortValue } from '../types';
+import type { FacetsResponse, IFilters, PriceRangeFacets } from '../types';
 
 export const useProducts = () => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [sort, setSort] = useState<SortValue>({ value: 'default', direction: 'asc' });
-  const [search, setSearch] = useState('');
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
   const [filters, setFilters] = useState<IFilters>({
     categoryId: '',
     priceRange: { from: '', to: '' },
     size: [],
+    search: '',
+    sort: { value: 'default', direction: 'asc' },
   });
 
   const createFilterQuery = () => {
@@ -44,14 +44,14 @@ export const useProducts = () => {
   };
 
   const createSortQuery = () => {
-    if (sort.value === 'default') return;
+    if (filters.sort.value === 'default') return;
 
-    switch (sort.value) {
+    switch (filters.sort.value) {
       case 'price': {
-        return `price ${sort.direction}`;
+        return `price ${filters.sort.direction}`;
       }
       case 'name': {
-        return `name.en-US ${sort.direction}`;
+        return `name.en-US ${filters.sort.direction}`;
       }
       default:
         return;
@@ -80,7 +80,7 @@ export const useProducts = () => {
       const filterQuery = createFilterQuery();
       const sortQuery = createSortQuery();
 
-      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, search);
+      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, filters.search, filters.categoryId);
 
       const { min, max } = getPriceRange(data.facets);
 
@@ -100,13 +100,9 @@ export const useProducts = () => {
     products,
     filters,
     initialPriceValue,
-    sort,
-    search,
     loading,
     error,
     setFilters,
-    setSort,
-    setSearch,
     fetchProducts,
   };
 };

@@ -1,4 +1,4 @@
-export { Categories } from './Categories/Categories';
+export { Filters } from './Filters/Filters';
 export { Footer } from './Footer/Footer';
 export { Header } from './Header/Header';
 export { LoginForm } from './LoginForm/LoginForm';
