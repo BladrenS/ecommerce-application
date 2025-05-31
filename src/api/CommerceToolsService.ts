@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { type LoginField } from '../components/LoginForm/schemas/loginSchemas';
 import { COMMERCETOOLS_CONFIG } from '../constants';
-import type { AuthResponse, MainTokenResponse } from '../types';
+import type { AuthResponse, MainTokenResponse, MyCustomer } from '../types';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl } = COMMERCETOOLS_CONFIG;
 
@@ -12,7 +12,7 @@ const auth = {
 };
 
 export class CommerceToolsService {
-  private static accessToken: string;
+  //private static accessToken: string;
   private static mainToken: string;
 
   public static async authCustomer(values: LoginField): Promise<AuthResponse> {
@@ -28,7 +28,7 @@ export class CommerceToolsService {
       },
     );
 
-    CommerceToolsService.accessToken = response.data.access_token;
+    //CommerceToolsService.accessToken = response.data.access_token;
     localStorage.setItem('access_token', response.data.access_token);
 
     return response.data;
@@ -57,18 +57,20 @@ export class CommerceToolsService {
         { auth },
       );
 
-      CommerceToolsService.accessToken = response.data.access_token;
+      //CommerceToolsService.accessToken = response.data.access_token;
+      localStorage.setItem('access_token', response.data.access_token);
     } catch {
       localStorage.removeItem('refresh_token');
     }
   }
 
-  public static async getMe(): Promise<void> {
-    await axios.get(`${apiUrl}/${projectKey}/me`, {
+  public static async getMe(): Promise<MyCustomer> {
+    const response = await axios.get(`${apiUrl}/${projectKey}/me`, {
       headers: {
-        Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
+    return response.data;
   }
 
   public static async checkEmail(email: string): Promise<boolean> {
