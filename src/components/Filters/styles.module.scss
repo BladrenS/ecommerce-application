@@ -1,0 +1,14 @@
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: flex-start;
+
+  padding: 15px 15px 30px;
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.center {
+  text-align: center;
+}

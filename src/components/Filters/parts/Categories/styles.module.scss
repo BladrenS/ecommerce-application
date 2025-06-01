@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 32px;
+  color: var(--primary-color);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  @media (width <= 1360px) {
+    overflow: scroll;
+    height: 200px;
+  }
+}

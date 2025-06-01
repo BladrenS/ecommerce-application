@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.item {
+  cursor: pointer;
+
+  flex: 0 0 50px;
+
+  padding: 15px;
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+
+  color: var(--secondary-color);
+
+  background-color: transparent;
+
+  transition: var(--transition);
+
+  &.active {
+    background-color: var(--primary-hover);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

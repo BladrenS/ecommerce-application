@@ -1,33 +1,59 @@
-import { type ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import type { CategoryPagedQueryResponse, ProductProjectionPagedSearchResponse } from '@commercetools/platform-sdk';
 import axios from 'axios';
 
 import { CommerceToolsService } from './CommerceToolsService';
 
 export class CommerceToolsProducts extends CommerceToolsService {
-  public static async getProducts(): Promise<ProductProjectionPagedQueryResponse> {
-    const response1 = await axios.get<ProductProjectionPagedQueryResponse>(
-      `${CommerceToolsService.apiUrl}/${CommerceToolsService.projectKey}/categories`,
-      {
-        headers: {
-          Authorization: `Bearer ${CommerceToolsService.accessToken}`,
-        },
-      },
-    );
+  public static async getProducts(
+    filters?: string[],
+    sortQuery?: string,
+    search?: string,
+    offset?: number,
+  ): Promise<ProductProjectionPagedSearchResponse> {
+    const parameters: Record<string, any> = {
+      limit: 9,
+      withTotal: true,
+      markMatchingVariants: true,
+      offset: 0,
+      facet: ['variants.price.centAmount: range(0 to *)'],
+    };
 
-    console.log(response1);
+    if (filters) {
+      parameters['filter.query'] = filters;
+    }
 
-    const response = await axios.get<ProductProjectionPagedQueryResponse>(
+    if (sortQuery) {
+      parameters.sort = sortQuery;
+    }
+
+    if (search) {
+      parameters['text.en-US'] = search;
+      parameters.fuzzy = 'true';
+    }
+
+    if (offset) {
+      parameters.offset = offset;
+    }
+
+    const response = await axios.get<ProductProjectionPagedSearchResponse>(
       `${CommerceToolsService.apiUrl}/${CommerceToolsService.projectKey}/product-projections/search`,
       {
-        params: {
-          filter: `categories.id:"d92f525a-7a01-4b7d-a270-6d758f221c0a"`,
-          expand: 'categories',
-        },
+        params: parameters,
         headers: {
           Authorization: `Bearer ${CommerceToolsService.accessToken}`,
         },
       },
     );
+
+    return response.data;
+  }
+
+  public static async getCategories(): Promise<CategoryPagedQueryResponse> {
+    const response = await axios.get<CategoryPagedQueryResponse>(`${this.apiUrl}/${this.projectKey}/categories`, {
+      headers: {
+        Authorization: `Bearer ${CommerceToolsService.accessToken}`,
+      },
+    });
 
     return response.data;
   }
