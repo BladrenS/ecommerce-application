@@ -19,14 +19,33 @@ export const PersonalModalForm = (props: PersonalProps) => {
     register,
     //handleSubmit,
     //setError,
-    //watch,
+    watch,
     formState: { errors, isValid },
   } = useForm<personalFormData>({
     resolver: zodResolver(personalSchema),
     mode: 'onChange',
     reValidateMode: 'onChange',
     shouldUnregister: true,
+    defaultValues: {
+      firstName: props.name,
+      lastName: props.lastName,
+      email: props.email,
+      dateOfBirth: props.date ? new Date(props.date) : undefined,
+    },
   });
+
+  const [firstName, lastName, email, dateOfBirth] = watch(['firstName', 'lastName', 'email', 'dateOfBirth'], {
+    firstName: props.name,
+    lastName: props.lastName,
+    email: props.email,
+    dateOfBirth: props.date ? new Date(props.date) : undefined,
+  });
+
+  const isDirty =
+    firstName !== props.name ||
+    lastName !== props.lastName ||
+    email !== props.email ||
+    (dateOfBirth instanceof Date && props.date ? dateOfBirth.getTime() !== new Date(props.date).getTime() : false);
 
   return (
     <div>
@@ -53,7 +72,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
         value={props.date}
         type="date"
       />
-      <Button disabled={!isValid} className={styles['submit-button']}>
+      <Button disabled={!isValid || !isDirty} className={styles['submit-button']}>
         Update
       </Button>
     </div>
