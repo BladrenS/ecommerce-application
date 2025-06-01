@@ -6,7 +6,7 @@ import type { FieldErrors, SubmitHandler, UseFormRegister } from 'react-hook-for
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsAuth } from '../../../api/CommerceToolsService';
 import { ErrorCodeResponse } from '../../../types';
 import { type LoginField, schema } from '../schemas/loginSchemas';
 
@@ -31,14 +31,14 @@ export const useLoginSubmitting = (): SubmitHandling => {
   const submit: SubmitHandler<LoginField> = async (values) => {
     try {
       setLoading(true);
-      const isCorrectEmail = await CommerceToolsService.checkEmail(values.email);
+      const isCorrectEmail = await CommerceToolsAuth.checkEmail(values.email);
 
       if (!isCorrectEmail) {
         setError('email', { message: 'Invalid email address' });
         return;
       }
 
-      const response = await CommerceToolsService.authCustomer(values);
+      const response = await CommerceToolsAuth.authCustomer(values);
 
       localStorage.setItem('refresh_token', response.refresh_token);
 

@@ -1,14 +1,10 @@
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { CommerceToolsService } from './api/CommerceToolsService';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { Loader } from './components/Ui';
-import { ScrollToTopButton } from './components/Ui';
-import { Login, Main } from './pages';
-import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
+import { CommerceToolsAuth } from './api/CommerceToolsService';
+import { Footer, Header } from './components';
+import { Loader, ScrollToTopButton } from './components/Ui';
+import { Catalog, Login, Main, Product, RegistrationPage } from './pages';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -19,7 +15,9 @@ export const App: FC = () => {
     const refreshToken = localStorage.getItem('refresh_token');
     try {
       if (refreshToken) {
-        await CommerceToolsService.refreshToken(refreshToken);
+        await CommerceToolsAuth.refreshToken(refreshToken);
+      } else {
+        await CommerceToolsAuth.anonymousSession();
       }
     } finally {
       setLoading(false);
@@ -37,16 +35,18 @@ export const App: FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Header></Header>
+      <Header />
       <ScrollToTopButton />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
-      <Footer></Footer>
+      <Footer />
     </BrowserRouter>
   );
 };
