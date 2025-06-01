@@ -16,6 +16,8 @@ export const App: FC = () => {
     try {
       if (refreshToken) {
         await CommerceToolsAuth.refreshToken(refreshToken);
+      } else {
+        await CommerceToolsAuth.anonymousSession();
       }
     } finally {
       setLoading(false);

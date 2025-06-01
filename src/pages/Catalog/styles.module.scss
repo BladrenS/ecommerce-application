@@ -6,4 +6,9 @@
   padding: 180px 50px 160px;
 
   color: var(--secondary-color);
+
+  @media (width <= 1360px) {
+    grid-template-columns: 1fr;
+    padding: 130px 30px 80px;
+  }
 }

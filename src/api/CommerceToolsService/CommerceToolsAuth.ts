@@ -68,4 +68,18 @@ export class CommerceToolsAuth extends CommerceToolsService {
 
     return response.data.count;
   }
+
+  public static async anonymousSession(): Promise<void> {
+    const response = await axios.post(
+      `${CommerceToolsService.authUrl}/oauth/${CommerceToolsService.projectKey}/anonymous/token`,
+      new URLSearchParams({
+        grant_type: 'client_credentials',
+      }),
+      {
+        auth: CommerceToolsService.auth,
+      },
+    );
+
+    CommerceToolsService.accessToken = response.data.access_token;
+  }
 }

@@ -15,4 +15,9 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  @media (width <= 1360px) {
+    overflow: scroll;
+    height: 200px;
+  }
 }
