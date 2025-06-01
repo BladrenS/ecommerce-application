@@ -1,4 +1,3 @@
-// import type { Customer } from '@commercetools/platform-sdk';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
@@ -62,10 +61,10 @@ export const Profile = () => {
     }
     CommerceToolsService.getMe()
       .then((data) => {
-        setName(data.firstName);
-        setLastName(data.lastName);
+        setName(data.firstName || '');
+        setLastName(data.lastName || '');
         setEmail(data.email);
-        setDate(data.dateOfBirth.toString());
+        setDate(data.dateOfBirth?.toString() || '');
       })
       .catch((error) => {
         setError(error.message || 'Failed to load data');

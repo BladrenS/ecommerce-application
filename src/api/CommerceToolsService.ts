@@ -1,8 +1,9 @@
+import type { Customer } from '@commercetools/platform-sdk';
 import axios from 'axios';
 
 import { type LoginField } from '../components/LoginForm/schemas/loginSchemas';
 import { COMMERCETOOLS_CONFIG } from '../constants';
-import type { AuthResponse, MainTokenResponse, MyCustomer } from '../types';
+import type { AuthResponse, MainTokenResponse } from '../types';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl } = COMMERCETOOLS_CONFIG;
 
@@ -64,7 +65,7 @@ export class CommerceToolsService {
     }
   }
 
-  public static async getMe(): Promise<MyCustomer> {
+  public static async getMe(): Promise<Customer> {
     const response = await axios.get(`${apiUrl}/${projectKey}/me`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,

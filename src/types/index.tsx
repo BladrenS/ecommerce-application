@@ -18,25 +18,6 @@ export interface MainTokenResponse {
   token_type: string;
 }
 
-interface BaseAddress {
-  id: string;
-  city: string;
-  country: string; // Country Code если что, а не страна, надо распарсить
-  streetName: string;
-  postalCode: string;
-}
-
-export interface MyCustomer {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  defaultShippingAddress: number;
-  defaultBillingAddress: number;
-  addresses: BaseAddress[];
-}
-
 export enum ErrorCodeResponse {
   BAD_REQUEST = 400,
   CONFLICT = 409,
