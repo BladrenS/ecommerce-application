@@ -8,7 +8,7 @@ type BlogCardProps = BlogItem & {
   index: number;
 };
 
-export const BlogCard: FC<BlogCardProps> = ({ date, title, text, image, index, link }) => {
+export const BlogCard: FC<BlogCardProps> = ({ date, title, text, image, index }) => {
   const content = (
     <>
       <img className={styles['blog-img']} src={image} alt={title} />
@@ -21,7 +21,7 @@ export const BlogCard: FC<BlogCardProps> = ({ date, title, text, image, index, l
   );
 
   return (
-    <NavLink to={link ? `${link}` : `/article/${index}`} className={styles['blog-item']}>
+    <NavLink to={`/article/${index}`} className={styles['blog-item']}>
       {content}
     </NavLink>
   );

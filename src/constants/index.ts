@@ -4,11 +4,11 @@ import {
   blog2,
   chain,
   facebook,
+  harley,
   helmet,
   instagram,
   linkedin,
   mastercard,
-  newHelm,
   parts,
   paypal,
   twitter,
@@ -51,10 +51,10 @@ export const blogItems: BlogItem[] = [
   },
   {
     date: 'May 5',
-    title: 'New helmet arrivals',
-    text: 'Explore the latest gear for your next ride.',
-    image: newHelm,
-    link: '/catalog',
+    title: 'Harley Davidson Nightster 2025',
+    text: 'The New Era of Dark Custom',
+    image: harley,
+    index: 2,
   },
 ];
 

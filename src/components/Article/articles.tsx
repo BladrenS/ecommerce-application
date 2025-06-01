@@ -1,4 +1,4 @@
-import { blog1alt, blog2 } from '../../assets';
+import { blog1alt, blog2, harley } from '../../assets';
 
 export const articleItems: { header: string; image: string; text: string }[] = [
   {
@@ -83,5 +83,48 @@ With few peers in the two-wheeled world, the Ninja H2R has etched its name into 
 The Kawasaki Ninja H2R isn’t for everyone — and that’s what makes it so special. It’s for the fearless. The focused. The few who crave the extremes of performance and engineering.
 
 Are you ready to tame the wildest Ninja ever built?`,
+  },
+  {
+    header: 'Harley-Davidson Nightster 2025: The New Era of Dark Custom',
+    image: harley,
+    text: `The Harley-Davidson Nightster 2025 isn’t just a motorcycle — it’s a modern rebellion wrapped in blacked-out steel. With roots deep in Harley’s storied past and eyes fixed firmly on the future, the Nightster is a sleek, powerful machine built for those who crave freedom with a darker edge.
+
+⚙️ A New Heart, Same Soul
+
+- At the core of the Nightster is the Revolution Max 975T engine, a liquid-cooled V-Twin pushing out 90 horsepower and 70 lb-ft of torque. This is Harley performance reimagined — fast-revving, responsive, and tuned for torque across the rev range.
+- All-new Revolution Max 975T engine — smooth, punchy, and efficient.
+- Lightweight frame with a low center of gravity for razor-sharp handling.
+- Tuned for real-world riding — from city streets to open highways.
+
+🖤 Minimalist Style, Maximum Attitude
+
+- The 2025 Nightster keeps it stripped down and purposeful. No chrome, no clutter — just raw muscle and clean lines.
+- Solo seat and chopped fenders give it that unmistakable custom silhouette.
+- Classic peanut fuel tank with modern finishes.
+- Available in deep, moody colors that reflect its dark custom DNA.
+
+🧠 Modern Tech Meets Old-School Cool
+
+- Don’t let the retro looks fool you — the Nightster is packed with tech that brings confidence and control to every ride:
+- Selectable Ride Modes: Road, Rain, and Sport.
+- Traction Control System (TCS) and ABS for enhanced safety.
+- LED lighting and a modern digital display that blends seamlessly into the cockpit.
+
+🔥 A Cruiser That Carves
+
+- This isn’t your grandfather’s Harley. The Nightster is nimble, responsive, and genuinely fun to ride — especially for riders who want that stripped-down feel with modern performance.
+- Lightweight design makes it ideal for newer riders or urban warriors.
+- Comfortable ergonomics without sacrificing style or stance.
+- Built to be personalized — customize it, mod it, make it yours.
+
+🏍️ Born to Ride. Built to Lead.
+
+The 2025 Nightster is a fresh take on Harley’s legendary legacy. It's a machine that blends heritage and innovation, power and precision — designed for those who ride not just for the road, but for the soul.
+
+💬 Final Thoughts
+
+The Harley-Davidson Nightster 2025 isn’t trying to be everything to everyone — it’s built for the bold. For the riders who embrace the night, chase the horizon, and ride like they mean it.
+
+Are you ready to join the next generation of dark custom legends?`,
   },
 ];

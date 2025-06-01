@@ -38,7 +38,9 @@ export const Header: FC = memo(() => {
         <div className={styles['header-links']}>
           {HEADER_LINKS.map(({ href, text }, index) => {
             const shouldDisable = token && (index === 0 || index === 1);
-
+            const clearStorage = () => {
+              localStorage.removeItem('filter');
+            };
             return shouldDisable ? (
               <span
                 key={href}
@@ -48,7 +50,7 @@ export const Header: FC = memo(() => {
                 {text}
               </span>
             ) : (
-              <NavLink key={href} to={href} className={getNavLinkClass}>
+              <NavLink key={href} to={href} className={getNavLinkClass} onClick={clearStorage}>
                 {text}
               </NavLink>
             );

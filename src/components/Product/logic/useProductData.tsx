@@ -1,4 +1,4 @@
-import type { Category, Product } from '@commercetools/platform-sdk';
+import type { Category, CategoryReference, Product } from '@commercetools/platform-sdk';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ export const useProductData = () => {
   const [category1, setCategory1] = useState<Category>();
   const [category2, setCategory2] = useState<Category>();
   const [loading, setIsLoading] = useState(true);
+  const [category1Id, setCategory1Id] = useState<string>();
+  const [category2Id, setCategory2Id] = useState<string>();
 
   useEffect(() => {
     if (!productId) return;
@@ -20,7 +22,10 @@ export const useProductData = () => {
         const productData = await queryProduct(productId);
         setProduct(productData);
 
-        const categories = productData.masterData.current.categories;
+        const categories: CategoryReference[] = productData.masterData.current.categories;
+
+        setCategory1Id(categories[0].id);
+        setCategory2Id(categories[1].id);
 
         const [cat1, cat2] = await Promise.all([
           categories[0]?.id ? queryCategory(categories[0].id) : Promise.resolve(undefined),
@@ -54,5 +59,7 @@ export const useProductData = () => {
     description: current?.description?.['en-US'] || '',
     price,
     discountedPrice,
+    category1Id,
+    category2Id,
   };
 };

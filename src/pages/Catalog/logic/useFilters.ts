@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { type IFilters } from '../types';
 
-export const useFilters = () => {
+export const useFilters = (id = localStorage.getItem('filter')) => {
   const [filters, setFilters] = useState<IFilters>({
-    category: [],
+    category: id ? [id] : [],
     priceRange: { from: '', to: '' },
     size: [],
     search: '',
