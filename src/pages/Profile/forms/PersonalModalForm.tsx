@@ -51,6 +51,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
         register={register}
         error={errors.dateOfBirth}
         value={props.date}
+        type="date"
       />
       <Button disabled={!isValid} className={styles['submit-button']}>
         Update
