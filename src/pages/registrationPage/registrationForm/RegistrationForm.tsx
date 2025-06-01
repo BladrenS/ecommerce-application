@@ -92,7 +92,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Email"
               name="email"
-              type="text"
               placeholder="user@example.com"
               register={register}
               error={errors.email}
@@ -116,7 +115,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="First Name"
               name="firstName"
-              type="text"
               placeholder="Donald"
               register={register}
               error={errors.firstName}
@@ -126,7 +124,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Last Name"
               name="lastName"
-              type="text"
               placeholder="Trump"
               register={register}
               error={errors.lastName}
@@ -150,7 +147,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Street"
               name="street_shipping"
-              type="text"
               placeholder="Street"
               register={register}
               error={errors.street_shipping}
@@ -160,7 +156,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="City"
               name="city_shipping"
-              type="text"
               placeholder="City"
               register={register}
               error={errors.city_shipping}
@@ -170,7 +165,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Country"
               name="country_shipping"
-              type="text"
               placeholder="Country"
               register={register}
               error={errors.country_shipping}
@@ -180,7 +174,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Postal Code"
               name="postalCode_shipping"
-              type="text"
               placeholder="Postal Code"
               register={register}
               error={errors.postalCode_shipping}
@@ -205,7 +198,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Street"
                 name="street_billing"
-                type="text"
                 placeholder="Street"
                 register={register}
                 error={errors.street_billing}
@@ -215,7 +207,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="City"
                 name="city_billing"
-                type="text"
                 placeholder="City"
                 register={register}
                 error={errors.city_billing}
@@ -225,7 +216,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Country"
                 name="country_billing"
-                type="text"
                 placeholder="Country"
                 register={register}
                 error={errors.country_billing}
@@ -235,7 +225,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Postal Code"
                 name="postalCode_billing"
-                type="text"
                 placeholder="Postal Code"
                 register={register}
                 error={errors.postalCode_billing}
