@@ -23,7 +23,7 @@ export const ProductDetails = ({
   <div className={styles['product-info']}>
     <h2 className={styles['product-name']}>{name}</h2>
     <div className={styles.prices}>
-      <div className={styles.sale}>{price && centToDollar(price)}</div>
+      <div className={discountedPrice ? styles.sale : styles.standard}>{price && centToDollar(price)}</div>
       <div className={styles.price}>{discountedPrice && centToDollar(discountedPrice)}</div>
     </div>
     <h3 className={styles['description-header']}>Description:</h3>

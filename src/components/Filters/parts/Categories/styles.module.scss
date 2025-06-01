@@ -18,6 +18,7 @@
 
   @media (width <= 1360px) {
     overflow: scroll;
+    overflow-x: hidden;
     height: 200px;
   }
 }

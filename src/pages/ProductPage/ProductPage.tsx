@@ -18,7 +18,7 @@ export const ProductPage = () => {
 
   return (
     <div className={styles['product-wrapper']}>
-      <Breadcrumbs category1={category1Name} category2={category2Name} />
+      <Breadcrumbs category1={category2Name} category2={category1Name} />
       <div className={styles['product-container']}>
         <ProductGallery images={images} />
         <ProductDetails
