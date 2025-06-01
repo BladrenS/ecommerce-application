@@ -2,16 +2,17 @@ import { type FC } from 'react';
 
 import { useCatalogContext } from '../../pages/Catalog';
 import { Loader } from '../Ui';
-import { Product, Search, Sort } from './parts';
+import { Pagination, Product, Search, Sort } from './parts';
 import styles from './styles.module.scss';
 
 export const Products: FC = () => {
-  const { products, loading } = useCatalogContext();
+  const { products, page, loading } = useCatalogContext();
 
   return (
     <section className={styles.container}>
       <Search />
       <Sort />
+      {page.totalPages > page.limit && <Pagination />}
       {loading && <Loader />}
       <ul className={styles.products}>
         {products.map(({ description, id, name, key, masterVariant: { images, prices } }) => {
@@ -28,6 +29,7 @@ export const Products: FC = () => {
           );
         })}
       </ul>
+      {page.totalPages > page.limit && <Pagination />}
     </section>
   );
 };

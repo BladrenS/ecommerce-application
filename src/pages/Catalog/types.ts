@@ -28,3 +28,10 @@ export interface SortValue {
   value: 'name' | 'price' | 'default';
   direction: 'asc' | 'desc';
 }
+
+export interface Page {
+  offset: number;
+  totalPages: number;
+  count: number;
+  limit: number;
+}

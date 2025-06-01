@@ -8,6 +8,7 @@ export class CommerceToolsProducts extends CommerceToolsService {
     filters?: string[],
     sortQuery?: string,
     search?: string,
+    offset?: number,
   ): Promise<ProductProjectionPagedSearchResponse> {
     const parameters: Record<string, any> = {
       limit: 9,
@@ -28,6 +29,10 @@ export class CommerceToolsProducts extends CommerceToolsService {
     if (search) {
       parameters['text.en-US'] = search;
       parameters.fuzzy = 'true';
+    }
+
+    if (offset) {
+      parameters.offset = offset;
     }
 
     const response = await axios.get<ProductProjectionPagedSearchResponse>(

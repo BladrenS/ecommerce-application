@@ -28,10 +28,12 @@
   transition: var(--transition);
 
   &:hover {
-    outline: 1px solid var(--primary-hover);
+    @media (any-hover: hover) {
+      outline: 1px solid var(--primary-hover);
 
-    .image {
-      transform: scale(1.18);
+      .image {
+        transform: scale(1.18);
+      }
     }
   }
 }
@@ -121,6 +123,8 @@
   transition: var(--transition);
 
   &:hover {
-    color: var(--primary-hover);
+    @media (any-hover: hover) {
+      color: var(--primary-hover);
+    }
   }
 }

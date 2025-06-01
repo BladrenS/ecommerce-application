@@ -15,6 +15,7 @@ export const Search: FC = () => {
   return (
     <div className={styles.container}>
       <input
+        name="search"
         placeholder="Search..."
         type="text"
         className={styles.input}

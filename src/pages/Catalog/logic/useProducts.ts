@@ -10,6 +10,7 @@ export const useProducts = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
+  const [page, setPage] = useState({ offset: 0, totalPages: 0, count: 0, limit: 9 });
   const [filters, setFilters] = useState<IFilters>({
     category: [],
     priceRange: { from: '', to: '' },
@@ -80,10 +81,11 @@ export const useProducts = () => {
       const filterQuery = createFilterQuery();
       const sortQuery = createSortQuery();
 
-      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, filters.search);
+      const data = await CommerceToolsProducts.getProducts(filterQuery, sortQuery, filters.search, page.offset);
 
       const { min, max } = getPriceRange(data.facets);
 
+      setPage((previous) => ({ ...previous, totalPages: data.total ?? 0, count: data.count }));
       setInitialPriceValue({ from: min, to: max });
 
       setProducts(data.results);
@@ -99,10 +101,12 @@ export const useProducts = () => {
   return {
     products,
     filters,
+    page,
     initialPriceValue,
     loading,
     error,
     setFilters,
+    setPage,
     fetchProducts,
   };
 };

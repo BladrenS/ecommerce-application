@@ -6,7 +6,7 @@ import { Categories, Price, Size } from './parts';
 import styles from './styles.module.scss';
 
 export const Filters: FC = () => {
-  const { setFilters } = useCatalogContext();
+  const { setFilters, setCurrentPage } = useCatalogContext();
 
   const initialValue = () => {
     setFilters({
@@ -16,6 +16,8 @@ export const Filters: FC = () => {
       search: '',
       sort: { value: 'default', direction: 'asc' },
     });
+
+    setCurrentPage(1);
   };
 
   return (

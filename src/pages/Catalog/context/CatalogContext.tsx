@@ -3,25 +3,32 @@ import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import { createContext, useContext, useEffect } from 'react';
 
 import { useDebounce } from '../../../hooks';
-import { useCategories, useProducts } from '../logic/';
-import type { IFilters, PriceRange } from '../types';
+import { useCategories, usePagination, useProducts } from '../logic/';
+import type { IFilters, Page, PriceRange } from '../types';
 
 interface CatalogContextType {
   products: ProductProjection[];
   categories: Category[];
   filters: IFilters;
+  page: Page;
+  pagination: number[];
+  currentPage: number;
   initialPriceValue: PriceRange;
   loading: boolean;
   error: string;
   setFilters: Dispatch<SetStateAction<IFilters>>;
+  setPage: Dispatch<SetStateAction<Page>>;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export const CatalogContext = createContext<null | CatalogContextType>(null);
 
 export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { products, filters, initialPriceValue, loading, error, fetchProducts, setFilters } = useProducts();
+  const { products, filters, page, initialPriceValue, loading, error, fetchProducts, setFilters, setPage } =
+    useProducts();
 
   const { categories, fetchCategories } = useCategories();
+  const { pagination, currentPage, setCurrentPage } = usePagination(page.totalPages, page.count);
 
   const debounceFilters = useDebounce(filters, 1000);
 
@@ -31,18 +38,23 @@ export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
-  }, [debounceFilters]);
+  }, [debounceFilters, page.offset]);
 
   return (
     <CatalogContext.Provider
       value={{
         products,
         filters,
+        page,
+        pagination,
+        currentPage,
         initialPriceValue,
         categories,
         loading,
         error,
+        setPage,
         setFilters,
+        setCurrentPage,
       }}
     >
       {children}
