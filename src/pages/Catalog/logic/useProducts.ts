@@ -1,63 +1,21 @@
 import type { ProductProjection } from '@commercetools/platform-sdk';
 import { AxiosError } from 'axios';
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
 
 import { CommerceToolsProducts } from '../../../api/CommerceToolsService';
-import type { FacetsResponse, IFilters, PriceRangeFacets } from '../types';
+import type { FacetsResponse, IFilters, Page, PriceRangeFacets } from '../types';
 
-export const useProducts = () => {
+export const useProducts = (
+  page: Page,
+  filters: IFilters,
+  createFilterQuery: () => string[],
+  createSortQuery: () => string,
+  setPage: Dispatch<SetStateAction<Page>>,
+) => {
   const [products, setProducts] = useState<ProductProjection[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [initialPriceValue, setInitialPriceValue] = useState({ from: '', to: '' });
-  const [page, setPage] = useState({ offset: 0, totalPages: 0, count: 0, limit: 9 });
-  const [filters, setFilters] = useState<IFilters>({
-    category: [],
-    priceRange: { from: '', to: '' },
-    size: [],
-    search: '',
-    sort: { value: 'default', direction: 'asc' },
-  });
-
-  const createFilterQuery = () => {
-    const conditions = [];
-    const {
-      category,
-      priceRange: { from, to },
-      size,
-    } = filters;
-
-    if (category.length) {
-      conditions.push(`categories.id:${category.map((c) => `"${c}"`).join(',')}`);
-    }
-
-    if (from || to) {
-      conditions.push(
-        `variants.price.centAmount:range(${from ? Math.round(+from * 100) : 0} to ${to ? Math.round(+to * 100) : '*'})`,
-      );
-    }
-
-    if (size.length) {
-      conditions.push(`variants.attributes.sizes:${size.map((size) => `"${size.toLowerCase()}"`).join(',')}`);
-    }
-
-    return conditions;
-  };
-
-  const createSortQuery = () => {
-    if (filters.sort.value === 'default') return;
-
-    switch (filters.sort.value) {
-      case 'price': {
-        return `price ${filters.sort.direction}`;
-      }
-      case 'name': {
-        return `name.en-US ${filters.sort.direction}`;
-      }
-      default:
-        return;
-    }
-  };
 
   function getPriceRange(facets?: FacetsResponse): PriceRangeFacets {
     const priceFacet = facets ? facets['variants.price.centAmount'] : '';
@@ -105,7 +63,6 @@ export const useProducts = () => {
     initialPriceValue,
     loading,
     error,
-    setFilters,
     setPage,
     fetchProducts,
   };

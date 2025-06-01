@@ -3,7 +3,7 @@ import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import { createContext, useContext, useEffect } from 'react';
 
 import { useDebounce } from '../../../hooks';
-import { useCategories, usePagination, useProducts } from '../logic/';
+import { useCategories, useFilters, usePagination, useProducts } from '../logic/';
 import type { IFilters, Page, PriceRange } from '../types';
 
 interface CatalogContextType {
@@ -12,25 +12,30 @@ interface CatalogContextType {
   filters: IFilters;
   page: Page;
   pagination: number[];
-  currentPage: number;
   initialPriceValue: PriceRange;
   loading: boolean;
   error: string;
   setFilters: Dispatch<SetStateAction<IFilters>>;
   setPage: Dispatch<SetStateAction<Page>>;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
 }
 
 export const CatalogContext = createContext<null | CatalogContextType>(null);
 
 export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { products, filters, page, initialPriceValue, loading, error, fetchProducts, setFilters, setPage } =
-    useProducts();
+  const { pagination, page, setPage } = usePagination();
+  const { filters, createFilterQuery, createSortQuery, setFilters } = useFilters();
+  const { products, initialPriceValue, loading, error, fetchProducts } = useProducts(
+    page,
+    filters,
+    createFilterQuery,
+    createSortQuery,
+    setPage,
+  );
 
   const { categories, fetchCategories } = useCategories();
-  const { pagination, currentPage, setCurrentPage } = usePagination(page.totalPages, page.count);
 
-  const debounceFilters = useDebounce(filters, 1000);
+  const debounceFilters = useDebounce(filters, 500);
+  const debouncePage = useDebounce(page.offset, 500);
 
   useEffect(() => {
     fetchCategories();
@@ -38,7 +43,7 @@ export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     fetchProducts();
-  }, [debounceFilters, page.offset]);
+  }, [debounceFilters, debouncePage]);
 
   return (
     <CatalogContext.Provider
@@ -47,14 +52,12 @@ export const CatalogProvider: FC<PropsWithChildren> = ({ children }) => {
         filters,
         page,
         pagination,
-        currentPage,
         initialPriceValue,
         categories,
         loading,
         error,
         setPage,
         setFilters,
-        setCurrentPage,
       }}
     >
       {children}

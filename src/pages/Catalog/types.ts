@@ -34,4 +34,5 @@ export interface Page {
   totalPages: number;
   count: number;
   limit: number;
+  currentPage: number;
 }

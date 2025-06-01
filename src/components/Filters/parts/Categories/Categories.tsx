@@ -5,7 +5,7 @@ import { Category } from '../index';
 import styles from './styles.module.scss';
 
 export const Categories: FC = () => {
-  const { categories, filters, setFilters, setCurrentPage } = useCatalogContext();
+  const { categories, filters, setFilters, setPage } = useCatalogContext();
 
   const categoryClickHandler = (id: string) => {
     setFilters((previous) => {
@@ -19,7 +19,7 @@ export const Categories: FC = () => {
       };
     });
 
-    setCurrentPage(1);
+    setPage({ offset: 0, totalPages: 0, count: 0, limit: 9, currentPage: 1 });
   };
 
   return (

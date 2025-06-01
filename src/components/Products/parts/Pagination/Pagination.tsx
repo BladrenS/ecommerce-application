@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 const OFFSET = 9;
 
 export const Pagination: FC = () => {
-  const { pagination, currentPage, setCurrentPage, setPage } = useCatalogContext();
+  const { pagination, page, setPage } = useCatalogContext();
   const isMounted = useRef(false);
 
   useEffect(() => {
@@ -16,22 +16,24 @@ export const Pagination: FC = () => {
       return;
     }
 
-    setPage((previous) => ({ ...previous, offset: (currentPage - 1) * OFFSET }));
-  }, [currentPage]);
+    setPage((previous) => ({ ...previous, offset: (previous.currentPage - 1) * OFFSET }));
+  }, [page.currentPage]);
+
+  if (page.totalPages < page.limit) return;
 
   return (
     <div className={styles.container}>
       <button
         className={styles.item}
-        onClick={() => setCurrentPage((previous) => previous - 1)}
-        disabled={currentPage - 1 === 0}
+        onClick={() => setPage((previous) => ({ ...previous, currentPage: previous.currentPage - 1 }))}
+        disabled={page.currentPage - 1 === 0}
       >
         {'<'}
       </button>
       {pagination.map((pageNumber) => (
         <button
-          onClick={() => setCurrentPage(pageNumber + 1)}
-          className={clsx(styles.item, { [styles.active]: currentPage - 1 === pageNumber })}
+          onClick={() => setPage((previous) => ({ ...previous, currentPage: pageNumber + 1 }))}
+          className={clsx(styles.item, { [styles.active]: page.currentPage - 1 === pageNumber })}
           key={pageNumber}
         >
           {pageNumber + 1}
@@ -39,8 +41,8 @@ export const Pagination: FC = () => {
       ))}
       <button
         className={styles.item}
-        onClick={() => setCurrentPage((previous) => previous + 1)}
-        disabled={currentPage === pagination.length}
+        onClick={() => setPage((previous) => ({ ...previous, currentPage: previous.currentPage + 1 }))}
+        disabled={page.currentPage === pagination.length}
       >
         {'>'}
       </button>

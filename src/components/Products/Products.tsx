@@ -6,13 +6,13 @@ import { Pagination, Product, Search, Sort } from './parts';
 import styles from './styles.module.scss';
 
 export const Products: FC = () => {
-  const { products, page, loading } = useCatalogContext();
+  const { products, loading } = useCatalogContext();
 
   return (
     <section className={styles.container}>
       <Search />
       <Sort />
-      {page.totalPages > page.limit && <Pagination />}
+      <Pagination />
       {loading && <Loader />}
       <ul className={styles.products}>
         {products.map(({ description, id, name, key, masterVariant: { images, prices } }) => {
@@ -29,7 +29,7 @@ export const Products: FC = () => {
           );
         })}
       </ul>
-      {page.totalPages > page.limit && <Pagination />}
+      <Pagination />
     </section>
   );
 };
