@@ -1,4 +1,44 @@
-.submit-button {
+$accent-color: #ff6200;
+$base-gap: 20px;
+
+submit-button {
   display: block;
   margin: 50px auto 0;
+}
+
+.button {
+  width: fit-content;
+  margin-top: $base-gap;
+  padding: 5px 20px;
+  border-radius: 5px;
+
+  font-size: 14px;
+}
+
+.many-buttons {
+  display: flex;
+  gap: $base-gap;
+}
+
+.address-span {
+  color: $accent-color;
+}
+
+.address-card {
+  display: flex;
+  flex-direction: column;
+  gap: $base-gap;
+
+  min-width: 380px;
+  padding: 20px;
+  border: 1px solid $accent-color;
+  border-radius: 10px;
+
+  color: white;
+}
+
+.badge {
+  padding: 5px;
+  border: 1px solid $accent-color;
+  border-radius: 5px;
 }

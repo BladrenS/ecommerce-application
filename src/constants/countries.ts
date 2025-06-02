@@ -21,3 +21,15 @@ export const countryNameToCode: Record<string, string> = {
   Lithuania: 'LT',
   Spain: 'ES',
 };
+
+export const countryCodeToName: Record<string, string> = {
+  HR: 'Croatia',
+  EE: 'Estonia',
+  FI: 'Finland',
+  FR: 'France',
+  DE: 'Germany',
+  GR: 'Greece',
+  IT: 'Italy',
+  LT: 'Lithuania',
+  ES: 'Spain',
+};
