@@ -1,11 +1,27 @@
 import { type FC, memo } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { location, logo, mail, phone } from '../../assets/';
 import { footerLinks, paymentIcons, promoItems, socialIcons } from '../../constants/';
 import styles from './styles.module.scss';
 
 export const Footer: FC = memo(() => {
+  const { pathname } = useLocation();
+  const handleClick = (id: string | undefined) => {
+    if (id) {
+      localStorage.setItem('filter', id);
+    }
+  };
+  if (pathname === '/catalog') {
+    for (const item of footerLinks[2].links) {
+      item.disabled = true;
+    }
+  } else {
+    for (const item of footerLinks[2].links) {
+      item.disabled = false;
+    }
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles['footer-container']}>
@@ -64,11 +80,11 @@ export const Footer: FC = memo(() => {
             <h2 className={styles['links-header']}>{block.header}</h2>
             {block.links.map((link, i) =>
               link.disabled ? (
-                <NavLink key={i} to={link.to} className={styles.disabled}>
+                <div key={i} className={styles.disabled}>
                   {link.label}
-                </NavLink>
+                </div>
               ) : (
-                <NavLink key={i} to={link.to} className={styles['footer-link']}>
+                <NavLink key={i} to={link.to} className={styles['footer-link']} onClick={() => handleClick(link.id)}>
                   {link.label}
                 </NavLink>
               ),

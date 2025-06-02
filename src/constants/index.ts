@@ -83,11 +83,13 @@ export const footerLinks: {
         to: string;
         label: string;
         disabled?: undefined;
+        id?: string;
       }
     | {
         to: string;
         label: string;
         disabled: boolean;
+        id?: string;
       }
   )[];
 }[] = [
@@ -114,11 +116,11 @@ export const footerLinks: {
   {
     header: 'Categories',
     links: [
-      { to: '/catalog', label: 'Sport' },
-      { to: '/catalog', label: 'Street' },
-      { to: '/catalog', label: 'Parts' },
-      { to: '/catalog', label: 'Gear' },
-      { to: '/catalog', label: 'Helmets' },
+      { to: '/catalog', label: 'Sport', id: '2ade6a19-0a51-4cde-8a70-b24326f0fcfd' },
+      { to: '/catalog', label: 'Street', id: 'b0ec9a42-2df5-43e1-b3cd-382fe6e6bca4' },
+      { to: '/catalog', label: 'Parts', id: 'c1f40b0b-6a6b-453b-86c2-658ec103f51c' },
+      { to: '/catalog', label: 'Gear', id: '373e93bd-c96e-43ab-a438-d464049d05dd' },
+      { to: '/catalog', label: 'Helmets', id: '3ee46543-fa9a-4132-b8d2-2ffe152c6cbb' },
     ],
   },
 ];
