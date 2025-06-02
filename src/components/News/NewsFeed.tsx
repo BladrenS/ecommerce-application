@@ -8,26 +8,43 @@ type Article = {
   title: string;
   description: string;
   url: string;
-  urlToImage: string;
+  image: string;
 };
 
 export const NewsFeed = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const isValidImage = (url: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      img.src = url;
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+    });
+  };
+
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/everything', {
+        const response = await axios.get('https://gnews.io/api/v4/search', {
           params: {
-            q: 'Kawasaki Ninja OR yamaha r1',
-            sortBy: 'popularity',
-            language: 'en',
-            apiKey: '71ab631bae824a6588800a679f9c5e4e',
-            pageSize: 15,
+            q: 'Yamaha OR motoGP OR Kawasaki OR motorcycle',
+            lang: 'en',
+            sortby: 'relevance',
+            max: 8,
+            token: 'af607d434e29d1cf96d13223350b456b',
           },
         });
-        setArticles(response.data.articles);
+        const articles = response.data.articles;
+
+        const validatedArticles = await Promise.all(
+          articles.map(async (article: Article) => {
+            const isValid = await isValidImage(article.image);
+            return isValid ? article : null;
+          }),
+        );
+        setArticles(validatedArticles.filter(Boolean));
       } catch (error) {
         console.error('Ошибка при загрузке новостей:', error);
       } finally {
@@ -56,7 +73,7 @@ export const NewsFeed = () => {
             href={article.url}
             target="_blank"
             style={{
-              backgroundImage: `linear-gradient(rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url(${article.urlToImage})`,
+              backgroundImage: `linear-gradient(rgb(0 0 0 / 70%), rgb(0 0 0 / 70%)), url(${article.image})`,
               backgroundSize: 'cover',
             }}
           >
