@@ -4,6 +4,7 @@ import axios from 'axios';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { Button } from '../../../components/Ui';
@@ -79,14 +80,22 @@ export const PersonalModalForm = (props: PersonalProps) => {
       console.log(response);
       props.modalCloseFunc();
       dispatch(incrementVersion());
+      toast.success('Your data has been successfully updated', {
+        position: 'bottom-left',
+        autoClose: 2000,
+        theme: 'dark',
+      });
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response:', error.response.data);
+        toast.error(`Something goes wrong:(`, {
+          position: 'bottom-left',
+          autoClose: 2000,
+          theme: 'dark',
+        });
       } else {
         console.error(error);
       }
-    } finally {
-      console.log();
     }
   };
 

@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { CommerceToolsService } from './api/CommerceToolsService';
 import { Footer } from './components/Footer/Footer';
@@ -49,6 +50,7 @@ export const App: FC = () => {
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
     </BrowserRouter>
   );
 };
