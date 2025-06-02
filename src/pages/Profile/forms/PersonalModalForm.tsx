@@ -1,7 +1,13 @@
+import type { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
+import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { Button } from '../../../components/Ui';
+import { incrementVersion } from '../../../store/versionSlice';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import type { personalFormData } from '../profile-validation';
 import { personalSchema } from '../profile-validation';
@@ -12,12 +18,13 @@ interface PersonalProps {
   lastName: string;
   email: string;
   date: string;
+  modalCloseFunc: () => void;
 }
 
 export const PersonalModalForm = (props: PersonalProps) => {
   const {
     register,
-    //handleSubmit,
+    handleSubmit,
     //setError,
     watch,
     formState: { errors, isValid },
@@ -34,6 +41,59 @@ export const PersonalModalForm = (props: PersonalProps) => {
     },
   });
 
+  const dispatch = useDispatch();
+
+  const onSubmit: SubmitHandler<personalFormData> = async (data) => {
+    const actions: MyCustomerUpdateAction[] = [];
+    if (data.firstName !== props.name) {
+      actions.push({
+        action: 'setFirstName',
+        firstName: data.firstName,
+      });
+    }
+    if (data.lastName !== props.lastName) {
+      actions.push({
+        action: 'setLastName',
+        lastName: data.lastName,
+      });
+    }
+    if (data.email !== props.email) {
+      actions.push({
+        action: 'changeEmail',
+        email: data.email,
+      });
+    }
+    const dateToCompare = new Date(props.date);
+    if (
+      (data.dateOfBirth && !dateToCompare) ||
+      (!data.dateOfBirth && dateToCompare) ||
+      (data.dateOfBirth && dateToCompare && data.dateOfBirth.getTime() !== dateToCompare.getTime())
+    ) {
+      actions.push({
+        action: 'setDateOfBirth',
+        dateOfBirth: data.dateOfBirth.toLocaleDateString('en-CA'),
+      });
+    }
+    try {
+      const response = await CommerceToolsService.updateMe(actions);
+      console.log(response);
+      props.modalCloseFunc();
+      dispatch(incrementVersion());
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Error response:', error.response.data);
+      } else {
+        console.error(error);
+      }
+    } finally {
+      console.log();
+    }
+  };
+
+  const onError = (errors: unknown): void => {
+    console.error('Form errors:', errors);
+  };
+
   const [firstName, lastName, email, dateOfBirth] = watch(['firstName', 'lastName', 'email', 'dateOfBirth'], {
     firstName: props.name,
     lastName: props.lastName,
@@ -48,7 +108,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
     (dateOfBirth instanceof Date && props.date ? dateOfBirth.getTime() !== new Date(props.date).getTime() : false);
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit, onError)}>
       <LabeledInput
         label="Firstname"
         name="firstName"
@@ -75,6 +135,6 @@ export const PersonalModalForm = (props: PersonalProps) => {
       <Button disabled={!isValid || !isDirty} className={styles['submit-button']}>
         Update
       </Button>
-    </div>
+    </form>
   );
 };

@@ -1,8 +1,9 @@
-import type { Customer } from '@commercetools/platform-sdk';
+import type { Customer, MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import axios from 'axios';
 
 import { type LoginField } from '../components/LoginForm/schemas/loginSchemas';
 import { COMMERCETOOLS_CONFIG } from '../constants';
+import { store } from '../store';
 import type { AuthResponse, MainTokenResponse } from '../types';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl } = COMMERCETOOLS_CONFIG;
@@ -71,6 +72,20 @@ export class CommerceToolsService {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
+    return response.data;
+  }
+
+  public static async updateMe(actions: MyCustomerUpdateAction[]): Promise<Customer> {
+    const version = store.getState().version.value;
+    const response = await axios.post(
+      `${apiUrl}/${projectKey}/me`,
+      { version, actions },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      },
+    );
     return response.data;
   }
 

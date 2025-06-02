@@ -16,9 +16,12 @@ export const versionSlice = createSlice({
     setVersion: (state, action: PayloadAction<number>) => {
       state.value = action.payload;
     },
+    incrementVersion: (state) => {
+      state.value += 1;
+    },
   },
 });
 
-export const { setVersion } = versionSlice.actions;
+export const { setVersion, incrementVersion } = versionSlice.actions;
 
 export const versionReducer = versionSlice.reducer;
