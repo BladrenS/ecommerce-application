@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { CommerceToolsService } from '../../api/CommerceToolsService';
+import { CommerceToolsService } from '../../api/CommerceToolsService/CommerceToolsService';
 import { cross } from '../../assets';
 import { Button, Loader } from '../../components/Ui';
 import { baseModalStyle } from '../../constants/modal';

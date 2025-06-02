@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsFeed renders loading and then news items 1`] = `
+<div>
+  <div
+    class="news-container"
+  >
+    <div
+      class="news-inner"
+    >
+      <a
+        class="news-item"
+        href="https://example.com"
+        style="background-size: cover;"
+        target="_blank"
+      >
+        <h3
+          class="news-item-header"
+        >
+          Test Title
+        </h3>
+        <p
+          class="news-item-text"
+        >
+          Test Description
+        </p>
+      </a>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,19 @@
+@use '../../styles/abstract/mixins' as *;
+
+.product-wrapper {
+  min-height: 60vh;
+  margin-top: 140px;
+  margin-bottom: 50px;
+  color: var(--secondary-color);
+}
+
+.product-container {
+  display: flex;
+  gap: 40px;
+  width: 95%;
+  margin: 0 auto;
+
+  @media (width <= 1000px) {
+    flex-direction: column;
+  }
+}

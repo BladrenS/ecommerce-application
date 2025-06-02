@@ -1,7 +1,7 @@
 import type { Address } from '@commercetools/platform-sdk';
 import { useDispatch } from 'react-redux';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { countryCodeToName } from '../../../constants/countries';
 import { incrementVersion } from '../../../store/versionSlice';

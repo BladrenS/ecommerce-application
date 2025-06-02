@@ -52,6 +52,13 @@ exports[`Header snapshot test renders correctly 1`] = `
         <a
           class="header-link"
           data-discover="true"
+          href="/news"
+        >
+          News
+        </a>
+        <a
+          class="header-link"
+          data-discover="true"
           href="/about"
         >
           About us
@@ -136,61 +143,48 @@ exports[`Header snapshot test renders correctly 1`] = `
         <ul
           class="list"
         >
-          <li
-            class="item"
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/login"
           >
-            <a
-              class="menu-link"
-              data-discover="true"
-              href="/login"
-            >
-              Login
-            </a>
-          </li>
-          <li
-            class="item"
+            Login
+          </a>
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/register"
           >
-            <a
-              class="menu-link"
-              data-discover="true"
-              href="/register"
-            >
-              Register
-            </a>
-          </li>
-          <li
-            class="item"
+            Register
+          </a>
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/main"
           >
-            <a
-              class="menu-link"
-              data-discover="true"
-              href="/main"
-            >
-              Main
-            </a>
-          </li>
-          <li
-            class="item"
+            Main
+          </a>
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/catalog"
           >
-            <a
-              class="menu-link"
-              data-discover="true"
-              href="/catalog"
-            >
-              Catalog
-            </a>
-          </li>
-          <li
-            class="item"
+            Catalog
+          </a>
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/news"
           >
-            <a
-              class="menu-link"
-              data-discover="true"
-              href="/about"
-            >
-              About us
-            </a>
-          </li>
+            News
+          </a>
+          <a
+            class="menu-link"
+            data-discover="true"
+            href="/about"
+          >
+            About us
+          </a>
         </ul>
         <ul
           class="list-icons"

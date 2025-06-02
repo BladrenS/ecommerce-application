@@ -1,0 +1,20 @@
+.category {
+  cursor: pointer;
+  padding: 13px 0;
+  color: var(--secondary-color);
+  transition: var(--transition);
+
+  &:hover {
+    @media (any-hover: hover) {
+      color: var(--primary-hover);
+    }
+  }
+
+  &.active {
+    color: var(--primary-color);
+  }
+}
+
+.sub-category {
+  padding: 13px;
+}

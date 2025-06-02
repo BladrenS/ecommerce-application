@@ -2,7 +2,7 @@ import type { Address } from '@commercetools/platform-sdk';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { cross } from '../../../assets';
 // import { useDispatch } from 'react-redux';
 import { Button } from '../../../components/Ui';

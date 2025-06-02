@@ -1,7 +1,10 @@
 import {
   bit,
+  blog1,
+  blog2,
   chain,
   facebook,
+  harley,
   helmet,
   instagram,
   linkedin,
@@ -21,6 +24,39 @@ export const COMMERCETOOLS_CONFIG = {
   scope: process.env.REACT_APP_CTP_SCOPES || '',
   apiUrl: process.env.REACT_APP_CTP_API_URL || '',
 };
+
+export type BlogItem = {
+  date: string;
+  title: string;
+  text: string;
+  image: string;
+  link?: string;
+  index?: number;
+};
+
+export const blogItems: BlogItem[] = [
+  {
+    date: 'March 30',
+    title: 'Yamaha R1 2025',
+    text: 'Don’t miss the updated model of the iconic R1 series!',
+    image: blog1,
+    index: 0,
+  },
+  {
+    date: 'February 25',
+    title: 'Kawasaki Ninja H2R',
+    text: 'The Untamed Hyperbike Redefining Speed',
+    image: blog2,
+    index: 1,
+  },
+  {
+    date: 'May 5',
+    title: 'Harley Davidson Nightster 2025',
+    text: 'The New Era of Dark Custom',
+    image: harley,
+    index: 2,
+  },
+];
 
 export const promoItems: {
   img: string;
@@ -47,11 +83,13 @@ export const footerLinks: {
         to: string;
         label: string;
         disabled?: undefined;
+        id?: string;
       }
     | {
         to: string;
         label: string;
         disabled: boolean;
+        id?: string;
       }
   )[];
 }[] = [
@@ -60,7 +98,7 @@ export const footerLinks: {
     links: [
       { to: '/profile', label: 'My account' },
       { to: '/about', label: 'About us' },
-      { to: '/blog', label: 'Blog' },
+      { to: '/news', label: 'News' },
       { to: '', label: 'Career', disabled: true },
       { to: '/Cooperation', label: 'Cooperation' },
     ],
@@ -78,11 +116,11 @@ export const footerLinks: {
   {
     header: 'Categories',
     links: [
-      { to: '/profile', label: 'Cat 1' },
-      { to: '/about', label: 'Cat 2' },
-      { to: '/blog', label: 'Cat 3' },
-      { to: '', label: 'Cat 4' },
-      { to: '/Cooperation', label: 'Cat 5' },
+      { to: '/catalog', label: 'Sport', id: '2ade6a19-0a51-4cde-8a70-b24326f0fcfd' },
+      { to: '/catalog', label: 'Street', id: 'b0ec9a42-2df5-43e1-b3cd-382fe6e6bca4' },
+      { to: '/catalog', label: 'Parts', id: 'c1f40b0b-6a6b-453b-86c2-658ec103f51c' },
+      { to: '/catalog', label: 'Gear', id: '373e93bd-c96e-43ab-a438-d464049d05dd' },
+      { to: '/catalog', label: 'Helmets', id: '3ee46543-fa9a-4132-b8d2-2ffe152c6cbb' },
     ],
   },
 ];

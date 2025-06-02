@@ -1,16 +1,15 @@
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { CommerceToolsService } from './api/CommerceToolsService';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { Loader } from './components/Ui';
-import { ScrollToTopButton } from './components/Ui';
-import { Login, Main } from './pages';
+import { CommerceToolsAuth } from './api/CommerceToolsService';
+import { Footer, Header } from './components';
+import { Article } from './components/Article/Article';
+import { NewsFeed } from './components/News/NewsFeed';
+import { Loader, ScrollToTopButton } from './components/Ui';
+import { Catalog, Login, Main, RegistrationPage } from './pages';
+import { ProductPage } from './pages/ProductPage/ProductPage';
 import { Profile } from './pages/Profile/Profile';
-import { RegistrationPage } from './pages/registrationPage/RegistrationPage';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -21,7 +20,9 @@ export const App: FC = () => {
     const refreshToken = localStorage.getItem('refresh_token');
     try {
       if (refreshToken) {
-        await CommerceToolsService.refreshToken(refreshToken);
+        await CommerceToolsAuth.refreshToken(refreshToken);
+      } else {
+        await CommerceToolsAuth.anonymousSession();
       }
     } finally {
       setLoading(false);
@@ -39,7 +40,7 @@ export const App: FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Header></Header>
+      <Header />
       <ScrollToTopButton />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
@@ -47,9 +48,13 @@ export const App: FC = () => {
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/article/:id" element={<Article />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route path="/news" element={<NewsFeed />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
-      <Footer></Footer>
+      <Footer />
       <ToastContainer />
     </BrowserRouter>
   );

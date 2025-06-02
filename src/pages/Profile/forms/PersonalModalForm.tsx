@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
-import { CommerceToolsService } from '../../../api/CommerceToolsService';
+import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { incrementVersion } from '../../../store/versionSlice';
 import { formatDate } from '../../../utils/formatDate';

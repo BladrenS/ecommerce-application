@@ -1,10 +1,40 @@
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@use '../../styles/abstract/mixins' as *;
 
-  height: 100vh;
+.main {
+  flex-direction: column;
+
+  min-height: 100vh;
+  padding-top: 150px;
 
   font-size: 24px;
   color: var(--primary-color);
+
+  @include flex-center;
+}
+
+.header-big,
+.header-small {
+  margin-top: 70px;
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.header-small {
+  margin-top: 20px;
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.blog-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  width: 95%;
+  margin: 40px 0;
+
+  @media (width <= 768px) {
+    gap: 30px;
+    justify-content: center;
+  }
 }
