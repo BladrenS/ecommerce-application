@@ -1,8 +1,10 @@
 import type { Address } from '@commercetools/platform-sdk';
+import { useDispatch } from 'react-redux';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { countryCodeToName } from '../../../constants/countries';
+import { incrementVersion } from '../../../store/versionSlice';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -10,12 +12,20 @@ type Props = {
   isDefaultShipping: boolean;
   isDefaultBilling: boolean;
   canDelete: boolean;
-  //onEdit: () => void;
-  //onChange: () => void;
   editorOpener: () => void;
+  onDeleteSuccess: () => void;
 };
 
-export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canDelete, editorOpener }: Props) => {
+export const AddressCard = ({
+  address,
+  isDefaultShipping,
+  isDefaultBilling,
+  canDelete,
+  editorOpener,
+  onDeleteSuccess,
+}: Props) => {
+  const dispatch = useDispatch();
+
   const handleDelete = async () => {
     if (!address.id) return;
 
@@ -25,7 +35,8 @@ export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canD
         addressId: address.id,
       },
     ]);
-    // onChange();
+    onDeleteSuccess();
+    dispatch(incrementVersion());
   };
 
   return (

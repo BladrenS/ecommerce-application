@@ -55,7 +55,7 @@ export const AddAddressModal = (props: AddressProps) => {
       props.modalCloseFunc();
       props.onUpdateSuccess();
 
-      toast.success('Your data has been successfully updated', {
+      toast.success('New address added successfully', {
         position: 'bottom-left',
         autoClose: 2000,
         theme: 'dark',
