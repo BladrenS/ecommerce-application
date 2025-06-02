@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlogCard snapshot test renders correctly 1`] = `
+<DocumentFragment>
+  <a
+    class="blog-item"
+    data-discover="true"
+    href="/article/3"
+  >
+    <img
+      alt="Новый пост в блоге"
+      class="blog-img"
+      src="/test-image.jpg"
+    />
+    <div
+      class="blog-info"
+    >
+      <span
+        class="info-date"
+      >
+        01.06.2025
+      </span>
+      <span
+        class="info-header"
+      >
+        Новый пост в блоге
+      </span>
+      <span
+        class="info-text"
+      >
+        Это краткое описание блога.
+      </span>
+    </div>
+  </a>
+</DocumentFragment>
+`;

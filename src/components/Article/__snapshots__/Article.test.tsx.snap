@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Article snapshot test renders article with id 0 correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <h1
+      class="header"
+    >
+      Test Article 0
+    </h1>
+    <img
+      alt="article"
+      class="image"
+      src="image0.jpg"
+    />
+    <div
+      class="text"
+    >
+      Content for article zero
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Article snapshot test renders article with id 1 correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <h1
+      class="header"
+    >
+      Test Article 1
+    </h1>
+    <img
+      alt="article"
+      class="image"
+      src="image1.jpg"
+    />
+    <div
+      class="text"
+    >
+      Content for article one
+    </div>
+  </div>
+</DocumentFragment>
+`;

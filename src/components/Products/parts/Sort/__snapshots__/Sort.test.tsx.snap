@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sort snapshot соответствует снапшоту 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <div
+      class="title"
+    >
+      Sorting:
+    </div>
+    <div
+      class="wrapper"
+    >
+      <div
+        class="value"
+      >
+        <div
+          class="item active"
+        >
+          default
+        </div>
+        <span
+          class="decor"
+        />
+      </div>
+      <div
+        class="value"
+      >
+        <div
+          class="item"
+        >
+          price
+        </div>
+        <span
+          class="decor"
+        />
+      </div>
+      <div
+        class="value"
+      >
+        <div
+          class="item"
+        >
+          name
+        </div>
+        <span
+          class="decor"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -153,18 +153,15 @@ exports[`Footer snapshot test renders correctly 1`] = `
         <a
           class="footer-link"
           data-discover="true"
-          href="/blog"
+          href="/news"
         >
-          Blog
+          News
         </a>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        <div
+          class="disabled"
         >
           Career
-        </a>
+        </div>
         <a
           class="footer-link"
           data-discover="true"
@@ -181,46 +178,31 @@ exports[`Footer snapshot test renders correctly 1`] = `
         >
           Help & Guide
         </h2>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        <div
+          class="disabled"
         >
           Help center
-        </a>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        </div>
+        <div
+          class="disabled"
         >
           How to buy
-        </a>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        </div>
+        <div
+          class="disabled"
         >
           Delivery
-        </a>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        </div>
+        <div
+          class="disabled"
         >
           Product Policy
-        </a>
-        <a
-          aria-current="page"
-          class="disabled active"
-          data-discover="true"
-          href="/"
+        </div>
+        <div
+          class="disabled"
         >
           How to Return
-        </a>
+        </div>
       </div>
       <div
         class="footer-links-block"
@@ -233,38 +215,37 @@ exports[`Footer snapshot test renders correctly 1`] = `
         <a
           class="footer-link"
           data-discover="true"
-          href="/profile"
+          href="/catalog"
         >
-          Cat 1
+          Sport
         </a>
         <a
           class="footer-link"
           data-discover="true"
-          href="/about"
+          href="/catalog"
         >
-          Cat 2
+          Street
         </a>
         <a
           class="footer-link"
           data-discover="true"
-          href="/blog"
+          href="/catalog"
         >
-          Cat 3
-        </a>
-        <a
-          aria-current="page"
-          class="footer-link active"
-          data-discover="true"
-          href="/"
-        >
-          Cat 4
+          Parts
         </a>
         <a
           class="footer-link"
           data-discover="true"
-          href="/Cooperation"
+          href="/catalog"
         >
-          Cat 5
+          Gear
+        </a>
+        <a
+          class="footer-link"
+          data-discover="true"
+          href="/catalog"
+        >
+          Helmets
         </a>
       </div>
       <div
