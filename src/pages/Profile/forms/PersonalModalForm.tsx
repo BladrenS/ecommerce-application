@@ -21,13 +21,13 @@ interface PersonalProps {
   email: string;
   date: string;
   modalCloseFunc: () => void;
+  onUpdateSuccess: () => void;
 }
 
 export const PersonalModalForm = (props: PersonalProps) => {
   const {
     register,
     handleSubmit,
-    //setError,
     watch,
     formState: { errors, isValid },
   } = useForm<personalFormData>({
@@ -47,6 +47,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
 
   const onSubmit: SubmitHandler<personalFormData> = async (data) => {
     const actions: MyCustomerUpdateAction[] = [];
+
     if (data.firstName !== props.name) {
       actions.push({
         action: 'setFirstName',
@@ -65,6 +66,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
         email: data.email,
       });
     }
+
     const dateToCompare = new Date(props.date);
     if (
       (data.dateOfBirth && !dateToCompare) ||
@@ -76,20 +78,23 @@ export const PersonalModalForm = (props: PersonalProps) => {
         dateOfBirth: data.dateOfBirth.toLocaleDateString('en-CA'),
       });
     }
+
     try {
-      const response = await CommerceToolsService.updateMe(actions);
-      console.log(response);
+      await CommerceToolsService.updateMe(actions);
       props.modalCloseFunc();
-      dispatch(incrementVersion());
+      props.onUpdateSuccess();
+
       toast.success('Your data has been successfully updated', {
         position: 'bottom-left',
         autoClose: 2000,
         theme: 'dark',
       });
+
+      dispatch(incrementVersion());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response:', error.response.data);
-        toast.error(`Something goes wrong:(`, {
+        toast.error(`Something went wrong :(`, {
           position: 'bottom-left',
           autoClose: 2000,
           theme: 'dark',

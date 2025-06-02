@@ -1,11 +1,15 @@
+import type { Address } from '@commercetools/platform-sdk';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { CommerceToolsService } from '../../api/CommerceToolsService';
 import { cross } from '../../assets';
 import { Button, Loader } from '../../components/Ui';
 import { baseModalStyle } from '../../constants/modal';
+import { setVersion } from '../../store/versionSlice';
+import { AddressesList } from './forms/AddressesList';
 import { PasswordModalForm } from './forms/PasswordModalForm';
 import { PersonalModalForm } from './forms/PersonalModalForm';
 import styles from './styles.module.scss';
@@ -21,6 +25,11 @@ export const Profile = () => {
   const [modalErrorIsOpen, setmodalIsOpen] = useState(false);
   const [modalPasswordIsOpen, setmodalPasswordIsOpen] = useState(false);
   const [modalPersonalIsOpen, setmodalPersonalIsOpen] = useState(false);
+  const [addresses, setAddresses] = useState<Address[]>([]);
+  const [shippingId, setShippingId] = useState('');
+  const [billingId, setBillingId] = useState('');
+
+  const dispatch = useDispatch();
 
   Modal.setAppElement('#root');
 
@@ -65,6 +74,10 @@ export const Profile = () => {
         setLastName(data.lastName || '');
         setEmail(data.email);
         setDate(data.dateOfBirth?.toString() || '');
+        setAddresses(data.addresses || []);
+        setShippingId(data.defaultShippingAddressId || '');
+        setBillingId(data.defaultBillingAddressId || '');
+        dispatch(setVersion(data.version));
       })
       .catch((error) => {
         setError(error.message || 'Failed to load data');
@@ -123,7 +136,27 @@ export const Profile = () => {
       <Modal isOpen={modalPersonalIsOpen} onRequestClose={closePersonalModal} style={baseModalStyle}>
         <div>
           <img src={cross} onClick={closePersonalModal} className={styles.cross} alt="cross" />
-          <PersonalModalForm name={name} lastName={lastName} email={email} date={date} />
+          <PersonalModalForm
+            name={name}
+            lastName={lastName}
+            email={email}
+            date={date}
+            modalCloseFunc={closePersonalModal}
+            onUpdateSuccess={() => {
+              CommerceToolsService.getMe()
+                .then((data) => {
+                  setName(data.firstName || '');
+                  setLastName(data.lastName || '');
+                  setEmail(data.email);
+                  setDate(data.dateOfBirth?.toString() || '');
+                  dispatch(setVersion(data.version));
+                })
+                .catch((error) => {
+                  setError(error.message || 'Failed to refresh user data');
+                  openErrorModal();
+                });
+            }}
+          />
         </div>
       </Modal>
 
@@ -136,9 +169,7 @@ export const Profile = () => {
 
       <div className={styles.form}>
         <div className={styles.name}>Addresses</div>
-        <Button className={styles.button} type="button">
-          Change Addresses
-        </Button>
+        <AddressesList addresses={addresses} defaultShipping={shippingId} defaultBilling={billingId} />
       </div>
     </div>
   );
