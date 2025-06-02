@@ -2,6 +2,7 @@ import type { Address } from '@commercetools/platform-sdk';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
+import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { cross } from '../../../assets';
 // import { useDispatch } from 'react-redux';
 import { Button } from '../../../components/Ui';
@@ -18,7 +19,7 @@ type Props = {
 
 export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Props) => {
   // const [editingAddress, setEditingAddress] = useState<Address | null>(null);
-
+  const [addressesState, setAddressesState] = useState<Address[]>(addresses);
   const [AddModalIsOpen, setAddModalIsOpen] = useState(false);
   const [EditModalIsOpen, setEditModalIsOpen] = useState(false);
 
@@ -44,10 +45,19 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
     document.body.style.overflow = '';
   }
 
+  const handleAddSuccess = async () => {
+    try {
+      const me = await CommerceToolsService.getMe();
+      setAddressesState(me.addresses ?? []);
+    } catch (error) {
+      console.error('Failed to fetch updated addresses:', error);
+    }
+  };
+
   return (
     <div>
       <div className={styles['addresses-list']}>
-        {addresses.map((address) => (
+        {addressesState.map((address) => (
           <AddressCard
             key={address.id}
             address={address}
@@ -64,7 +74,7 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
 
       <Modal isOpen={AddModalIsOpen} onRequestClose={closeAddModal} style={baseModalStyle}>
         <img src={cross} onClick={closeAddModal} className={styles.cross} alt="cross" />
-        <AddAddressModal modalCloseFunc={closeAddModal} onUpdateSuccess={closeAddModal}></AddAddressModal>
+        <AddAddressModal modalCloseFunc={closeAddModal} onUpdateSuccess={handleAddSuccess}></AddAddressModal>
       </Modal>
 
       <Modal isOpen={EditModalIsOpen} onRequestClose={closeEditModal} style={baseModalStyle}>
