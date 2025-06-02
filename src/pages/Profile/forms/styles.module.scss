@@ -1,7 +1,7 @@
 $accent-color: #ff6200;
 $base-gap: 20px;
 
-submit-button {
+.submit-button {
   display: block;
   margin: 50px auto 0;
 }
@@ -20,6 +20,12 @@ submit-button {
   gap: $base-gap;
 }
 
+.addresses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
 .address-span {
   color: $accent-color;
 }
@@ -30,6 +36,7 @@ submit-button {
   gap: $base-gap;
 
   min-width: 380px;
+  margin: 0 auto;
   padding: 20px;
   border: 1px solid $accent-color;
   border-radius: 10px;
@@ -41,4 +48,27 @@ submit-button {
   padding: 5px;
   border: 1px solid $accent-color;
   border-radius: 5px;
+}
+
+.cross {
+  position: absolute;
+  z-index: 6;
+  top: 10px;
+  right: 10px;
+
+  width: 18px;
+  height: 18px;
+
+  transition: all 0.5s linear;
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(90deg);
+  }
+}
+
+.gap {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }

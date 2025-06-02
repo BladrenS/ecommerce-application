@@ -105,8 +105,8 @@ export const addressSchema = z.object({
     .refine((value) => validCountries.includes(value), {
       message: 'Only: Сroatia, Estonia, Finland, France, Germany, Greece, Italy, Lithuania, Spain',
     }),
-  defaultShipping: z.boolean(),
-  defaultBilling: z.boolean(),
+  defaultShipping: z.boolean().optional(),
+  defaultBilling: z.boolean().optional(),
 });
 
 export type passwordFormData = z.infer<typeof passwordSchema>;

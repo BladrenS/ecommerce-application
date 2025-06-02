@@ -10,11 +10,12 @@ type Props = {
   isDefaultShipping: boolean;
   isDefaultBilling: boolean;
   canDelete: boolean;
-  onEdit: () => void;
-  onChange: () => void;
+  //onEdit: () => void;
+  //onChange: () => void;
+  editorOpener: () => void;
 };
 
-export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canDelete, onEdit, onChange }: Props) => {
+export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canDelete, editorOpener }: Props) => {
   const handleDelete = async () => {
     if (!address.id) return;
 
@@ -24,7 +25,7 @@ export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canD
         addressId: address.id,
       },
     ]);
-    onChange();
+    // onChange();
   };
 
   return (
@@ -50,7 +51,7 @@ export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, canD
         {isDefaultBilling && <span className={styles.badge}>✓ Default Billing</span>}
       </div>
       <div className={styles['many-buttons']}>
-        <Button onClick={onEdit} className={styles.button}>
+        <Button className={styles.button} onClick={editorOpener}>
           Edit
         </Button>
         <Button onClick={handleDelete} disabled={!canDelete} className={styles.button}>
