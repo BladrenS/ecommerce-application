@@ -102,4 +102,22 @@ export class CommerceToolsService {
 
     return response.data.count;
   }
+
+  public static async changePassword(currentPassword: string, newPassword: string): Promise<void> {
+    const version = store.getState().version.value;
+
+    await axios.post(
+      `${apiUrl}/${projectKey}/me/password`,
+      {
+        version,
+        currentPassword,
+        newPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      },
+    );
+  }
 }

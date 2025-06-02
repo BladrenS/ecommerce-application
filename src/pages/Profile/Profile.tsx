@@ -163,7 +163,7 @@ export const Profile = () => {
       <Modal isOpen={modalPasswordIsOpen} onRequestClose={closePasswordModal} style={baseModalStyle}>
         <div>
           <img src={cross} onClick={closePasswordModal} className={styles.cross} alt="cross" />
-          <PasswordModalForm />
+          <PasswordModalForm modalCloseFunc={closePasswordModal} />
         </div>
       </Modal>
 
