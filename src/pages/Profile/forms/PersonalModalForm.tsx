@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { CommerceToolsService } from '../../../api/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { incrementVersion } from '../../../store/versionSlice';
+import { formatDate } from '../../../utils/formatDate';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import type { personalFormData } from '../profile-validation';
 import { personalSchema } from '../profile-validation';
@@ -114,7 +115,7 @@ export const PersonalModalForm = (props: PersonalProps) => {
     firstName !== props.name ||
     lastName !== props.lastName ||
     email !== props.email ||
-    (dateOfBirth instanceof Date && props.date ? dateOfBirth.getTime() !== new Date(props.date).getTime() : false);
+    formatDate(dateOfBirth) !== formatDate(props.date);
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)}>
