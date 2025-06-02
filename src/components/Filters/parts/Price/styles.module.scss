@@ -45,6 +45,9 @@
 
   color: var(--primary-color);
 
+  appearance: none;
+  appearance: textfield;
+  appearance: none;
   background: #f0f0f0;
   outline: none;
 
@@ -55,5 +58,11 @@
 
   &::placeholder {
     line-height: 20px;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    margin: 0;
+    appearance: none;
   }
 }
