@@ -1,5 +1,6 @@
 import { type FC, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { CommerceToolsAuth } from './api/CommerceToolsService';
 import { Footer, Header } from './components';
@@ -8,6 +9,7 @@ import { NewsFeed } from './components/News/NewsFeed';
 import { Loader, ScrollToTopButton } from './components/Ui';
 import { Catalog, Login, Main, RegistrationPage } from './pages';
 import { ProductPage } from './pages/ProductPage/ProductPage';
+import { Profile } from './pages/Profile/Profile';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -45,6 +47,7 @@ export const App: FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/article/:id" element={<Article />} />
         <Route path="/product/:productId" element={<ProductPage />} />
@@ -52,6 +55,7 @@ export const App: FC = () => {
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </BrowserRouter>
   );
 };

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useEffect } from 'react';
 
-import { CommerceToolsUser } from '../../api/CommerceToolsService';
+import { CommerceToolsService } from '../../api/CommerceToolsService/CommerceToolsService';
 import { BlogCard } from '../../components/Main/BlogCard';
 import { MainSlider } from '../../components/Main/MainSlider';
 import { blogItems } from '../../constants';
@@ -11,7 +11,7 @@ export const Main: FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       if (localStorage.getItem('refresh_token')) {
-        await CommerceToolsUser.getMe();
+        await CommerceToolsService.getMe();
       }
     };
 

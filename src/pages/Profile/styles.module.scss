@@ -1,0 +1,68 @@
+@use '../../styles/variables' as *;
+
+$base-gap: 20px;
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+  justify-content: center;
+
+  min-height: 800px;
+  padding: 135px 50px 50px;
+}
+
+.form {
+  // border: 2px solid $accent-color;
+  display: flex;
+  flex-direction: column;
+  gap: $base-gap;
+
+  min-width: 380px;
+
+  color: white;
+}
+
+.name {
+  width: fit-content;
+  padding-bottom: 5px;
+  border-bottom: 2px solid $accent-color;
+
+  font-weight: 700;
+  color: $accent-color;
+}
+
+.personal-span {
+  color: $accent-color;
+}
+
+.button {
+  width: fit-content;
+  margin-top: $base-gap;
+  padding: 5px 20px;
+  border-radius: 5px;
+
+  font-size: 14px;
+}
+
+.many-buttons {
+  display: flex;
+  gap: $base-gap;
+}
+
+.cross {
+  position: absolute;
+  z-index: 6;
+  top: 10px;
+  right: 10px;
+
+  width: 18px;
+  height: 18px;
+
+  transition: all 0.5s linear;
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(90deg);
+  }
+}

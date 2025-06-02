@@ -21,6 +21,7 @@ export const Header: FC = memo(() => {
   const userLogout = () => {
     if (token) {
       localStorage.removeItem('refresh_token');
+      localStorage.removeItem('access_token');
       navigate('/login');
     }
   };

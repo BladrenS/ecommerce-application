@@ -19,6 +19,7 @@ export class CommerceToolsAuth extends CommerceToolsService {
     );
 
     CommerceToolsService.accessToken = response.data.access_token;
+    localStorage.setItem('access_token', response.data.access_token);
 
     return response.data;
   }
@@ -47,6 +48,7 @@ export class CommerceToolsAuth extends CommerceToolsService {
       );
 
       CommerceToolsService.accessToken = response.data.access_token;
+      localStorage.setItem('access_token', response.data.access_token);
     } catch {
       localStorage.removeItem('refresh_token');
     }

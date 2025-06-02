@@ -10,6 +10,7 @@ import { createCustomer } from '../../../api/request';
 import { cross } from '../../../assets';
 import { Button } from '../../../components/Ui';
 import { Loader } from '../../../components/Ui/Loader/Loader';
+import { baseModalStyle } from '../../../constants/modal';
 import { LabeledInput } from './LabeledInput';
 import styles from './registerForm.module.scss';
 import type { RegistrationFormData } from './validation';
@@ -38,26 +39,6 @@ export const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const shippingAsBilling = watch('shippingAsBilling');
-
-  const customStyles = {
-    overlay: {
-      backgroundColor: '#000000ad',
-    },
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      width: '25em',
-      height: 'auto',
-      borderRadius: '15px',
-      backgroundColor: 'black',
-      color: 'white',
-      border: '1px solid #ff6200',
-    },
-  };
 
   function openModal() {
     setIsOpen(true);
@@ -96,7 +77,7 @@ export const RegistrationForm = () => {
 
   return (
     <div className={styles['page-wrapper']}>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={baseModalStyle} contentLabel="Example Modal">
         <div>
           <img src={cross} onClick={closeModal} className={styles.cross} alt="cross" />
           {errorMessage}
@@ -111,7 +92,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Email"
               name="email"
-              type="text"
               placeholder="user@example.com"
               register={register}
               error={errors.email}
@@ -135,7 +115,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="First Name"
               name="firstName"
-              type="text"
               placeholder="Donald"
               register={register}
               error={errors.firstName}
@@ -145,7 +124,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Last Name"
               name="lastName"
-              type="text"
               placeholder="Trump"
               register={register}
               error={errors.lastName}
@@ -169,7 +147,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Street"
               name="street_shipping"
-              type="text"
               placeholder="Street"
               register={register}
               error={errors.street_shipping}
@@ -179,7 +156,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="City"
               name="city_shipping"
-              type="text"
               placeholder="City"
               register={register}
               error={errors.city_shipping}
@@ -189,7 +165,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Country"
               name="country_shipping"
-              type="text"
               placeholder="Country"
               register={register}
               error={errors.country_shipping}
@@ -199,7 +174,6 @@ export const RegistrationForm = () => {
             <LabeledInput
               label="Postal Code"
               name="postalCode_shipping"
-              type="text"
               placeholder="Postal Code"
               register={register}
               error={errors.postalCode_shipping}
@@ -224,7 +198,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Street"
                 name="street_billing"
-                type="text"
                 placeholder="Street"
                 register={register}
                 error={errors.street_billing}
@@ -234,7 +207,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="City"
                 name="city_billing"
-                type="text"
                 placeholder="City"
                 register={register}
                 error={errors.city_billing}
@@ -244,7 +216,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Country"
                 name="country_billing"
-                type="text"
                 placeholder="Country"
                 register={register}
                 error={errors.country_billing}
@@ -254,7 +225,6 @@ export const RegistrationForm = () => {
               <LabeledInput
                 label="Postal Code"
                 name="postalCode_billing"
-                type="text"
                 placeholder="Postal Code"
                 register={register}
                 error={errors.postalCode_billing}
