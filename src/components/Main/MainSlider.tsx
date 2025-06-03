@@ -18,7 +18,7 @@ export const MainSlider: FC = () => {
       slidesPerView={1}
       className={styles['my-swiper']}
       loop
-      autoplay={{ delay: 115_000, disableOnInteraction: false }}
+      autoplay={{ delay: 2500, disableOnInteraction: false }}
     >
       <SwiperSlide className={styles.slide}>
         <div className={styles['slide-one']}>
