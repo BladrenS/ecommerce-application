@@ -1,4 +1,5 @@
 import type { Address } from '@commercetools/platform-sdk';
+import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
@@ -107,7 +108,7 @@ export const Profile = () => {
 
       <div className={styles.form}>
         <div className={styles.name}>Personal</div>
-        <div>
+        <div className={styles.firstname}>
           <span className={styles['personal-span']}>Firstname: </span>
           {name}
         </div>
@@ -168,7 +169,7 @@ export const Profile = () => {
       </Modal>
 
       <div className={styles.form}>
-        <div className={styles.name}>Addresses</div>
+        <div className={clsx(styles.name, styles['address-name'])}>Addresses</div>
         <AddressesList addresses={addresses} defaultShipping={shippingId} defaultBilling={billingId} />
       </div>
     </div>

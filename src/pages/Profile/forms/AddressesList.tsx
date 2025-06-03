@@ -1,10 +1,10 @@
 import type { Address } from '@commercetools/platform-sdk';
+import clsx from 'clsx';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { cross } from '../../../assets';
-// import { useDispatch } from 'react-redux';
 import { Button } from '../../../components/Ui';
 import { baseModalStyle } from '../../../constants/modal';
 import { AddAddressModal } from './AddAdressModal';
@@ -25,8 +25,6 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
   const [addressesState, setAddressesState] = useState<Address[]>(addresses);
   const [AddModalIsOpen, setAddModalIsOpen] = useState(false);
   const [EditModalIsOpen, setEditModalIsOpen] = useState(false);
-
-  //const dispatch = useDispatch();
 
   function openAddModal() {
     setAddModalIsOpen(true);
@@ -61,7 +59,7 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
   };
 
   return (
-    <div>
+    <div className={styles['addresses-wrapper']}>
       <div className={styles['addresses-list']}>
         {addressesState.map((address) => (
           <AddressCard
@@ -74,7 +72,7 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
           />
         ))}
       </div>
-      <Button onClick={openAddModal} className={styles.button}>
+      <Button onClick={openAddModal} className={clsx(styles.button)}>
         Add New Address
       </Button>
 

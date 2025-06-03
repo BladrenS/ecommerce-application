@@ -15,6 +15,12 @@ $base-gap: 20px;
   font-size: 14px;
 }
 
+.addresses-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .many-buttons {
   display: flex;
   gap: $base-gap;
@@ -78,5 +84,9 @@ $base-gap: 20px;
 }
 
 .checkboxlabel {
-  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.checkboxlabel:first-of-type {
+  padding-top: 30px;
 }
