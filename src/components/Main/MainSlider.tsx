@@ -46,7 +46,7 @@ export const MainSlider: FC = () => {
             <img src={sale} alt="sale" />
             <span style={{ marginLeft: '10px' }}>SPRING-SALE-15%</span>
           </div>
-          <span className={styles.dates}>10.04.2025 - 15.05.2025</span>
+          <span className={styles.dates}>03.06.2025 - 15.07.2025</span>
         </div>
       </SwiperSlide>
 

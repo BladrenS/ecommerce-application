@@ -9,6 +9,7 @@ import { Button } from '../../../components/Ui';
 import { baseModalStyle } from '../../../constants/modal';
 import { AddAddressModal } from './AddAdressModal';
 import { AddressCard } from './AddressCard';
+import { EditAddressModal } from './EditAddressModal';
 import styles from './styles.module.scss';
 
 type Props = {
@@ -18,7 +19,9 @@ type Props = {
 };
 
 export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Props) => {
-  // const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [defaultShippingId, setDefaultShippingId] = useState(defaultShipping);
+  const [defaultBillingId, setDefaultBillingId] = useState(defaultBilling);
   const [addressesState, setAddressesState] = useState<Address[]>(addresses);
   const [AddModalIsOpen, setAddModalIsOpen] = useState(false);
   const [EditModalIsOpen, setEditModalIsOpen] = useState(false);
@@ -35,7 +38,8 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
     document.body.style.overflow = '';
   }
 
-  function openEditModal() {
+  function openEditModal(address: Address) {
+    setEditingAddress(address);
     setEditModalIsOpen(true);
     document.body.style.overflow = 'hidden';
   }
@@ -49,6 +53,8 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
     try {
       const me = await CommerceToolsService.getMe();
       setAddressesState(me.addresses ?? []);
+      setDefaultShippingId(me.defaultShippingAddressId ?? '');
+      setDefaultBillingId(me.defaultBillingAddressId ?? '');
     } catch (error) {
       console.error('Failed to fetch updated addresses:', error);
     }
@@ -61,10 +67,10 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
           <AddressCard
             key={address.id}
             address={address}
-            isDefaultShipping={address.id === defaultShipping}
-            isDefaultBilling={address.id === defaultBilling}
+            isDefaultShipping={address.id === defaultShippingId}
+            isDefaultBilling={address.id === defaultBillingId}
             canDelete={addresses.length > 1}
-            editorOpener={openEditModal}
+            editorOpener={() => openEditModal(address)}
             onDeleteSuccess={handleAddSuccess}
           />
         ))}
@@ -80,7 +86,13 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
 
       <Modal isOpen={EditModalIsOpen} onRequestClose={closeEditModal} style={baseModalStyle}>
         <img src={cross} onClick={closeEditModal} className={styles.cross} alt="cross" />
-        <div></div>
+        {editingAddress && (
+          <EditAddressModal
+            address={editingAddress}
+            modalCloseFunc={closeEditModal}
+            onUpdateSuccess={handleAddSuccess}
+          />
+        )}
       </Modal>
     </div>
   );
