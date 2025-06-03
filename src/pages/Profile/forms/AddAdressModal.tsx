@@ -1,6 +1,7 @@
 import type { MyCustomerUpdateAction } from '@commercetools/platform-sdk';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
+import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -37,18 +38,37 @@ export const AddAddressModal = (props: AddressProps) => {
 
   const dispatch = useDispatch();
 
+  const [isDefaultShipping, setIsDefaultShipping] = useState(false);
+  const [isDefaultBilling, setIsDefaultBilling] = useState(false);
+
   const onSubmit: SubmitHandler<addressFormData> = async (data) => {
     const actions: MyCustomerUpdateAction[] = [];
+    const randomKey = window.crypto.randomUUID();
 
     actions.push({
       action: 'addAddress',
       address: {
+        key: randomKey,
         streetName: data.street,
         city: data.city,
         postalCode: data.postalCode,
         country: countryNameToCode[data.country],
       },
     });
+
+    if (isDefaultShipping) {
+      actions.push({
+        action: 'setDefaultShippingAddress',
+        addressKey: randomKey,
+      });
+    }
+
+    if (isDefaultBilling) {
+      actions.push({
+        action: 'setDefaultBillingAddress',
+        addressKey: randomKey,
+      });
+    }
 
     try {
       await CommerceToolsService.updateMe(actions);
@@ -92,6 +112,26 @@ export const AddAddressModal = (props: AddressProps) => {
         error={errors.postalCode}
         value={props.postalCode}
       />
+      <div className={styles.checkboxlabel}>
+        <label>
+          <input
+            type="checkbox"
+            className={styles.checkbox}
+            onChange={(event) => setIsDefaultShipping(event.target.checked)}
+          />
+          Set as Default Shipping
+        </label>
+      </div>
+      <div className={styles.checkboxlabel}>
+        <label>
+          <input
+            type="checkbox"
+            className={styles.checkbox}
+            onChange={(event) => setIsDefaultBilling(event.target.checked)}
+          />
+          Set as Default Billing
+        </label>
+      </div>
       <Button disabled={!isValid} className={styles['submit-button']}>
         Add new Address
       </Button>
