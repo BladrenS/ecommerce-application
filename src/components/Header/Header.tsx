@@ -47,6 +47,10 @@ export const Header: FC = memo(() => {
       HEADER_ICONS[0].active = false;
       HEADER_ICONS[2].active = false;
       break;
+    default:
+      HEADER_ICONS[0].active = false;
+      HEADER_ICONS[1].active = false;
+      HEADER_ICONS[2].active = false;
   }
   return (
     <header className={styles.header}>
