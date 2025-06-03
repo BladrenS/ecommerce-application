@@ -39,7 +39,7 @@ export const MainSlider: FC = () => {
           <i className={styles.yellow}></i>
         </div>
         <div className={styles.info}>
-          <span className={styles.spring}>SPRING</span>
+          <span className={styles.spring}>SUMMER</span>
           <span className={styles.white}>SALE</span>
           <span className={styles.text}>Motorbike season kick-off with 15% discount</span>
           <div className={styles.promo}>
