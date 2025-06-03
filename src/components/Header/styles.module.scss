@@ -71,6 +71,16 @@
   transition: all 0.2s linear;
 }
 
+.header-icon-active {
+  margin: 0 10px;
+
+  fill: var(--primary-color);
+  stroke: var(--primary-color);
+  stroke-width: 0;
+
+  transition: all 0.2s linear;
+}
+
 .header-icon:hover {
   cursor: pointer;
   fill: var(--primary-color);

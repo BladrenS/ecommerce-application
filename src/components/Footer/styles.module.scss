@@ -13,6 +13,10 @@
 
   margin: 0 auto;
   padding: 0 40px;
+
+  @media (width <= 478px) {
+    justify-content: space-around;
+  }
 }
 
 .footer-promo {

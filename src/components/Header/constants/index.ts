@@ -31,13 +31,16 @@ export const HEADER_ICONS = [
   {
     Component: CartIcon,
     href: '/cart',
+    active: false,
   },
   {
     Component: FavoriteIcon,
-    href: '/like',
+    href: '/wishlist',
+    active: false,
   },
   {
     Component: ProfileIcon,
     href: '/profile',
+    active: false,
   },
 ];

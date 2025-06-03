@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type FC, memo } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { logo } from '../../assets/';
 import { HEADER_ICONS, HEADER_LINKS } from './constants';
@@ -11,6 +11,7 @@ import styles from './styles.module.scss';
 export const Header: FC = memo(() => {
   const token = localStorage.getItem('refresh_token');
 
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { isActiveMenu, setIsActiveMenu } = useMenuVisible();
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -30,6 +31,23 @@ export const Header: FC = memo(() => {
     setIsActiveMenu((previous) => !previous);
   };
 
+  switch (pathname) {
+    case '/profile':
+      HEADER_ICONS[2].active = true;
+      HEADER_ICONS[0].active = false;
+      HEADER_ICONS[1].active = false;
+      break;
+    case '/cart':
+      HEADER_ICONS[0].active = true;
+      HEADER_ICONS[1].active = false;
+      HEADER_ICONS[2].active = false;
+      break;
+    case '/wishlist':
+      HEADER_ICONS[1].active = true;
+      HEADER_ICONS[0].active = false;
+      HEADER_ICONS[2].active = false;
+      break;
+  }
   return (
     <header className={styles.header}>
       <div className={styles['header-container']}>
@@ -59,9 +77,9 @@ export const Header: FC = memo(() => {
         </div>
 
         <div className={styles['header-icons']}>
-          {HEADER_ICONS.map(({ Component, href }) => (
-            <NavLink key={href} to={href}>
-              <Component className={styles['header-icon']} />
+          {HEADER_ICONS.map((item, href) => (
+            <NavLink key={href} to={item.href}>
+              <item.Component className={item.active ? styles['header-icon-active'] : styles['header-icon']} />
             </NavLink>
           ))}
           {token && <LogoutIcon onClick={userLogout} className={styles['header-icon']} />}
