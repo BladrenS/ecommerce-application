@@ -69,7 +69,6 @@ export const AddressesList = ({ addresses, defaultShipping, defaultBilling }: Pr
             address={address}
             isDefaultShipping={address.id === defaultShippingId}
             isDefaultBilling={address.id === defaultBillingId}
-            canDelete={addresses.length > 1}
             editorOpener={() => openEditModal(address)}
             onDeleteSuccess={handleAddSuccess}
           />

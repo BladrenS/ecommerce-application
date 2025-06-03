@@ -1,5 +1,6 @@
 import type { Address } from '@commercetools/platform-sdk';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
@@ -11,19 +12,11 @@ type Props = {
   address: Address;
   isDefaultShipping: boolean;
   isDefaultBilling: boolean;
-  canDelete: boolean;
   editorOpener: () => void;
   onDeleteSuccess: () => void;
 };
 
-export const AddressCard = ({
-  address,
-  isDefaultShipping,
-  isDefaultBilling,
-  canDelete,
-  editorOpener,
-  onDeleteSuccess,
-}: Props) => {
+export const AddressCard = ({ address, isDefaultShipping, isDefaultBilling, editorOpener, onDeleteSuccess }: Props) => {
   const dispatch = useDispatch();
 
   const handleDelete = async () => {
@@ -37,6 +30,11 @@ export const AddressCard = ({
     ]);
     onDeleteSuccess();
     dispatch(incrementVersion());
+    toast.success('The address has been successfully deleted.', {
+      position: 'bottom-left',
+      autoClose: 2000,
+      theme: 'dark',
+    });
   };
 
   return (
@@ -65,7 +63,7 @@ export const AddressCard = ({
         <Button className={styles.button} onClick={editorOpener}>
           Edit
         </Button>
-        <Button onClick={handleDelete} disabled={!canDelete} className={styles.button}>
+        <Button onClick={handleDelete} className={styles.button}>
           Delete
         </Button>
       </div>
