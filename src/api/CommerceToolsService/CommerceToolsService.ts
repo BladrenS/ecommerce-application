@@ -27,10 +27,10 @@ export class CommerceToolsService {
   }
 
   public static async updateMe(actions: MyCustomerUpdateAction[]): Promise<Customer> {
-    const version = store.getState().version.value;
+    const me = await this.getMe();
     const response = await axios.post(
       `${apiUrl}/${projectKey}/me`,
-      { version, actions },
+      { version: me.version, actions },
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
