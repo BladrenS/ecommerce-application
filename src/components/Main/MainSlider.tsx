@@ -44,7 +44,7 @@ export const MainSlider: FC = () => {
           <span className={styles.text}>Motorbike season kick-off with 15% discount</span>
           <div className={styles.promo}>
             <img src={sale} alt="sale" />
-            <span style={{ marginLeft: '10px' }}>SPRING-SALE-15%</span>
+            <span style={{ marginLeft: '10px' }}>SUMMER-SALE-15%</span>
           </div>
           <span className={styles.dates}>03.06.2025 - 15.07.2025</span>
         </div>
