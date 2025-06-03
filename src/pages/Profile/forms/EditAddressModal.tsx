@@ -122,22 +122,24 @@ export const EditAddressModal = ({ address, modalCloseFunc, onUpdateSuccess }: P
         value={address.postalCode}
       />
 
-      <div className={styles.checkbox}>
+      <div className={styles.checkboxlabel}>
         <label>
           <input
             type="checkbox"
             checked={isDefaultShipping}
             onChange={(event) => setIsDefaultShipping(event.target.checked)}
+            className={styles.checkbox}
           />
           Set as Default Shipping
         </label>
       </div>
-      <div className={styles.checkbox}>
+      <div className={styles.checkboxlabel}>
         <label>
           <input
             type="checkbox"
             checked={isDefaultBilling}
             onChange={(event) => setIsDefaultBilling(event.target.checked)}
+            className={styles.checkbox}
           />
           Set as Default Billing
         </label>
