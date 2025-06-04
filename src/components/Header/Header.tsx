@@ -52,6 +52,12 @@ export const Header: FC = memo(() => {
       HEADER_ICONS[1].active = false;
       HEADER_ICONS[2].active = false;
   }
+
+  if (localStorage.getItem('refresh_token')) {
+    HEADER_ICONS[2].disabled = false;
+  } else {
+    HEADER_ICONS[2].disabled = true;
+  }
   return (
     <header className={styles.header}>
       <div className={styles['header-container']}>
@@ -83,7 +89,9 @@ export const Header: FC = memo(() => {
         <div className={styles['header-icons']}>
           {HEADER_ICONS.map((item, href) => (
             <NavLink key={href} to={item.href}>
-              <item.Component className={item.active ? styles['header-icon-active'] : styles['header-icon']} />
+              <item.Component
+                className={`${styles['header-icon']} ${item.active ? styles['header-icon-active'] : ''} ${item.disabled ? styles.disabled : ''}`}
+              />
             </NavLink>
           ))}
           {token && <LogoutIcon onClick={userLogout} className={styles['header-icon']} />}

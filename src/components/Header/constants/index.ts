@@ -42,5 +42,6 @@ export const HEADER_ICONS = [
     Component: ProfileIcon,
     href: '/profile',
     active: false,
+    disabled: true,
   },
 ];
