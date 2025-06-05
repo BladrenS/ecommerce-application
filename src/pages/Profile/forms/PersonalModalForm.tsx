@@ -3,12 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
-import { incrementVersion } from '../../../store/versionSlice';
 import { formatDate } from '../../../utils/formatDate';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import type { personalFormData } from '../profile-validation';
@@ -42,8 +40,6 @@ export const PersonalModalForm = (props: PersonalProps) => {
       dateOfBirth: props.date ? new Date(props.date) : undefined,
     },
   });
-
-  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<personalFormData> = async (data) => {
     const actions: MyCustomerUpdateAction[] = [];
@@ -89,8 +85,6 @@ export const PersonalModalForm = (props: PersonalProps) => {
         autoClose: 2000,
         theme: 'dark',
       });
-
-      dispatch(incrementVersion());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response:', error.response.data);

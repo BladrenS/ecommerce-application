@@ -4,13 +4,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { countryNameToCode } from '../../../constants/countries';
-import { incrementVersion } from '../../../store/versionSlice';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import { type addressFormData, addressSchema } from '../profile-validation';
 import styles from './styles.module.scss';
@@ -35,8 +33,6 @@ export const AddAddressModal = (props: AddressProps) => {
     reValidateMode: 'onChange',
     shouldUnregister: true,
   });
-
-  const dispatch = useDispatch();
 
   const [isDefaultShipping, setIsDefaultShipping] = useState(false);
   const [isDefaultBilling, setIsDefaultBilling] = useState(false);
@@ -80,8 +76,6 @@ export const AddAddressModal = (props: AddressProps) => {
         autoClose: 2000,
         theme: 'dark',
       });
-
-      dispatch(incrementVersion());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response:', error.response.data);

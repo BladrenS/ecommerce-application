@@ -3,13 +3,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useState } from 'react';
 import { type SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { countryCodeToName, countryNameToCode } from '../../../constants/countries';
-import { incrementVersion } from '../../../store/versionSlice';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import { type addressFormData, addressSchema } from '../profile-validation';
 import styles from './styles.module.scss';
@@ -41,8 +39,6 @@ export const EditAddressModal = ({ address, modalCloseFunc, onUpdateSuccess }: P
 
   const [isDefaultShipping, setIsDefaultShipping] = useState(false);
   const [isDefaultBilling, setIsDefaultBilling] = useState(false);
-
-  const dispatch = useDispatch();
 
   const countryName = Object.entries(countryNameToCode).find(([, code]) => code === address.country)?.[0];
   if (countryName) {
@@ -88,7 +84,6 @@ export const EditAddressModal = ({ address, modalCloseFunc, onUpdateSuccess }: P
         autoClose: 2000,
         theme: 'dark',
       });
-      dispatch(incrementVersion());
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response:', error.response.data);

@@ -1,13 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import { CommerceToolsAuth } from '../../../api/CommerceToolsService';
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
-import { incrementVersion } from '../../../store/versionSlice';
 import { LabeledInput } from '../../registrationPage/registrationForm/LabeledInput';
 import type { passwordFormData } from '../profile-validation';
 import { passwordSchema } from '../profile-validation';
@@ -21,8 +19,6 @@ export const PasswordModalForm = ({ modalCloseFunc }: PasswordFormProps) => {
   const {
     register,
     handleSubmit,
-    //setError,
-    //watch,
     formState: { errors, isValid },
   } = useForm<passwordFormData>({
     resolver: zodResolver(passwordSchema),
@@ -30,8 +26,6 @@ export const PasswordModalForm = ({ modalCloseFunc }: PasswordFormProps) => {
     reValidateMode: 'onChange',
     shouldUnregister: true,
   });
-
-  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<passwordFormData> = async (data) => {
     try {
@@ -46,7 +40,6 @@ export const PasswordModalForm = ({ modalCloseFunc }: PasswordFormProps) => {
       await CommerceToolsAuth.authCustomer({ email: localStorage.getItem('user_login')!, password: data.newPassword });
 
       modalCloseFunc();
-      dispatch(incrementVersion());
     } catch (error) {
       console.error('Error changing password:', error);
       toast.error('Failed to change password. Please check your current password.', {

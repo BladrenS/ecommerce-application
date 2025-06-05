@@ -2,14 +2,12 @@ import type { Address } from '@commercetools/platform-sdk';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { CommerceToolsService } from '../../api/CommerceToolsService/CommerceToolsService';
 import { cross } from '../../assets';
 import { Button, Loader } from '../../components/Ui';
 import { baseModalStyle } from '../../constants/modal';
-import { setVersion } from '../../store/versionSlice';
 import { AddressesList } from './forms/AddressesList';
 import { PasswordModalForm } from './forms/PasswordModalForm';
 import { PersonalModalForm } from './forms/PersonalModalForm';
@@ -29,8 +27,6 @@ export const Profile = () => {
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [shippingId, setShippingId] = useState('');
   const [billingId, setBillingId] = useState('');
-
-  const dispatch = useDispatch();
 
   Modal.setAppElement('#root');
 
@@ -78,7 +74,6 @@ export const Profile = () => {
         setAddresses(data.addresses || []);
         setShippingId(data.defaultShippingAddressId || '');
         setBillingId(data.defaultBillingAddressId || '');
-        dispatch(setVersion(data.version));
       })
       .catch((error) => {
         setError(error.message || 'Failed to load data');
@@ -150,7 +145,6 @@ export const Profile = () => {
                   setLastName(data.lastName || '');
                   setEmail(data.email);
                   setDate(data.dateOfBirth?.toString() || '');
-                  dispatch(setVersion(data.version));
                 })
                 .catch((error) => {
                   setError(error.message || 'Failed to refresh user data');

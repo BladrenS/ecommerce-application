@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { versionReducer } from './versionSlice';
+import { Reducer } from './Slice';
 
 export const store = configureStore({
   reducer: {
-    version: versionReducer,
+    version: Reducer,
   },
 });
 
