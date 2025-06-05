@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { CommerceToolsAuth } from '../../../api/CommerceToolsService';
 import { CommerceToolsService } from '../../../api/CommerceToolsService/CommerceToolsService';
 import { Button } from '../../../components/Ui';
 import { incrementVersion } from '../../../store/versionSlice';
@@ -41,6 +42,8 @@ export const PasswordModalForm = ({ modalCloseFunc }: PasswordFormProps) => {
         autoClose: 2000,
         theme: 'dark',
       });
+
+      await CommerceToolsAuth.authCustomer({ email: localStorage.getItem('user_login')!, password: data.newPassword });
 
       modalCloseFunc();
       dispatch(incrementVersion());

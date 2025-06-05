@@ -2,7 +2,6 @@ import type { Customer, MyCustomerUpdateAction } from '@commercetools/platform-s
 import axios from 'axios';
 
 import { COMMERCETOOLS_CONFIG } from '../../constants';
-import { store } from '../../store';
 
 const { authUrl, projectKey, clientId, clientSecret, apiUrl } = COMMERCETOOLS_CONFIG;
 
@@ -41,12 +40,12 @@ export class CommerceToolsService {
   }
 
   public static async changePassword(currentPassword: string, newPassword: string): Promise<void> {
-    const version = store.getState().version.value;
+    const me = await this.getMe();
 
     await axios.post(
       `${apiUrl}/${projectKey}/me/password`,
       {
-        version,
+        version: me.version,
         currentPassword,
         newPassword,
       },

@@ -20,6 +20,7 @@ export class CommerceToolsAuth extends CommerceToolsService {
 
     CommerceToolsService.accessToken = response.data.access_token;
     localStorage.setItem('access_token', response.data.access_token);
+    localStorage.setItem('user_login', values.email);
 
     return response.data;
   }
