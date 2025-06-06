@@ -11,6 +11,7 @@ import { Catalog, Login, Main, RegistrationPage } from './pages';
 import { About } from './pages/About/About';
 import { ProductPage } from './pages/ProductPage/ProductPage';
 import { Profile } from './pages/Profile/Profile';
+import { Wishlist } from './pages/Wishlist/Wishlist';
 import styles from './styles/main.scss';
 import { ScrollToTop } from './utils/ScrollToTop';
 
@@ -54,6 +55,7 @@ export const App: FC = () => {
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="/news" element={<NewsFeed />} />
         <Route path="/about" element={<About />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="*" element={<div className={styles['not-found']}>404 Page not found</div>} />
       </Routes>
       <Footer />

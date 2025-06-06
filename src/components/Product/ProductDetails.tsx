@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { addToCart, getOrCreateCart, removeFromCart } from '../../api/request';
-import { addToWishlist, getOrCreateWishlist, removeFromWishlist } from '../../api/request';
 import { FavoriteIcon } from '../../components/Header/parts';
 import { Button } from '../../components/Ui';
 import { centToDollar } from '../../utils/centToDollar';
-import { forceUpdateHeaderCounters } from '../Header/constants';
+import { useCart } from './logic/useCart';
+import { useWishlist } from './logic/useWishlist';
 import styles from './styles.module.scss';
 
 type ProductDetailsProps = {
@@ -27,83 +25,8 @@ export const ProductDetails = ({
   category2,
 }: ProductDetailsProps) => {
   const { productId } = useParams();
-  const [itemInCart, setItemInCart] = useState(false);
-  const [lineItemId, setLineItemId] = useState<string | null>(null);
-
-  const [itemInWishlist, setItemInWishlist] = useState(false);
-  const [wishlistItemId, setWishlistItemId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const checkItem = async () => {
-      if (!productId) {
-        setItemInCart(false);
-        setLineItemId(null);
-        setItemInWishlist(false);
-        setWishlistItemId(null);
-        return;
-      }
-
-      const cart = await getOrCreateCart();
-      const lineItem = cart.lineItems.find((item) => item.productId === productId);
-      if (lineItem) {
-        setItemInCart(true);
-        setLineItemId(lineItem.id);
-      } else {
-        setItemInCart(false);
-        setLineItemId(null);
-      }
-
-      const wishlist = await getOrCreateWishlist();
-      const wishItem = wishlist.lineItems.find((item) => item.productId === productId);
-      if (wishItem) {
-        setItemInWishlist(true);
-        setWishlistItemId(wishItem.id);
-      } else {
-        setItemInWishlist(false);
-        setWishlistItemId(null);
-      }
-    };
-
-    checkItem();
-  }, [productId]);
-
-  const handleAddToCart = async () => {
-    if (!productId) return;
-    const updatedCart = await addToCart(productId);
-    const lineItem = updatedCart.lineItems.find((item: any) => item.productId === productId);
-    if (lineItem) {
-      setItemInCart(true);
-      setLineItemId(lineItem.id);
-      forceUpdateHeaderCounters();
-    }
-  };
-
-  const handleRemoveFromCart = async () => {
-    if (!lineItemId) return;
-    await removeFromCart(lineItemId);
-    setItemInCart(false);
-    setLineItemId(null);
-    forceUpdateHeaderCounters();
-  };
-
-  const handleToggleWishlist = async () => {
-    if (!productId) return;
-
-    if (itemInWishlist && wishlistItemId) {
-      await removeFromWishlist(wishlistItemId);
-      setItemInWishlist(false);
-      setWishlistItemId(null);
-      forceUpdateHeaderCounters();
-    } else {
-      const updatedWishlist = await addToWishlist(productId);
-      const newItem = updatedWishlist.lineItems.find((item) => item.productId === productId);
-      if (newItem) {
-        setItemInWishlist(true);
-        setWishlistItemId(newItem.id);
-        forceUpdateHeaderCounters();
-      }
-    }
-  };
+  const { itemInCart, add, remove } = useCart(productId);
+  const { itemInWishlist, toggle } = useWishlist(productId);
 
   return (
     <div className={styles['product-info']}>
@@ -112,24 +35,22 @@ export const ProductDetails = ({
         <div className={discountedPrice ? styles.sale : styles.standard}>{price && centToDollar(price)}</div>
         <div className={styles.price}>{discountedPrice && centToDollar(discountedPrice)}</div>
       </div>
+
       <h3 className={styles['description-header']}>Description:</h3>
       <p className={styles.description}>{description}</p>
 
       <div className={styles['buttons-wrapper']}>
         {itemInCart ? (
-          <Button className={styles.add} onClick={handleRemoveFromCart}>
+          <Button className={styles.add} onClick={remove}>
             Remove from cart
           </Button>
         ) : (
-          <Button className={styles.add} onClick={handleAddToCart}>
+          <Button className={styles.add} onClick={add}>
             Add to cart
           </Button>
         )}
 
-        <FavoriteIcon
-          className={`${styles.like} ${itemInWishlist ? styles.liked : ''}`}
-          onClick={handleToggleWishlist}
-        />
+        <FavoriteIcon className={`${styles.like} ${itemInWishlist ? styles.liked : ''}`} onClick={toggle} />
       </div>
 
       <div className={styles.description}>

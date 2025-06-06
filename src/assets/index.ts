@@ -25,6 +25,7 @@ export { default as blog1 } from './images/blog1.jpg';
 export { default as blog1alt } from './images/blog1alt.jpg';
 export { default as blog2 } from './images/blog2.jpg';
 export { default as dcb } from './images/dcb.svg';
+export { default as empty } from './images/empty.gif';
 export { default as gitimg } from './images/git.svg';
 export { default as gloves } from './images/gloves.jpg';
 export { default as harley } from './images/harley.jpg';

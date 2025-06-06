@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import type { FC } from 'react';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import { HeaderIcons } from './parts/HeaderIcons';
 import { HeaderLinks } from './parts/HeaderLinks';
 import styles from './styles.module.scss';
 
-export const Header = memo(() => {
+export const Header: FC = memo(() => {
   const { isActiveMenu, setIsActiveMenu } = useMenuVisible();
   const { headerIcons, token } = useHeaderData();
 
