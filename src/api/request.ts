@@ -1,4 +1,4 @@
-import type { MyCustomerDraft } from '@commercetools/platform-sdk';
+import type { Cart, MyCustomerDraft, ShoppingList } from '@commercetools/platform-sdk';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 import { COMMERCETOOLS_CONFIG } from '../constants';
@@ -72,5 +72,145 @@ export const queryCategory = async (categoryID: string) => {
 
 export const queryCategories = async () => {
   const response = await apiRoot.categories().get().execute();
+  return response.body;
+};
+
+export const getOrCreateCart = async (): Promise<Cart> => {
+  const storedCartId = localStorage.getItem('cartId');
+  if (storedCartId) {
+    try {
+      const cart = await apiRoot.carts().withId({ ID: storedCartId }).get().execute();
+      return cart.body;
+    } catch {
+      localStorage.removeItem('cartId');
+    }
+  }
+  const newCart = await apiRoot
+    .carts()
+    .post({
+      body: { currency: 'USD' },
+    })
+    .execute();
+
+  localStorage.setItem('cartId', newCart.body.id);
+  return newCart.body;
+};
+
+export const addToCart = async (productId: string) => {
+  const cart = await getOrCreateCart();
+
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cart.id })
+    .post({
+      body: {
+        version: cart.version,
+        actions: [
+          {
+            action: 'addLineItem',
+            productId,
+            variantId: 1,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const removeFromCart = async (lineItemId: string) => {
+  const cart = await getOrCreateCart();
+
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cart.id })
+    .post({
+      body: {
+        version: cart.version,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const getOrCreateWishlist = async (): Promise<ShoppingList> => {
+  const storedWishlistId = localStorage.getItem('wishlistId');
+  if (storedWishlistId) {
+    try {
+      const wishlist = await apiRoot.shoppingLists().withId({ ID: storedWishlistId }).get().execute();
+      return wishlist.body;
+    } catch {
+      localStorage.removeItem('wishlistId');
+    }
+  }
+
+  const newWishlist = await apiRoot
+    .shoppingLists()
+    .post({
+      body: {
+        name: { en: 'My Wishlist' },
+        key: `wishlist-${Date.now()}`,
+      },
+    })
+    .execute();
+
+  localStorage.setItem('wishlistId', newWishlist.body.id);
+  return newWishlist.body;
+};
+
+export const addToWishlist = async (productId: string) => {
+  const wishlist = await getOrCreateWishlist();
+
+  const response = await apiRoot
+    .shoppingLists()
+    .withId({ ID: wishlist.id })
+    .post({
+      body: {
+        version: wishlist.version,
+        actions: [
+          {
+            action: 'addLineItem',
+            productId,
+            variantId: 1,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const removeFromWishlist = async (lineItemId: string) => {
+  const wishlist = await getOrCreateWishlist();
+
+  const response = await apiRoot
+    .shoppingLists()
+    .withId({ ID: wishlist.id })
+    .post({
+      body: {
+        version: wishlist.version,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+
   return response.body;
 };
