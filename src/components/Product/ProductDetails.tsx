@@ -6,6 +6,7 @@ import { addToWishlist, getOrCreateWishlist, removeFromWishlist } from '../../ap
 import { FavoriteIcon } from '../../components/Header/parts';
 import { Button } from '../../components/Ui';
 import { centToDollar } from '../../utils/centToDollar';
+import { forceUpdateHeaderCounters } from '../Header/constants';
 import styles from './styles.module.scss';
 
 type ProductDetailsProps = {
@@ -73,6 +74,7 @@ export const ProductDetails = ({
     if (lineItem) {
       setItemInCart(true);
       setLineItemId(lineItem.id);
+      forceUpdateHeaderCounters();
     }
   };
 
@@ -81,6 +83,7 @@ export const ProductDetails = ({
     await removeFromCart(lineItemId);
     setItemInCart(false);
     setLineItemId(null);
+    forceUpdateHeaderCounters();
   };
 
   const handleToggleWishlist = async () => {
@@ -90,12 +93,14 @@ export const ProductDetails = ({
       await removeFromWishlist(wishlistItemId);
       setItemInWishlist(false);
       setWishlistItemId(null);
+      forceUpdateHeaderCounters();
     } else {
       const updatedWishlist = await addToWishlist(productId);
       const newItem = updatedWishlist.lineItems.find((item) => item.productId === productId);
       if (newItem) {
         setItemInWishlist(true);
         setWishlistItemId(newItem.id);
+        forceUpdateHeaderCounters();
       }
     }
   };
