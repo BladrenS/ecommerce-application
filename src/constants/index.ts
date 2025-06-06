@@ -100,7 +100,7 @@ export const footerLinks: {
       { to: '/about', label: 'About us' },
       { to: '/news', label: 'News' },
       { to: '', label: 'Career', disabled: true },
-      { to: '/Cooperation', label: 'Cooperation' },
+      { to: '/Cooperation', label: 'Cooperation', disabled: true },
     ],
   },
   {
