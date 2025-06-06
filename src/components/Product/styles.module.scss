@@ -252,3 +252,8 @@ body.no-scroll {
 body.no-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.liked {
+  border: 1px solid var(--primary-color);
+  stroke: var(--primary-color);
+}
