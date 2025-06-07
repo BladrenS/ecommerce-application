@@ -21,7 +21,7 @@ export const Product: FC<Partial<ProductProps>> = ({ name, description, price, i
 
   return (
     <li className={styles.product} onClick={() => navigate(`/product/${id}`)}>
-      <ProductIcons id={id} />
+      <ProductIcons id={id} name={name} />
       <img src={imageUrl} alt={imageAlt} className={styles.image} />
       <div className={styles.content}>
         <h3 className={styles.title}>{name}</h3>

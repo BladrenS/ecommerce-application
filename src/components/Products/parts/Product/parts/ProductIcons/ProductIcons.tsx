@@ -1,26 +1,48 @@
 import clsx from 'clsx';
 import type { FC, MouseEvent } from 'react';
+import { toast } from 'react-toastify';
 
 import { CartIcon, FavoriteIcon } from '../../../../../Header/parts';
 import { useCart } from '../../../../../Product/logic/useCart';
 import { useWishlist } from '../../../../../Product/logic/useWishlist';
 import styles from './styles.module.scss';
 
-export const ProductIcons: FC<{ id?: string }> = ({ id }) => {
+interface ProductIconsProps {
+  id?: string;
+  name?: string;
+}
+
+export const ProductIcons: FC<ProductIconsProps> = ({ id, name }) => {
   const { itemInWishlist, toggle } = useWishlist(id);
   const { itemInCart, add, remove } = useCart(id);
+
+  const createNotification = (message: string) => {
+    toast.success(`${name} ${message}`, {
+      position: 'bottom-left',
+      autoClose: 2000,
+      theme: 'dark',
+    });
+  };
 
   const favoriteIconHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
 
     toggle();
+
+    itemInWishlist ? createNotification('removed from wishlist') : createNotification('added to wishlist');
   };
 
   const cartIconHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     if (itemInCart) return;
 
-    itemInCart ? remove() : add();
+    if (itemInCart) {
+      remove();
+      createNotification('removed from cart');
+    } else {
+      add();
+      createNotification('added to cart');
+    }
   };
 
   return (
