@@ -3,6 +3,7 @@ import { type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { centToDollar } from '../../../../utils/centToDollar';
+import { ProductIcons } from './parts';
 import styles from './styles.module.scss';
 
 interface ProductProps {
@@ -20,6 +21,7 @@ export const Product: FC<Partial<ProductProps>> = ({ name, description, price, i
 
   return (
     <li className={styles.product} onClick={() => navigate(`/product/${id}`)}>
+      <ProductIcons id={id} />
       <img src={imageUrl} alt={imageAlt} className={styles.image} />
       <div className={styles.content}>
         <h3 className={styles.title}>{name}</h3>
