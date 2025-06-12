@@ -18,9 +18,7 @@ export const Header: FC = memo(() => {
   const clickHandlerBurger = () => setIsActiveMenu((previous) => !previous);
 
   const userLogout = () => {
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('user_login');
+    localStorage.clear();
     window.location.href = '/login';
   };
 
