@@ -3,9 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { CommerceToolsAuth } from './api/CommerceToolsService';
-import { Footer, Header } from './components';
-import { Article } from './components/Article/Article';
-import { NewsFeed } from './components/News/NewsFeed';
+import { Article, Footer, Header, NewsFeed } from './components';
 import { Loader, ScrollToTopButton } from './components/Ui';
 import { About, Basket, Catalog, Login, Main, ProductPage, Profile, RegistrationPage, Wishlist } from './pages';
 import styles from './styles/main.scss';
