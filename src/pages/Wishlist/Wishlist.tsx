@@ -13,37 +13,37 @@ export const Wishlist: FC = () => {
   const [wishlistProducts, setWishlistProducts] = useState<Product[]>([]);
   const [loading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const wishlist = await getOrCreateWishlist();
-        const lineItems = wishlist.lineItems;
+  const fetchWishlist = async () => {
+    try {
+      const wishlist = await getOrCreateWishlist();
+      const lineItems = wishlist.lineItems;
 
-        const productResults = await Promise.all(
-          lineItems.map(async (item) => {
-            if (item.productId) {
-              try {
-                const product = await queryProduct(item.productId);
-                return product;
-              } catch (error) {
-                console.warn(`Failed to fetch product ${error} ${item.productId}`);
-              }
+      const productResults = await Promise.all(
+        lineItems.map(async (item) => {
+          if (item.productId) {
+            try {
+              const product = await queryProduct(item.productId);
+              return product;
+            } catch (error) {
+              console.warn(`Failed to fetch product ${error} ${item.productId}`);
             }
-            return null;
-          }),
-        );
+          }
+          return null;
+        }),
+      );
 
-        const filteredProducts = productResults.filter((product): product is Product => product !== null);
+      const filteredProducts = productResults.filter((product): product is Product => product !== null);
 
-        setWishlistProducts(filteredProducts);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch wishlist:', error);
-      }
-    };
+      setWishlistProducts(filteredProducts);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Failed to fetch wishlist:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchWishlist();
-  }, []);
+  }, [wishlistProducts]);
 
   if (loading) {
     return (
@@ -78,6 +78,9 @@ export const Wishlist: FC = () => {
                 imageUrl={productData.masterVariant.images?.[0]?.url || ''}
                 price={productData.masterVariant.prices?.[0]}
                 imageAlt={key || ''}
+                onWishlistRemove={async () => {
+                  await fetchWishlist();
+                }}
               />
             );
           })}

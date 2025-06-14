@@ -13,15 +13,24 @@ interface ProductProps {
   price: Price;
   imageAlt: string;
   id: string;
+  onWishlistRemove?: () => void;
 }
 
-export const Product: FC<Partial<ProductProps>> = ({ name, description, price, imageUrl, imageAlt, id }) => {
+export const Product: FC<Partial<ProductProps>> = ({
+  name,
+  description,
+  price,
+  imageUrl,
+  imageAlt,
+  id,
+  onWishlistRemove,
+}) => {
   const navigate = useNavigate();
   const priceFormatted = centToDollar(price?.value.centAmount);
 
   return (
     <li className={styles.product} onClick={() => navigate(`/product/${id}`)}>
-      <ProductIcons id={id} name={name} />
+      <ProductIcons id={id} name={name} onWishlistRemove={onWishlistRemove} />
       <img src={imageUrl} alt={imageAlt} className={styles.image} />
       <div className={styles.content}>
         <h3 className={styles.title}>{name}</h3>

@@ -10,9 +10,10 @@ import styles from './styles.module.scss';
 interface ProductIconsProps {
   id?: string;
   name?: string;
+  onWishlistRemove?: () => void;
 }
 
-export const ProductIcons: FC<ProductIconsProps> = ({ id, name }) => {
+export const ProductIcons: FC<ProductIconsProps> = ({ id, name, onWishlistRemove }) => {
   const { itemInWishlist, toggle } = useWishlist(id);
   const { itemInCart, add, remove } = useCart(id);
 
@@ -39,6 +40,7 @@ export const ProductIcons: FC<ProductIconsProps> = ({ id, name }) => {
     if (itemInCart) {
       remove();
       createNotification('removed from cart');
+      onWishlistRemove?.();
     } else {
       add();
       createNotification('added to cart');
