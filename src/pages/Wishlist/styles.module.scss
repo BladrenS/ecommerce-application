@@ -1,4 +1,5 @@
 @use '../../styles/abstract/mixins' as *;
+@use '../../styles/variables' as *;
 
 .wishlist {
   min-height: 100vh;
@@ -50,5 +51,20 @@
 }
 
 .empty {
+  flex-direction: column;
+  gap: 30px;
+
   @include flex-center;
+}
+
+.emptyText {
+  font-weight: 400;
+  color: white;
+}
+
+.catLink {
+  position: relative;
+  color: $accent-color;
+
+  @include hover-decor;
 }

@@ -1,10 +1,11 @@
 import type { Product } from '@commercetools/platform-sdk';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { getOrCreateWishlist, queryProduct } from '../../api/request';
 import { empty } from '../../assets';
-import { Breadcrumbs } from '../../components/Product/Breadcrumbs';
+// import { Breadcrumbs } from '../../components/Product/Breadcrumbs';
 import { Product as ProductCard } from '../../components/Products/parts/Product/Product';
 import { Loader } from '../../components/Ui';
 import styles from './styles.module.scss';
@@ -55,15 +56,19 @@ export const Wishlist: FC = () => {
 
   return (
     <div className={styles.wishlist}>
-      <div className={styles['breadcrumbs-container']}>
+      {/* <div className={styles['breadcrumbs-container']}>
         <Breadcrumbs />
         <span className={styles.delimiter}>•</span>
         <div className={styles.wish}>WISHLIST</div>
-      </div>
+      </div> */}
 
       {wishlistProducts.length === 0 ? (
         <div className={styles['empty']}>
           <img src={empty} alt="Empty wishlist" />
+          <h4 className={styles.emptyText}>Your wishlist is currently empty</h4>
+          <NavLink to="/catalog" className={styles.catLink}>
+            Continue Shopping
+          </NavLink>
         </div>
       ) : (
         <ul className={styles.products}>
