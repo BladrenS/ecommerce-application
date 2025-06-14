@@ -214,3 +214,8 @@ export const removeFromWishlist = async (lineItemId: string) => {
 
   return response.body;
 };
+
+export const logoutCustomer = async (): Promise<void> => {
+  localStorage.clear();
+  window.location.href = '/main';
+};

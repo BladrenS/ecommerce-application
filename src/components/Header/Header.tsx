@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { logoutCustomer } from '../../api/request';
 import { logo } from '../../assets/';
 import { useHeaderData } from './logic/useHeaderData';
 import { useMenuVisible } from './logic/useMenuVisible';
@@ -17,11 +18,6 @@ export const Header: FC = memo(() => {
 
   const clickHandlerBurger = () => setIsActiveMenu((previous) => !previous);
 
-  const userLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
-  };
-
   return (
     <header className={styles.header}>
       <div className={styles['header-container']}>
@@ -30,7 +26,7 @@ export const Header: FC = memo(() => {
         </NavLink>
 
         <HeaderLinks token={token} />
-        <HeaderIcons icons={headerIcons} token={token} onLogout={userLogout} />
+        <HeaderIcons icons={headerIcons} token={token} onLogout={logoutCustomer} />
 
         <div className={clsx(styles.burger, isActiveMenu && styles['active-burger'])} onClick={clickHandlerBurger} />
       </div>
@@ -38,7 +34,7 @@ export const Header: FC = memo(() => {
       <Menu
         active={isActiveMenu}
         setActive={setIsActiveMenu}
-        userLogout={userLogout}
+        userLogout={logoutCustomer}
         icons={headerIcons}
         token={token}
       />

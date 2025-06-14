@@ -39,7 +39,7 @@ export const App: FC = () => {
       <Header />
       <ScrollToTopButton />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/main" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/main" element={<Main />} />
