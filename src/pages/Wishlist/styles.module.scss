@@ -6,36 +6,8 @@
   padding-top: 150px;
 }
 
-.breadcrumbs-container {
-  display: flex;
-  font-size: 12px;
-  color: rgb(182 182 182);
-}
-
-.delimiter {
-  margin: 0 10px;
-}
-
-.wish {
-  position: relative;
-  height: 16px;
-  color: var(--primary-color);
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 100%;
-    height: 2px;
-
-    background-color: var(--primary-color);
-
-    transition: var(--transition);
-  }
+.products li {
+  height: 100%;
 }
 
 .products {

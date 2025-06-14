@@ -1,11 +1,11 @@
 import type { Product } from '@commercetools/platform-sdk';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { getOrCreateWishlist, queryProduct } from '../../api/request';
 import { empty } from '../../assets';
-// import { Breadcrumbs } from '../../components/Product/Breadcrumbs';
 import { Product as ProductCard } from '../../components/Products/parts/Product/Product';
 import { Loader } from '../../components/Ui';
 import styles from './styles.module.scss';
@@ -34,7 +34,6 @@ export const Wishlist: FC = () => {
       );
 
       const filteredProducts = productResults.filter((product): product is Product => product !== null);
-
       setWishlistProducts(filteredProducts);
       setIsLoading(false);
     } catch (error) {
@@ -56,14 +55,8 @@ export const Wishlist: FC = () => {
 
   return (
     <div className={styles.wishlist}>
-      {/* <div className={styles['breadcrumbs-container']}>
-        <Breadcrumbs />
-        <span className={styles.delimiter}>•</span>
-        <div className={styles.wish}>WISHLIST</div>
-      </div> */}
-
       {wishlistProducts.length === 0 ? (
-        <div className={styles['empty']}>
+        <div className={styles.empty}>
           <img src={empty} alt="Empty wishlist" />
           <h4 className={styles.emptyText}>Your wishlist is currently empty</h4>
           <NavLink to="/catalog" className={styles.catLink}>
@@ -71,25 +64,35 @@ export const Wishlist: FC = () => {
           </NavLink>
         </div>
       ) : (
-        <ul className={styles.products}>
-          {wishlistProducts.map(({ id, key, masterData }) => {
-            const productData = masterData.current;
-            return (
-              <ProductCard
-                key={id}
-                id={id}
-                name={productData.name?.['en-US'] || ''}
-                description={productData.description?.['en-US'] || ''}
-                imageUrl={productData.masterVariant.images?.[0]?.url || ''}
-                price={productData.masterVariant.prices?.[0]}
-                imageAlt={key || ''}
-                onWishlistRemove={async () => {
-                  await fetchWishlist();
-                }}
-              />
-            );
-          })}
-        </ul>
+        <motion.ul className={styles.products} layout>
+          <AnimatePresence>
+            {wishlistProducts.map(({ id, key, masterData }) => {
+              const productData = masterData.current;
+              return (
+                <motion.li
+                  key={id}
+                  layout // Анимация при изменении порядка
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ProductCard
+                    id={id}
+                    name={productData.name?.['en-US'] || ''}
+                    description={productData.description?.['en-US'] || ''}
+                    imageUrl={productData.masterVariant.images?.[0]?.url || ''}
+                    price={productData.masterVariant.prices?.[0]}
+                    imageAlt={key || ''}
+                    onWishlistRemove={async () => {
+                      await fetchWishlist();
+                    }}
+                  />
+                </motion.li>
+              );
+            })}
+          </AnimatePresence>
+        </motion.ul>
       )}
     </div>
   );
