@@ -32,6 +32,7 @@ export { default as harley } from './images/harley.jpg';
 export { default as honda } from './images/honda.svg';
 export { default as kawa } from './images/kawasaki.svg';
 export { default as me } from './images/me.jpg';
+export { default as me1 } from './images/me1.jpg';
 export { default as slide1 } from './images/medium.jpg';
 export { default as mitz } from './images/mitz.svg';
 export { default as slide2 } from './images/motoslide.jpg';
