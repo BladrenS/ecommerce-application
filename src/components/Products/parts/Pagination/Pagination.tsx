@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { type FC, useEffect, useRef } from 'react';
+import { type FC, useEffect } from 'react';
 
 import { useCatalogContext } from '../../../../pages/Catalog/context/CatalogContext';
 import styles from './styles.module.scss';
@@ -8,13 +8,12 @@ const OFFSET = 9;
 
 export const Pagination: FC = () => {
   const { pagination, page, setPage } = useCatalogContext();
-  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
 
     setPage((previous) => ({ ...previous, offset: (previous.currentPage - 1) * OFFSET }));
   }, [page.currentPage]);
