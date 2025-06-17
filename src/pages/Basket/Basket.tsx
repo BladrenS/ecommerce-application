@@ -108,7 +108,7 @@ export const Basket = () => {
                               <span className={styles.newPrice}>${(discounted / 100).toFixed(2)}</span>
                             </>
                           ) : (
-                            <span>${original.toFixed(2)}</span>
+                            <span>${(Number(original.toFixed(2)) * quantity).toFixed(2)}</span>
                           )}
                         </div>
                         <div className={styles.controls}>
@@ -116,6 +116,7 @@ export const Basket = () => {
                           <span>{quantity}</span>
                           <button onClick={() => handleQuantityChange(id, quantity + 1)}>+</button>
                           <button onClick={() => handleRemove(id)}>Remove</button>
+                          <div className={styles.soloPrice}>${original.toFixed(2)} per item</div>
                         </div>
                       </div>
                     </div>
@@ -127,6 +128,8 @@ export const Basket = () => {
 
           <div className={styles.checkout}>
             <Button className={styles.checkoutButton}>Proceed to checkout</Button>
+            <div className={styles.delivery}>You can choose available delivery options and times at checkout.</div>
+            <div className={styles.yourCart}>Your cart</div>
             <div className={styles.promo}>
               <input
                 type="text"

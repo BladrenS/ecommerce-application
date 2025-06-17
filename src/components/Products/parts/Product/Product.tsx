@@ -18,15 +18,7 @@ interface ProductProps {
   onWishlistRemove?: () => void;
 }
 
-export const Product: FC<Partial<ProductProps>> = ({
-  name,
-  description,
-  price,
-  imageUrl,
-  imageAlt,
-  id,
-  onWishlistRemove,
-}) => {
+export const Product: FC<Partial<ProductProps>> = ({ name, description, price, imageUrl, imageAlt, id }) => {
   const navigate = useNavigate();
   const priceFormatted = centToDollar(price?.value.centAmount);
   const [imageLoad, setImageLoad] = useState(true);

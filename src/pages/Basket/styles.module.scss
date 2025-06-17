@@ -142,6 +142,9 @@ button {
   display: flex;
   gap: 20px;
   justify-content: space-between;
+
+  padding-bottom: 35px;
+  border-bottom: 1px solid rgb(255 98 0 / 14.5%);
 }
 
 .promo input {
@@ -165,4 +168,29 @@ button {
   span {
     color: $accent-color;
   }
+}
+
+.soloPrice {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+
+  font-size: 14px;
+  color: var(--primary-color);
+
+  opacity: 0.3;
+}
+
+.delivery {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--primary-color);
+  text-align: center;
+  opacity: 0.6;
+}
+
+.yourCart {
+  font-size: 30px;
+  color: var(--primary-color);
+  text-align: center;
+  text-transform: uppercase;
 }

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { dcb, gitimg, locationimg, logo } from '../../assets';
+import { gitimg, locationimg, logo } from '../../assets';
 import { BackFooterItem } from './BackFooterItem';
 import { FooterItem } from './FooterItem';
 import styles from './styles.module.scss';
@@ -15,12 +15,13 @@ type CardProps = {
   done: string[];
   text: string;
   contribution: string[];
+  img: string;
 };
 
-export const Card: FC<CardProps> = ({ link, name, photo, location, git, header, done, text, contribution }) => (
+export const Card: FC<CardProps> = ({ link, name, photo, location, git, header, done, text, contribution, img }) => (
   <a href={link} target="_blank" rel="noopener noreferrer" className={styles.card}>
     <div className={styles['cards-inner-front']}>
-      <img src={dcb} className={styles['card-top-bg']} alt="background" />
+      <img src={img} className={styles['card-top-bg']} alt="background" />
       <img src={photo} className={styles['card-photo']} alt={`${name}'s photo`} />
 
       <div className={styles['inner-header']}>
