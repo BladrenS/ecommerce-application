@@ -57,7 +57,7 @@ export const Wishlist: FC = () => {
     <div className={styles.wishlist}>
       {wishlistProducts.length === 0 ? (
         <div className={styles.empty}>
-          <img src={empty} alt="Empty wishlist" />
+          <img className={styles.emptyGif} src={empty} alt="Empty wishlist" />
           <h4 className={styles.emptyText}>Your wishlist is currently empty</h4>
           <NavLink to="/catalog" className={styles.catLink}>
             Continue Shopping
