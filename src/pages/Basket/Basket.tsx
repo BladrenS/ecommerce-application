@@ -73,7 +73,7 @@ export const Basket = () => {
       {lineItems.length === 0 ? (
         <div className={styles.empty}>
           <img src={empty} alt="Empty cart" />
-          <h4>Oops! Your cart is empty</h4>
+          <h4 className={styles.emptyCart}>Oops! Your cart is empty</h4>
           <NavLink to="/catalog" className={styles.catLink}>
             Continue Shopping
           </NavLink>
