@@ -1,4 +1,4 @@
-import type { Cart, MyCustomerDraft, ShoppingList } from '@commercetools/platform-sdk';
+import type { Cart, CartUpdateAction, MyCustomerDraft, ShoppingList } from '@commercetools/platform-sdk';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 import { COMMERCETOOLS_CONFIG } from '../constants';
@@ -206,6 +206,100 @@ export const removeFromWishlist = async (lineItemId: string) => {
             action: 'removeLineItem',
             lineItemId,
             quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const logoutCustomer = async (): Promise<void> => {
+  localStorage.clear();
+  window.location.href = '/main';
+};
+
+export const changeLineItemQuantity = async (
+  cartId: string,
+  version: number,
+  lineItemId: string,
+  quantity: number,
+): Promise<Cart> => {
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cartId })
+    .post({
+      body: {
+        version,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId,
+            quantity,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const removeLineItem = async (cartId: string, version: number, lineItemId: string): Promise<Cart> => {
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cartId })
+    .post({
+      body: {
+        version,
+        actions: [
+          {
+            action: 'removeLineItem',
+            lineItemId,
+          },
+        ],
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const clearCart = async (cartId: string, version: number): Promise<Cart> => {
+  const cart = await apiRoot.carts().withId({ ID: cartId }).get().execute();
+  const lineItems = cart.body.lineItems;
+
+  const actions: CartUpdateAction[] = lineItems.map((item) => ({
+    action: 'removeLineItem',
+    lineItemId: item.id,
+  }));
+
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cartId })
+    .post({
+      body: {
+        version,
+        actions,
+      },
+    })
+    .execute();
+
+  return response.body;
+};
+
+export const addDiscountCode = async (cartId: string, version: number, code: string): Promise<Cart> => {
+  const response = await apiRoot
+    .carts()
+    .withId({ ID: cartId })
+    .post({
+      body: {
+        version,
+        actions: [
+          {
+            action: 'addDiscountCode',
+            code,
           },
         ],
       },
