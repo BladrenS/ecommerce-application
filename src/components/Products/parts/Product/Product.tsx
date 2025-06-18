@@ -24,7 +24,7 @@ export const Product: FC<Partial<ProductProps>> = ({ name, description, price, i
   const [imageLoad, setImageLoad] = useState(true);
 
   return (
-    <li className={styles.product} onClick={() => navigate(`/product/${id}`)}>
+    <div className={styles.product} onClick={() => navigate(`/product/${id}`)}>
       <ProductIcons id={id} name={name} />
       <div className={styles['image-wrapper']}>
         {imageLoad && <Loader />}
@@ -51,6 +51,6 @@ export const Product: FC<Partial<ProductProps>> = ({ name, description, price, i
         <div className={styles.text}>{description}</div>
         <div className={styles.link}>More</div>
       </div>
-    </li>
+    </div>
   );
 };

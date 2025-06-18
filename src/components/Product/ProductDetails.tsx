@@ -41,16 +41,16 @@ export const ProductDetails = ({
 
       <div className={styles['buttons-wrapper']}>
         {itemInCart ? (
-          <Button className={styles.add} onClick={remove}>
+          <Button className={styles.add} onClick={() => remove(name)}>
             Remove from cart
           </Button>
         ) : (
-          <Button className={styles.add} onClick={add}>
+          <Button className={styles.add} onClick={() => add(name)}>
             Add to cart
           </Button>
         )}
 
-        <FavoriteIcon className={`${styles.like} ${itemInWishlist ? styles.liked : ''}`} onClick={toggle} />
+        <FavoriteIcon className={`${styles.like} ${itemInWishlist ? styles.liked : ''}`} onClick={() => toggle(name)} />
       </div>
 
       <div className={styles.description}>

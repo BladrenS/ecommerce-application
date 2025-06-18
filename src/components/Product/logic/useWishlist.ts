@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { addToWishlist, getOrCreateWishlist, removeFromWishlist } from '../../../api/request';
 import { forceUpdateHeaderCounters } from '../../../components/Header/constants/index';
@@ -24,19 +25,29 @@ export const useWishlist = (productId: string | undefined) => {
     checkWishlist();
   }, [productId]);
 
-  const toggle = async () => {
+  const toggle = async (name: string) => {
     if (!productId) return;
 
     if (itemInWishlist && wishlistItemId) {
       await removeFromWishlist(wishlistItemId);
       setItemInWishlist(false);
       setWishlistItemId(null);
+      toast.success(`${name} removed from wishlist`, {
+        position: 'bottom-left',
+        autoClose: 2000,
+        theme: 'dark',
+      });
     } else {
       const updatedWishlist = await addToWishlist(productId);
       const newItem = updatedWishlist.lineItems.find((item) => item.productId === productId);
       if (newItem) {
         setItemInWishlist(true);
         setWishlistItemId(newItem.id);
+        toast.success(`${name} added to wishlist`, {
+          position: 'bottom-left',
+          autoClose: 2000,
+          theme: 'dark',
+        });
       }
     }
 

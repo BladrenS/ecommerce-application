@@ -138,6 +138,11 @@
   }
 }
 
+.emptyImg {
+  width: 100%;
+  max-width: 490px;
+}
+
 .button:disabled {
   cursor: default;
   border-color: gray;

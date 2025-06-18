@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import type { FC, MouseEvent } from 'react';
-import { toast } from 'react-toastify';
 
 import { CartIcon, FavoriteIcon } from '../../../../../Header/parts';
 import { useCart } from '../../../../../Product/logic/useCart';
@@ -17,20 +16,9 @@ export const ProductIcons: FC<ProductIconsProps> = ({ id, name, onWishlistRemove
   const { itemInWishlist, toggle } = useWishlist(id);
   const { itemInCart, add, remove } = useCart(id);
 
-  const createNotification = (message: string) => {
-    toast.success(`${name} ${message}`, {
-      position: 'bottom-left',
-      autoClose: 2000,
-      theme: 'dark',
-    });
-  };
-
-  const favoriteIconHandler = (event: MouseEvent<HTMLDivElement>) => {
+  const carIconsToggler = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-
-    toggle();
-
-    itemInWishlist ? createNotification('removed from wishlist') : createNotification('added to wishlist');
+    if (name) toggle(name);
   };
 
   const cartIconHandler = (event: MouseEvent<HTMLDivElement>) => {
@@ -38,18 +26,16 @@ export const ProductIcons: FC<ProductIconsProps> = ({ id, name, onWishlistRemove
     if (itemInCart) return;
 
     if (itemInCart) {
-      remove();
-      createNotification('removed from cart');
+      if (name) remove(name);
       onWishlistRemove?.();
     } else {
-      add();
-      createNotification('added to cart');
+      if (name) add(name);
     }
   };
 
   return (
     <div className={styles.icons}>
-      <div className={styles['icon-container']} onClick={favoriteIconHandler}>
+      <div className={styles['icon-container']} onClick={carIconsToggler}>
         <FavoriteIcon
           className={clsx(styles.icon, {
             [styles['item-in-favorite']]: itemInWishlist,
