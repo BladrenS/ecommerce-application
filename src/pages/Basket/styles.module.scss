@@ -138,6 +138,13 @@
   }
 }
 
+.button:disabled {
+  cursor: default;
+  border-color: gray;
+  color: gray;
+  background: none;
+}
+
 .promo {
   display: flex;
   gap: 20px;
@@ -157,6 +164,10 @@
 
   background: none;
   outline: none;
+
+  &:disabled {
+    border-color: gray;
+  }
 }
 
 .summary {
@@ -196,4 +207,10 @@
 
 .emptyCart {
   color: var(--secondary-color);
+}
+
+.success {
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: #28a745;
 }

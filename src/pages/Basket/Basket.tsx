@@ -14,12 +14,14 @@ export const Basket = () => {
   const [loading, setLoading] = useState(true);
   const [promoCode, setPromoCode] = useState('');
   const [error, setError] = useState('');
+  const [promoApplied, setPromoApplied] = useState(false);
 
   const fetchCart = async () => {
     setLoading(true);
     try {
       const currentCart = await getOrCreateCart();
       setCart(currentCart);
+      setPromoApplied(currentCart.discountCodes.length > 0);
     } catch (error) {
       console.error('Error fetching cart:', error);
     } finally {
@@ -57,8 +59,10 @@ export const Basket = () => {
       setCart(updated);
       setPromoCode('');
       setError('');
+      setPromoApplied(true);
     } catch {
       setError('Invalid promo code');
+      setPromoApplied(false);
     }
   };
 
@@ -153,11 +157,14 @@ export const Basket = () => {
                 value={promoCode}
                 onChange={(event) => setPromoCode(event.target.value)}
                 placeholder="Enter promo code"
+                disabled={promoApplied}
               />
-              <button className={styles.button} onClick={handleApplyPromo}>
+              <button className={styles.button} onClick={handleApplyPromo} disabled={promoApplied}>
                 Apply
               </button>
             </div>
+            {error && <div className={styles.error}>{error}</div>}
+            {promoApplied && <div className={styles.success}>Promo code successfully applied</div>}
             {error && <div className={styles.error}>{error}</div>}
             <div className={styles.summary}>
               <span>Total:</span>
