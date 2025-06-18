@@ -2,6 +2,7 @@ import type { Cart } from '@commercetools/platform-sdk';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { addDiscountCode, changeLineItemQuantity, clearCart, getOrCreateCart, removeLineItem } from '../../api/request';
 import { empty } from '../../assets';
@@ -48,6 +49,11 @@ export const Basket = () => {
     if (!promoCode.trim() || !cart) return;
     try {
       const updated = await addDiscountCode(cart.id, cart.version, promoCode.trim());
+      toast.success('Promo code successfully applied', {
+        position: 'bottom-right',
+        autoClose: 2000,
+        theme: 'dark',
+      });
       setCart(updated);
       setPromoCode('');
       setError('');
