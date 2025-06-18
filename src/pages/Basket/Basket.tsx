@@ -117,10 +117,16 @@ export const Basket = () => {
                           )}
                         </div>
                         <div className={styles.controls}>
-                          <button onClick={() => handleQuantityChange(id, quantity - 1)}>-</button>
+                          <button className={styles.button} onClick={() => handleQuantityChange(id, quantity - 1)}>
+                            -
+                          </button>
                           <span>{quantity}</span>
-                          <button onClick={() => handleQuantityChange(id, quantity + 1)}>+</button>
-                          <button onClick={() => handleRemove(id)}>Remove</button>
+                          <button className={styles.button} onClick={() => handleQuantityChange(id, quantity + 1)}>
+                            +
+                          </button>
+                          <button className={styles.button} onClick={() => handleRemove(id)}>
+                            Remove
+                          </button>
                           <div className={styles.soloPrice}>${original.toFixed(2)} per item</div>
                         </div>
                       </div>
@@ -142,14 +148,18 @@ export const Basket = () => {
                 onChange={(event) => setPromoCode(event.target.value)}
                 placeholder="Enter promo code"
               />
-              <button onClick={handleApplyPromo}>Apply</button>
+              <button className={styles.button} onClick={handleApplyPromo}>
+                Apply
+              </button>
             </div>
             {error && <div className={styles.error}>{error}</div>}
             <div className={styles.summary}>
               <span>Total:</span>
               <strong>${(totalPrice / 100).toFixed(2)}</strong>
             </div>
-            <button onClick={handleClearCart}>Clear Cart</button>
+            <button className={styles.button} onClick={handleClearCart}>
+              Clear Cart
+            </button>
           </div>
         </div>
       )}
