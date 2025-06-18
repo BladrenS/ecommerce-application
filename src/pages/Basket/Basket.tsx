@@ -63,7 +63,12 @@ export const Basket = () => {
     }
   };
 
-  if (loading) return <Loader />;
+  if (loading)
+    return (
+      <div className={styles.basket}>
+        <Loader />
+      </div>
+    );
 
   const lineItems = cart?.lineItems ?? [];
   const totalPrice = cart?.totalPrice?.centAmount ?? 0;
