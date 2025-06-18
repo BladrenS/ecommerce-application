@@ -19,7 +19,7 @@
 
 ![React](https://img.shields.io/badge/React-20232A?logo=react)
 ![Typescript](https://img.shields.io/badge/Typescript-blue?logo=typescript)
-![Redux](https://img.shields.io/badge/Redux-764ABC?logo=redux)
+![Webpack](https://img.shields.io/badge/Webpack-20232A?logo=webpack)
 ![Static Badge](https://img.shields.io/badge/SASS-purple?logo=SASS)
 ![Jest](https://img.shields.io/badge/Jest-99424f?logo=Jest)
 ![CommerceTools](https://img.shields.io/badge/CommerceTools-purple?logo=comerctools)
@@ -60,4 +60,3 @@ npm install
 ```
 npm run dev
 ```
->>>>>>> 8277a96 (docs: create readme file)
