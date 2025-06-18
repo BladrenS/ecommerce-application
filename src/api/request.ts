@@ -290,21 +290,26 @@ export const clearCart = async (cartId: string, version: number): Promise<Cart> 
 };
 
 export const addDiscountCode = async (cartId: string, version: number, code: string): Promise<Cart> => {
-  const response = await apiRoot
-    .carts()
-    .withId({ ID: cartId })
-    .post({
-      body: {
-        version,
-        actions: [
-          {
-            action: 'addDiscountCode',
-            code,
-          },
-        ],
-      },
-    })
-    .execute();
+  try {
+    const response = await apiRoot
+      .carts()
+      .withId({ ID: cartId })
+      .post({
+        body: {
+          version,
+          actions: [
+            {
+              action: 'addDiscountCode',
+              code,
+            },
+          ],
+        },
+      })
+      .execute();
 
-  return response.body;
+    return response.body;
+  } catch (error: any) {
+    console.error('Failed to add discount code:', JSON.stringify(error.body, null, 2));
+    throw error;
+  }
 };
