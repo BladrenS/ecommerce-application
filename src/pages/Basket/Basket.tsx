@@ -157,9 +157,7 @@ export const Basket = () => {
                           <button className={styles.button} onClick={() => handleRemove(id)}>
                             Remove
                           </button>
-                          <div className={styles.soloPrice}>
-                            ${((priceToShow * quantity) / 100).toFixed(2)} per item
-                          </div>
+                          <div className={styles.soloPrice}>${(priceToShow / 100).toFixed(2)} per item</div>
                         </div>
                       </div>
                     </div>
