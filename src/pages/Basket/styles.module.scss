@@ -15,6 +15,10 @@
     padding: 0 20px;
   }
 
+  @media (width <= 500px) {
+    padding: 0;
+  }
+
   @media (width <= 1100px) {
     flex-wrap: wrap;
   }
@@ -54,7 +58,7 @@
   gap: 30px;
   align-items: center;
 
-  min-width: 380px;
+  min-width: 300px;
   padding: 20px;
   border: 2px solid $accent-color;
   border-radius: 20px;
@@ -63,6 +67,10 @@
 
   @media (width <= 730px) {
     flex-wrap: wrap;
+  }
+
+  @media (width <= 350px) {
+    padding: 20px 5px;
   }
 
   img {
@@ -90,7 +98,7 @@
   gap: 30px;
 
   width: 100%;
-  min-width: 380px;
+  min-width: 300px;
   max-width: 500px;
   height: fit-content;
   margin-bottom: 50px;
@@ -102,6 +110,11 @@
 
   @media (width <= 1100px) {
     margin: 0 auto 50px;
+  }
+
+  @media (width <= 350px) {
+    margin: 0;
+    padding: 20px 5px;
   }
 }
 
