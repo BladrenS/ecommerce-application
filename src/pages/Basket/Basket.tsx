@@ -1,13 +1,17 @@
 import type { Cart } from '@commercetools/platform-sdk';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import ReactModal from 'react-modal';
 import { NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { addDiscountCode, changeLineItemQuantity, clearCart, getOrCreateCart, removeLineItem } from '../../api/request';
 import { empty } from '../../assets';
 import { Button, Loader } from '../../components/Ui';
+import { baseModalStyle } from '../../constants/modal';
 import styles from './styles.module.scss';
+
+ReactModal.setAppElement('#root');
 
 export const Basket = () => {
   const [cart, setCart] = useState<Cart | null>(null);
@@ -15,6 +19,7 @@ export const Basket = () => {
   const [promoCode, setPromoCode] = useState('');
   const [error, setError] = useState('');
   const [promoApplied, setPromoApplied] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchCart = async () => {
     setLoading(true);
@@ -71,6 +76,12 @@ export const Basket = () => {
       const updated = await clearCart(cart.id, cart.version);
       setCart(updated);
     }
+    closeModal();
+    toast.success('The shopping cart has been successfully cleared', {
+      position: 'bottom-center',
+      autoClose: 2000,
+      theme: 'dark',
+    });
   };
 
   if (loading)
@@ -82,6 +93,9 @@ export const Basket = () => {
 
   const lineItems = cart?.lineItems ?? [];
   const totalPrice = cart?.totalPrice?.centAmount ?? 0;
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div className={styles.basket}>
@@ -170,12 +184,30 @@ export const Basket = () => {
               <span>Total:</span>
               <strong>${(totalPrice / 100).toFixed(2)}</strong>
             </div>
-            <button className={styles.button} onClick={handleClearCart}>
+            <button className={styles.button} onClick={openModal}>
               Clear Cart
             </button>
           </div>
         </div>
       )}
+      <ReactModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+        contentLabel="Confirm Clear Cart"
+        style={baseModalStyle}
+      >
+        <p>Are you sure you want to clear your cart? This action cannot be undone.</p>
+        <div className={styles.modalActions}>
+          <button className={styles.button} onClick={handleClearCart}>
+            Yes, clear
+          </button>
+          <button className={styles.button} onClick={closeModal}>
+            Cancel
+          </button>
+        </div>
+      </ReactModal>
     </div>
   );
 };
