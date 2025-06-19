@@ -140,7 +140,7 @@ export const Basket = () => {
                           {discounted ? (
                             <>
                               <span className={styles.oldPrice}>${(original / 100).toFixed(2)}</span>
-                              <span className={styles.newPrice}>${(priceToShow / 100).toFixed(2)}</span>
+                              <span className={styles.newPrice}>${((priceToShow * quantity) / 100).toFixed(2)}</span>
                             </>
                           ) : (
                             <span>${((priceToShow * quantity) / 100).toFixed(2)}</span>
