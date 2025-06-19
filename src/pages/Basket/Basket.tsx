@@ -97,6 +97,10 @@ export const Basket = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const originalTotal = lineItems.reduce((sum, item) => {
+    return sum + item.price.value.centAmount * item.quantity;
+  }, 0);
+
   return (
     <div className={styles.basket}>
       {lineItems.length === 0 ? (
@@ -182,7 +186,14 @@ export const Basket = () => {
             {error && <div className={styles.error}>{error}</div>}
             <div className={styles.summary}>
               <span>Total:</span>
-              <strong>${(totalPrice / 100).toFixed(2)}</strong>
+              {promoApplied && originalTotal > totalPrice ? (
+                <>
+                  <strong className={styles.oldTotal}>${(originalTotal / 100).toFixed(2)}</strong>
+                  <strong className={styles.newTotal}>${(totalPrice / 100).toFixed(2)}</strong>
+                </>
+              ) : (
+                <strong>${(totalPrice / 100).toFixed(2)}</strong>
+              )}
             </div>
             <button className={styles.button} onClick={openModal}>
               Clear Cart
