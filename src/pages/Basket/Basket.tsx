@@ -116,11 +116,13 @@ export const Basket = () => {
           <motion.ul className={styles.products} layout>
             <AnimatePresence>
               {lineItems.map((item) => {
-                const { id, name, quantity, variant, price, discountedPricePerQuantity } = item;
+                const { id, name, quantity, variant, price } = item;
                 const img = variant.images?.[0]?.url;
 
-                const original = price.value.centAmount / 100;
-                const discounted = discountedPricePerQuantity?.[0]?.discountedPrice?.value?.centAmount;
+                const original = price.value.centAmount;
+                const discounted = price.discounted?.value.centAmount;
+                const hasDiscount = discounted !== undefined && discounted < original;
+                const priceToShow = hasDiscount ? discounted : original;
 
                 return (
                   <motion.li
@@ -137,11 +139,11 @@ export const Basket = () => {
                         <div className={styles.price}>
                           {discounted ? (
                             <>
-                              <span className={styles.oldPrice}>${original.toFixed(2)}</span>
-                              <span className={styles.newPrice}>${(discounted / 100).toFixed(2)}</span>
+                              <span className={styles.oldPrice}>${(original / 100).toFixed(2)}</span>
+                              <span className={styles.newPrice}>${(priceToShow / 100).toFixed(2)}</span>
                             </>
                           ) : (
-                            <span>${(Number(original.toFixed(2)) * quantity).toFixed(2)}</span>
+                            <span>${((priceToShow * quantity) / 100).toFixed(2)}</span>
                           )}
                         </div>
                         <div className={styles.controls}>
@@ -155,7 +157,9 @@ export const Basket = () => {
                           <button className={styles.button} onClick={() => handleRemove(id)}>
                             Remove
                           </button>
-                          <div className={styles.soloPrice}>${original.toFixed(2)} per item</div>
+                          <div className={styles.soloPrice}>
+                            ${((priceToShow * quantity) / 100).toFixed(2)} per item
+                          </div>
                         </div>
                       </div>
                     </div>
