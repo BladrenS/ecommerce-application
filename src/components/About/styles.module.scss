@@ -1,0 +1,250 @@
+@use '../../styles/abstract/mixins' as *;
+
+.about {
+  max-width: 94vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 150px;
+
+  color: var(--primary-color);
+}
+
+.team {
+  margin-bottom: 40px;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+
+  width: 380px;
+  height: 500px;
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+
+  transition: transform 0.6s ease;
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+
+  .cards-inner-front,
+  .cards-inner-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+
+    backface-visibility: hidden;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  }
+
+  .cards-inner-front {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cards-inner-back {
+    z-index: 1;
+    transform: rotateY(180deg);
+  }
+
+  .card-top-bg {
+    width: 100%;
+    height: 216px;
+    border-radius: 20px;
+  }
+
+  .icons {
+    margin-right: 8px;
+  }
+
+  .card-photo {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(-40%, -45%);
+
+    width: 130px;
+    height: 130px;
+    border: 5px solid var(--background-color);
+    border-radius: 50%;
+  }
+
+  .name {
+    margin-bottom: 5px;
+  }
+
+  .inner-header {
+    margin-top: 55px;
+    text-align: center;
+
+    .name {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    span {
+      display: block;
+      font-size: 14px;
+      color: var(--primary-color);
+    }
+  }
+
+  .inner-info {
+    display: flex;
+    flex-direction: column;
+
+    width: 90%;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(255 98 0 / 24.5%);
+
+    .inner-item {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      span {
+        font-size: 15px;
+        font-weight: normal;
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  .inner-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+
+    margin-top: 10px;
+    padding: 0 15px;
+
+    .footer-item {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: space-around;
+
+      padding: 3px 5px;
+      border: 1px solid var(--primary-color);
+      border-radius: 5px;
+
+      font-size: 11px;
+      color: var(--primary-color);
+
+      img {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+
+  .inner-back-header {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    border-bottom: 1px solid rgb(255 98 0 / 24.5%);
+
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  .inner-back-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px 20px;
+
+    .back-info-header {
+      margin-top: 10px;
+
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    .back-info-text {
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgb(255 98 0 / 24.5%);
+
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--primary-color);
+      text-align: justify;
+    }
+
+    .inner-back-footer {
+      .back-footer-header {
+        margin-bottom: 10px;
+
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--primary-color);
+        text-align: center;
+      }
+
+      .back-footer-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-around;
+
+        .back-footer-item {
+          padding: 4px 6px;
+          border: 1px solid var(--primary-color);
+          border-radius: 5px;
+
+          font-size: 11px;
+          color: var(--primary-color);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.rss {
+  width: 240px;
+  margin: 50px auto;
+  transition: all 0.2s linear;
+
+  @include flex-center;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

@@ -1,7 +1,7 @@
 import { type FC, memo } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { location, logo, mail, phone } from '../../assets/';
+import { locationimg, logo, mail, phone } from '../../assets/';
 import { footerLinks, paymentIcons, promoItems, socialIcons } from '../../constants/';
 import styles from './styles.module.scss';
 
@@ -61,7 +61,7 @@ export const Footer: FC = memo(() => {
           href="https://maps.app.goo.gl/1jSjmqpZzkUWpoZJ8"
           target="_blank"
         >
-          <img src={location} alt="mark" />
+          <img src={locationimg} alt="mark" />
           Николаева ул., 2/1, Москва, 103274
         </a>
         <a href="mailto:connect@хрустикshop.com" className={styles['footer-connections-item']}>

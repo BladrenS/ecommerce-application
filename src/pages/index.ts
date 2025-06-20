@@ -1,4 +1,9 @@
+export { About } from './About/About';
+export { Basket } from './Basket/Basket';
 export { Catalog } from './Catalog/Catalog';
 export { Login } from './Login/Login';
 export { Main } from './Main/Main';
+export { ProductPage } from './ProductPage/ProductPage';
+export { Profile } from './Profile/Profile';
 export { RegistrationPage } from './registrationPage/RegistrationPage';
+export { Wishlist } from './Wishlist/Wishlist';

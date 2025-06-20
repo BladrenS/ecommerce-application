@@ -1,0 +1,48 @@
+@use '../../styles/abstract/mixins' as *;
+@use '../../styles/variables' as *;
+
+.wishlist {
+  min-height: 100vh;
+  padding-top: 150px;
+}
+
+.products li {
+  height: 100%;
+}
+
+.products {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, auto));
+  gap: 30px;
+
+  width: 95%;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.empty {
+  flex-direction: column;
+  gap: 30px;
+
+  @include flex-center;
+}
+
+.emptyText {
+  font-weight: 400;
+  color: white;
+}
+
+.catLink {
+  position: relative;
+  color: $accent-color;
+
+  @include hover-decor;
+}
+
+.emptyGif {
+  width: 100%;
+  max-width: 490px;
+  height: 476px;
+}

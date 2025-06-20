@@ -150,7 +150,7 @@
 .add {
   width: 250px;
   height: 50px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .buttons-wrapper {
@@ -251,4 +251,9 @@ body.no-scroll {
 
 body.no-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.liked {
+  border: 1px solid var(--primary-color);
+  stroke: var(--primary-color);
 }
